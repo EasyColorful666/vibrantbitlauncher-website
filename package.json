@@ -1,0 +1,20 @@
+{
+  "name": "vibrantbit-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "changelog": "node scripts/build-changelog.mjs"
+  },
+  "devDependencies": {
+    "nuxt": "^3.19.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.545.0"
+  }
+}

@@ -1,0 +1,2501 @@
+{
+  "generatedAt": "2026-10-22T11:09:03.928Z",
+  "source": "E:/VibrantbitLauncher.Avalonia/CHANGELOG.md",
+  "count": 61,
+  "releases": [
+    {
+      "version": "1.0.10.4",
+      "date": "2026-10-22",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>GitHub Actions 自动发布</strong> <code>.github/workflows/release.yml</code>：7 个平台<strong>并行</strong>构建并汇总到 GitHub Release。"
+            }
+          ]
+        },
+        {
+          "kind": "变更",
+          "items": [
+            {
+              "html": "<strong><code>publish-all.sh</code> 补上程序集剪裁开关</strong>，与 <code>publish-all.ps1</code> 对齐（默认开启）。"
+            }
+          ]
+        },
+        {
+          "kind": "移除",
+          "items": [
+            {
+              "html": "<strong>删除 <code>.github/workflows/build.yml</code></strong>。它的 Release 步骤用 <code>--generate-notes</code>， 且 SELF_CONTAINED 固定为 false（1.0.9.6 起已改默认自包含）， 与新的发布需求冲突；两份 workflow 在打 tag 时会同时抢同一个 Release。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.10.3",
+      "date": "2026-10-21",
+      "changes": 8,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>下载页版本类型筛选（多选框）</strong>：正式版 / 测试版 / 远古版 / 愚人节版四个多选框， 可任意叠加。<strong>勾选才显示，不勾选整类隐藏</strong>；默认只勾「正式版」。"
+            },
+            {
+              "html": "<strong>版本分类器</strong> <code>Models/McVersionKindClassifier</code>：清单 <code>type</code> → 四大类的唯一判定点。"
+            }
+          ]
+        },
+        {
+          "kind": "界面",
+          "items": [
+            {
+              "html": "四个多选框做成胶囊（高 30 / 圆角 99 / 12px 文字），沿用启动页主题切换的视觉语言， 但保留多选语义（分段控件是四选一，这里需要叠加）。"
+            },
+            {
+              "html": "状态齐全：hover / pressed / checked / checked:hover / checked:pressed / focus-visible / disabled；"
+            },
+            {
+              "html": "每个胶囊带 6px 类型色圆点（主色 / 橙 / 灰 / 紫），选中态一律转白，不与主色抢注意力。"
+            },
+            {
+              "html": "列表行内给非正式版补类型角标（测试版 / 远古版 / 愚人节），正式版不标（常态是噪音）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "搜索计数分母改为「当前勾选范围内」的数量：只勾正式版再搜「1.20」显示 <code>匹配 3 / 103 个版本</code>，不再显示容易误读的 <code>匹配 3 / 共 920</code>。"
+            },
+            {
+              "html": "列表尚未加载完成时不再短暂显示「当前筛选条件下没有版本」的空状态。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.10.2",
+      "date": "2026-10-21",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "变更",
+          "items": [
+            {
+              "html": "<strong>单文件体积 52.29 MB → 29.04 MB（-44%）</strong>，win-x64 自包含单文件。"
+            },
+            {
+              "html": "<strong>发布目录剔除调试器 / 转储分析组件（约 6.3MB 未压缩）</strong>： <code>mscordaccore.dll</code>、<code>mscordaccore_amd64_*.dll</code>、<code>mscordbi.dll</code>、 <code>Microsoft.DiaSymReader.Native.amd64.dll</code>。"
+            },
+            {
+              "html": "<strong>新增 <code>Properties/PublishProfiles/WindowsTrimmed.pubxml</code></strong>（剪裁档，29MB）。"
+            },
+            {
+              "html": "<strong><code>publish-all.ps1</code> / <code>publish-all.sh</code> 默认走剪裁档</strong>，新增 <code>-NoAppTrim</code> 回退到标准档。注意与既有的 <code>-NoTrim</code>（关平台后端剥离）不是一回事。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>剪裁档一启动就 <code>XamlLoadException: No precompiled XAML found for VibrantbitLauncher.App</code></strong>（28.03MB 那版）。"
+            },
+            {
+              "html": "<strong><code>TrimmerRootAssembly</code> 去掉 <code>Condition</code></strong>：pubxml 是在 csproj 全部求值 改为无条件声明（不剪裁时 ILLink 不跑，该 Item 零影响，实测标准档仍是 52.29MB）。"
+            },
+            {
+              "html": "<strong>剪裁保留根 8 个程序集</strong>：<code>VibrantbitLauncher.Avalonia</code>、<code>Avalonia.Base</code>、 <code>Avalonia.Controls</code>、<code>Avalonia.Markup.Xaml</code>、<code>FluentAvalonia</code>、 <code>MinecraftLaunch</code>、<code>MinecraftLaunch.Base</code>、<code>CommunityToolkit.Mvvm</code>。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.10.0",
+      "date": "2026-10-20",
+      "changes": 8,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>所有列表框：逐项从左飞入</strong>（<code>Helpers/ListMotion.cs</code> + <code>Styles/Animations.axaml</code> 一条全局样式）。"
+            },
+            {
+              "html": "<strong>启动页右侧「官方新闻」改为「快捷设置」</strong>：Minecraft 文件夹 / Java 运行环境 / 外观（亮色·暗色）。"
+            }
+          ]
+        },
+        {
+          "kind": "界面",
+          "items": [
+            {
+              "html": "字号只用两档：正文 14 / 说明 12（沿用全局 token，不新增档位）；"
+            },
+            {
+              "html": "圆角只加一种：胶囊 99；"
+            },
+            {
+              "html": "主色只出现在「当前选中的那个胶囊」上，面积 &lt; 3%；"
+            },
+            {
+              "html": "胶囊补齐 hover / pressed / checked / focus-visible / disabled 五态， 键盘焦点用描边而非加粗边框（避免布局跳动）；"
+            },
+            {
+              "html": "新增 <code>Helpers/MotionSettings.cs</code> 作为减动效的统一入口（性能模式即减动效）， 窗口动效 / 列表动效 / XAML 过渡三处统一读它。"
+            }
+          ]
+        },
+        {
+          "kind": "变更",
+          "items": [
+            {
+              "html": "窗口飞出时长 280ms → <strong>300ms</strong>，对齐 50ms 时长网格。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.9.9",
+      "date": "2026-10-20",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Forge 26.x 安装「补丁文件生成不出来」→ 实例装完启动报 patched jar missing</strong>。"
+            },
+            {
+              "html": "<strong>「补全资源」对上述文件只会失败，不会修</strong>。"
+            },
+            {
+              "html": "顺带修掉每个 Forge 安装后都会出现的假错误日志 <code>未观察到的任务异常 AggregateException: No process is associated with this object</code>。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.9.8",
+      "date": "2026-10-20",
+      "changes": 2,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>下载器：并发数与分块数拆成两个独立设置</strong>（「设置 → 网络 → 下载」）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>安装页：勾选一个加载器后，其余加载器的列表框仍可操作</strong>。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.9.7",
+      "date": "2026-10-20",
+      "changes": 1,
+      "sections": [
+        {
+          "kind": "变更",
+          "items": [
+            {
+              "html": "<strong>拉长窗口飞入 / 飞出动画的时长</strong>（1.0.9.6 的节奏偏快，推近与下沉几乎看不清）： 参数集中在 <code>Helpers/WindowMotion.cs</code> 的两个 <code>TimeSpan</code> 常量，主窗口、开机向导、 全部内嵌子窗口同时生效。性能模式下仍然完全不播。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.9.6",
+      "date": "2026-10-20",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>所有窗口都有飞入 / 飞出动画</strong>。"
+            },
+            {
+              "html": "<strong>窗口按屏幕分辨率自适应</strong>（<code>Helpers/WindowSizing.cs</code>）。"
+            }
+          ]
+        },
+        {
+          "kind": "变更",
+          "items": [
+            {
+              "html": "<strong>固化发布设置</strong>，以后不必再手工敲一长串参数： VS 里点一次「发布」得到的产物就等于手工发布的那份。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.9.5",
+      "date": "2026-10-19",
+      "changes": 26,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Windows 10 虚拟机启动即崩（<code>0x80131506</code>）、无任何日志</strong>。"
+            },
+            {
+              "html": "撤销 1.0.9.4 的「虚拟机一律软件渲染」：那次是把渲染层崩溃误当成根因， 实际是 CET。虚拟机识别保留（只写进日志摘要，如 <code>[VMware]</code>），不再改变渲染行为， 以免有 GPU 直通的虚拟机白白变慢。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>如果新版本仍报同一句 CET 错误</strong>，说明该机器的 CET 是被系统策略（而非 exe 标记） 启用的，此时唯一的出路是<strong>装齐 Windows 更新</strong> —— 这是 .NET 运行时自己给出的结论。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Windows 10 虚拟机里双击无反应、且没有任何日志（事件查看器 <code>0x80131506</code>）</strong>。"
+            },
+            {
+              "html": "说明：若某个虚拟机的 BIOS 串无法识别，仍可用命令行 <code>--software-render</code> 或环境变量 <code>VBL_SOFTWARE_RENDER=1</code> 强制软件渲染（这两个入口 1.0.6 起就有）。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>自包含发布默认启用单文件压缩，体积从 113 MB 降到 55 MB</strong>（用户反馈「文件怎么那么大」）。"
+            },
+            {
+              "html": "同时验证过 <strong><code>InvariantGlobalization=true</code> 对本项目几乎没有收益</strong>（54.79 MB vs 54.79 MB）， 故不启用 —— 没必要为了 0 MB 牺牲中文区域格式与字符串比较行为。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "55 MB 里大头仍是 .NET 运行时本身（coreclr + 基础类库 + Avalonia/Skia 原生库）， 应用自身代码约 6 MB。想再小只有两条路： 1. 改用框架依赖发布（39.6 MB），但目标机必须装 .NET 10 运行时；"
+            },
+            {
+              "html": "本次产物：<code>dist/standalone-win-x64/VibrantbitLauncher.Avalonia.exe</code>（54.8 MB，免装运行时）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「双击 exe 没反应」不再是一片空白</strong>（其他电脑上无法启动时完全无提示）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "同时产出一份<strong>自包含单文件</strong>版本供没有运行时的机器使用： <code>dist/standalone-win-x64/VibrantbitLauncher.Avalonia.exe</code>（约 108 MB，内含 .NET 10 运行时，拷过去即可双击运行）。"
+            },
+            {
+              "html": "<strong>Windows 7 / 8 / 8.1 不在 .NET 10 的支持范围内</strong>（最低 Windows 10 1607）， 这些系统上无论框架依赖还是自包含都跑不起来，需要另行降目标框架。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>Java 默认安装路径改为 Java 官方安装器的路径</strong>（用户要求）： <code>%ProgramFiles%\\Eclipse Adoptium\\jdk-&lt;版本&gt;-hotspot</code>。"
+            },
+            {
+              "html": "<strong>「已安装」列表会扫各发行版的约定目录</strong>，不再只看页面上的那个根目录： <code>Eclipse Adoptium</code> / <code>AdoptOpenJDK</code> / <code>Java</code>(Oracle) / <code>Zulu</code> / <code>Amazon Corretto</code> / <code>Semeru</code> / <code>Microsoft</code>，以及用户级安装的 <code>%LOCALAPPDATA%\\Programs\\Eclipse Adoptium</code>。"
+            },
+            {
+              "html": "<strong>写入 Program Files 需要管理员权限</strong>，因此安装前先做一次可写探测（含实际写探针文件， 因为「目录已存在」不代表能往里写）。没权限时给的是两条具体出路： 「以管理员身份运行启动器」或「点浏览换目录」， 而不是一句 <code>Access to the path 'C:\\Program Files\\...' is denied</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "探测放在下载<strong>之前</strong>：否则用户要白等 200 MB 下完，才在解压阶段发现没权限。"
+            },
+            {
+              "html": "极少数取不到 <code>ProgramFiles</code> 的精简系统会自动回落到启动器目录，功能不受影响。"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>Java 运行环境下载（下载中心 → 运行环境 → Java）</strong>。"
+            },
+            {
+              "html": "新增 <code>Services/JavaRuntimeService.cs</code>、<code>Models/JavaRuntime.cs</code>、<code>Views/Pages/JavaDownloadPage.axaml(.cs)</code>。"
+            },
+            {
+              "html": "新增 <code>Services/Download/ResilientFileDownloader.cs</code>：<strong>跨连接断点续传</strong>下载器（见下方「修复」里的实测背景）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>处理器阶段长时间没有任何进度</strong>。现在每 2 秒推一次「已耗时 X 秒」心跳， 并在每个处理器开跑前先报「运行 installertools（3/5）」，用户能区分「在算」和「真死了」。"
+            },
+            {
+              "html": "<strong>Java 进程僵死无兜底</strong>。处理器连续 12 分钟一行输出都没有时主动终止，并给出 「多为依赖库不完整或网络被墙导致处理器内部下载挂起」的可操作提示，而不是让用户干等或去杀进程。"
+            },
+            {
+              "html": "安装器候选顺序按加载器区分：<strong>Forge 走官方源、NeoForge 走 BMCLAPI 镜像</strong> （实测两者恰好互补），用户显式开启镜像时一律以镜像为先。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误。"
+            },
+            {
+              "html": "验证方式（均针对真实数据）： <code>BINPATCH</code> 解析为临时目录下的实际文件、裸 maven 参数解析为 <code>libraries/</code> 路径；"
+            },
+            {
+              "html": "升级后<strong>建议重装一次 Forge / NeoForge</strong>（patched jar 与 classpath 需要按新逻辑重新生成）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.8.2",
+      "date": "2026-10-18",
+      "changes": 1,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>内嵌的子页被改造成了「页面」</strong>。1.0.8.0 / 1.0.8.1 把子窗口拆成了 <code>UserControl</code> 之后， 为了让内嵌页有个标题，把每个子页<strong>自己那条标题栏隐藏了</strong>，改由宿主顶栏显示 「← 返回 / 标题 / ×」。这等于把「窗口」改成了「页面」—— 与 PCL2 的做法并不一样： PCL2 里那个「登录 Minecraft」是一整个窗口（有自己的标题栏和关闭按钮）浮在主界面上。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.8.1",
+      "date": "2026-10-18",
+      "changes": 1,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>内嵌子页被拉满整个内容区</strong>。1.0.8.0 把子窗口改成内嵌时，只保留了「换成 UserControl」， 却没保留原来的 <code>Width</code> / <code>Height</code> —— 于是 380×330 的「添加离线账户」表单被拉到 1000px 宽， 输入框横成一整条，观感完全走样。这不是「内嵌」该有的样子：内嵌的是<strong>原来那个窗口</strong>， 尺寸不该变。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.8.0",
+      "date": "2026-10-18",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>所有子窗口改为内嵌页面（学 PCL2）</strong>。此前登录、换肤、补全资源、崩溃分析、实例工具箱、 配装码、联机模块、整合包进度……十几个功能都是独立 <code>Window</code>：会占用任务栏、 会被 Alt+Tab 当成第二个程序、主窗口缩小时容易飞到屏幕外，观感也不统一。"
+            },
+            {
+              "html": "<strong>资源简介自动翻译</strong>（<code>Services/TranslateService</code>）：Modrinth 的 <code>summary</code> 基本都是英文， 列表加载后<strong>后台逐条翻成中文</strong>并回填，翻不出来就保留原文。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>账户页头像换成 Win11（太阳谷）风格的账户图标</strong>：没换过皮肤的离线账户不再显示史蒂夫头像， 改为圆底 + 人形轮廓的系统风格图标；一旦用户真的换过皮肤（<code>res/&lt;uuid&gt;.custom</code> 标记）就显示真实头像。"
+            },
+            {
+              "html": "<strong>加载器版本列表改为「官方源优先、镜像兜底」</strong>： 原来 Forge/NeoForge 直接读 BMCLAPI 的列表接口，版本集合可能落后于官方， 而安装页展示的版本来自官方枚举 —— 两边对不上就会「选了某个版本却装成别的」。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "子窗口的<strong>文件与类名没有改</strong>（还叫 <code>XxxWindow</code>），只是基类从 <code>Window</code> 换成了 <code>UserControl</code>， 这样全部调用点与 XAML 不用重写名字；新写子页请直接继承 <code>UserControl</code> 并实现 <code>IInlinePage</code>。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.16",
+      "date": "2026-10-18",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Forge / NeoForge / Quilt 在「安装版本」页卡住装不上</strong>（进度停在 0/1、速度显示 N/A）。"
+            },
+            {
+              "html": "<strong>NeoForge 的 <code>21.0.1-beta</code> 这类版本号被截成 <code>beta</code></strong>：<code>NormalizeLoaderVersion</code> 原来靠 「看起来像 1.2.3 就当前缀剥掉」的泛化判断，会把 <code>21.0.1</code> 当成 Minecraft 版本吃掉。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "加载器依赖库的下载声明现在会带上清单里的 <code>size</code> 与 <code>sha1</code>：上次下到一半的坏 jar 不再被当成「已下载」，<code>ClassNotFound</code> 那类莫名其妙的启动崩溃少一类来源。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.15",
+      "date": "2026-10-18",
+      "changes": 10,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>统一的高性能下载内核（<code>Services/Download/</code>）</strong>，接管全部 Minecraft 资源 / 模组资源 / 加载器资源的下载。原来每个下载点都是「开一条 TCP 流、<code>CopyToAsync</code> 到临时文件、 失败就从头再来」，慢速链路上一个 8 MB 的 Forge 安装器能等几十秒，而且各处的超时口径、 小于 1 MB 的文件不分块（握手开销大于收益）。"
+            },
+            {
+              "html": "<strong>统一的速度反馈（<code>DownloadSpeedometer</code>）</strong>：所有下载点把收到的字节报进同一张速度表， 500 ms 采样 + 指数平滑 + 连续空窗归零。界面上的「速度」从此是<strong>全局总速度</strong>， 而不是「某个文件自己的局部速度」——并行下 8 个文件时数字和进度条终于对得上。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>加载器依赖库改为批量下载</strong>（<code>LoaderInstaller.DownloadLibrariesAsync</code>）：Forge / NeoForge 的几十个库原来是串行一个个下，现在 4 个文件并行 × 每个文件内部分块，装一次加载器的时间 显著缩短；单文件失败不再中断整批，最后一次性报出「哪几个失败、为什么」。"
+            },
+            {
+              "html": "<strong>模组下载</strong>（模组页「另存为 / 添加到实例」）改走新内核：Modrinth CDN 支持 range 请求， 多连接后大模组的速度提升明显；任务中心的进度文案改用全局速度表。"
+            },
+            {
+              "html": "<strong>EasyTier 联机核心下载</strong>改走新内核（走 gh-proxy 的单连接经常只有几百 KB/s）。"
+            },
+            {
+              "html": "<strong>配装码 / 整合包文件下载</strong>改走新内核，顺带补上了体积与 sha1 校验。"
+            },
+            {
+              "html": "设置页「下载线程数」说明改为「每个文件的分块并发连接数（2~8）」，与实际语义对齐。"
+            },
+            {
+              "html": "新增 <code>DownloadIntegrityException</code>：「下到了但内容不对」单独成类，不再被 <code>DownloadErrors.DescribeFileSystem</code> 误报成「磁盘读写失败」，把用户引向错误的排查方向。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「补全资源」第二节（加载器依赖）点取消无效</strong>：<code>AssetRepairService</code> 调用 <code>VerifyAndDownloadDependenciesAsync(parallelism)</code> 时漏传了取消令牌， 几个 GB 的补全会一直跑到底。现在令牌一路传进库的下载器。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "原版资源（client.jar / 原版库 / 资源索引与资源对象）这一段的<strong>枚举与校验</strong>仍由 MinecraftLaunch 的 <code>MinecraftResourceDownloader</code> 完成 —— 它没有公开的下载器注入点 （<code>DownloaderClient</code> 只读、构造函数不收 <code>IDownloader</code>），要换只能把「库解析 + natives 解析 +"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.14",
+      "date": "2026-10-17",
+      "changes": 4,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>明暗主题在普通窗口里不生效（浅色底 + 浅色字，整窗发白）</strong>。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "应用级 <code>Style Selector=\"Window\"</code> 的底色兜底原先引用 <code>SolidBackgroundFillColorBase</code> —— 那是 <strong>Color</strong> 资源（同名 Brush 是 <code>*Brush</code> 版本），赋给 <code>IBrush</code> 类型的 <code>Background</code> 会因类型不匹配<strong>静默失效</strong>，等于没有兜底。改用本工程自己的 <code>ApplicationBackgroundBrush</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "排查手段：把截图当数据读（解 PNG 采样像素）。窗口底色实测 <code>#F3F3F3</code>（亮色手写值）、 正文几乎没有深色像素、只有主按钮 <code>#1599FF</code> 饱和 —— 一眼判定「底色按设置、文字按变体」， 而不是「整窗被降低透明度」或「字体颜色写错」。"
+            },
+            {
+              "html": "日志新增：<code>主题已应用：{Variant}（强调色…, 渐变…）</code>；变体不一致时打 Warning。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.13",
+      "date": "2026-10-17",
+      "changes": 11,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>账户页二次重构：从「卡片墙」改为「焦点卡 + 列表组」</strong>。上一版是 232×268 的等高卡片整齐排布， 每张卡的视觉音量相同 —— 没有主次，眼睛不知道先看哪，这正是「看着整齐但不高级」的根因。现在： 7% 渐变洗底）。其余账户全部降一档，收成 64px 的行。"
+            },
+            {
+              "html": "<strong>强调色预算收紧到 3% 以内</strong>：删掉三张卡片各一条的主色渐变条与常驻主色图标块， 彩色只剩 Hero 的渐变环 / 渐变洗底 / 选中圆点。右栏三个「添加身份」图标块改成中性浅底， 悬停才借 12% 主色。页面里实心主色按钮 0 个。"
+            },
+            {
+              "html": "页头的「N 个账户」徽标移到「全部账户」区块标题右侧，与它修饰的对象放在一起。"
+            },
+            {
+              "html": "空状态文案改为一步到位的引导（\"从右侧选一种登录方式，添加后即可启动游戏\"）。"
+            },
+            {
+              "html": "有账户但一个都没选时，Hero 位置不再空着，而是给出「尚未选择启动身份」的引导态。"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<code>FontSizeHero</code>（26）字号档：页标题 34、区块标题 22 之间原本缺一级，Hero 名字只能硬写尺寸。"
+            },
+            {
+              "html": "<code>AccountPageViewModel.CurrentUser</code> / <code>HasCurrentUser</code> / <code>HasUsers</code> / <code>AccountCountText</code>： 空状态、计数、Hero 内容全部改由绑定驱动，页面 code-behind 不再逐个 <code>x:Name</code> 开关 <code>IsVisible</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>键盘焦点在账户页不可见</strong>：行内按钮的模板底色被自定义样式覆盖后，Fluent 默认焦点框也跟着丢了。"
+            },
+            {
+              "html": "<code>Users.CollectionChanged</code> 原先在 <code>Loaded</code> 里订阅，每次导航回账户页都会重复挂一次处理器；"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "三级深度：L0 页面 / L1 Hero 卡与列表组（1px 内描边，无阴影）/ 仅悬停时一层浅影， 取代了上一版卡片常驻阴影的\"贴纸感\"。"
+            },
+            {
+              "html": "入场动效分三层：Hero（0ms）→ 右栏（80ms）→ 列表逐行（100ms 起，每行 +40ms）， 只在这三处动；<code>.performanceMode</code> 下全部关闭。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.12",
+      "date": "2026-10-17",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>账户页重构为「左卡片墙 + 右操作栏」</strong>。原来三个添加账户的大按钮横排在页面底部， 既吃掉一整行高度，窗口变窄时还会换行错位。现在： 纵向排列、始终可见，不再随卡片数量上下漂移。"
+            },
+            {
+              "html": "<strong>账户卡片增加「当前使用」状态</strong>。以前只靠一个 <code>RadioButton</code> 表达选中，而它和 ViewModel 里的 <code>selectedAccount</code> 是两份状态，自动恢复上次账户时两边会对不上。"
+            },
+            {
+              "html": "卡片上的账户类型改为中文（「微软账户 / 外置账户 / 离线账户」），「皮肤 / 删除」按钮改为小号描边样式， 删除按钮保留危险色。"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>账户页动效</strong>： 已入场过的卡片不会在增删账户时重复播放。"
+            },
+            {
+              "html": "新增两个语义化画刷键 <code>AppAccentSurfaceBrush</code>（主色 12%）、<code>AppAccentSurfaceStrongBrush</code>（20%）， 由 <code>SettingsService.ApplyAccentCore</code> 随主题色实时覆写，避免页面里硬编码 <code>#1F0078D4</code> 这类换色后会失配的值。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.11",
+      "date": "2026-10-17",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>配装码「准备阶段」点取消无效</strong>。1.0.7.10 把取消令牌打通到了下载层，但漏了一段： 从点「开始添加」到安装会话建立之间，还有「生成 .mrpack」「解析清单」两步， 这段时间<strong>还没有会话令牌可取消</strong>。此时点「取消添加」，<code>RequestCancel</code> 打到 <code>ModpackInstallSession.Current</code> 上——首次安装时它是 null，第二次安装时它是上一次的<strong>已终态会话</strong>，"
+            },
+            {
+              "html": "<code>ModpackInstallCoordinator</code> 的清单解析增加 <code>OperationCanceledException</code> 分支： 以前取消异常会落到通用 <code>catch (Exception)</code> 里被报成「解析整合包失败」。现在按取消处理， 只给一句「已取消这次安装」，不弹错误。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "取消现在覆盖「生成安装包 → 解析清单 → 装原版 → 装加载器 → 下模组」全链路， 任一阶段点取消都能停下；已下载的文件保留，重试不会从头再来。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.10",
+      "date": "2026-10-17",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>配装码安装时取消不了</strong>。根因：原版 Minecraft 那一大段下载（几百 MB）<strong>完全没有接取消令牌</strong> —— <code>ModpackInstaller.EnsureVanillaAsync</code> 调 <code>VanillaDownloader.InstallAsync</code> 时没传 <code>ct</code>， 本来就有 <code>(parallelism, ct)</code> 重载却只传了一半。结果点「取消安装」后界面显示「正在取消…」，"
+            },
+            {
+              "html": "<strong>配装码安装被显示成「整合包」</strong>。配装码内部是打成临时 <code>.mrpack</code> 交给整合包安装器的， 以前没告诉协调器来源，于是任务名写「整合包：xxx」、类型显示「游戏版本」、 进度窗口标题「整合包安装」。"
+            },
+            {
+              "html": "<strong>取消后任务显示「失败」</strong>：新增 <code>DownloadTaskService.CancelTask</code>，取消的任务在任务中心 标为「已取消」，不再染成失败色。"
+            },
+            {
+              "html": "<strong>配装码窗口安装期间无法取消</strong>：安装中「开始添加」按钮变为「取消添加」， 点击即向安装会话发取消请求并给出「正在取消…」反馈；关闭按钮不再被禁用 （关窗只是收起界面，安装会在后台继续，可在「下载任务」里看）。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>纯原版配装码也能装了</strong>：原来 <code>ShareableCount == 0</code> 一律拒绝，导致「想让它帮我装个原版本体」 的码用不了。现在只有「既没有模组、也没有游戏版本」才拒绝；有版本无模组时照常装出本体 + 加载器。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.9",
+      "date": "2026-10-17",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>启动页有版本时仍显示「还没有可用的游戏版本」空状态</strong>。"
+            },
+            {
+              "html": "<strong>首次进入会闪一下「没有版本」</strong>：新增 <code>RunPageViewModel.IsRefreshing</code>， 扫描期间空状态显示「正在扫描本地版本…」（不显示图标、提示与按钮）， 扫完仍为空才切换成真正的空态文案。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "底部工具栏 <code>启动游戏 | 版本设置 | 配装码 | 刷新</code> 里的<strong>「配装码」按钮始终可见</strong>， 与空状态是否存在无关；空状态里的「用配装码添加游戏」按钮只属于空态。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.8",
+      "date": "2026-10-17",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>启动页新增「配装码」入口</strong>：在「版本设置」右侧加了「配装码」按钮，点开粘贴一串分享码， 即可从零装出一个完整实例（Minecraft 本体 + 对应加载器 + 对方的所有模组）。"
+            },
+            {
+              "html": "<strong>版本列表空状态也带入口</strong>：没有可用版本时，空状态面板里直接给「用配装码添加游戏」按钮， 不用在空页面上找按钮。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "新增 <code>Views/Windows/LoadoutImportWindow.axaml(.cs)</code>：粘贴即识别（<code>VBL1-</code> 分享码与裸 JSON 都吃）， 识别后展示配装名、游戏版本 + 加载器、可下载模组数、未收录模组数、分享者的内存设置；"
+            },
+            {
+              "html": "安装复用 <code>LoadoutShareService.ImportAsNewInstanceAsync</code>（内部走整合包协调器）， 因此与拖入 <code>.mrpack</code> 是同一条路径：进度详情页、任务中心、完成提示、重名加后缀全都一致。"
+            },
+            {
+              "html": "只有真正装出实例才刷新启动页版本列表；打开看一眼就关掉不会白扫一遍磁盘。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "识别失败（粘贴到一半）只在窗口内提示，不弹通知 —— 边打边解析必然会短暂失败，弹窗会很吵。"
+            },
+            {
+              "html": "分享码里没有记录 Minecraft 版本时不予安装（会明确说明原因），避免装出一个不知道装什么的空实例。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.7",
+      "date": "2026-10-17",
+      "changes": 6,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>启动前「补全资源」窗口</strong>（<code>Views/Windows/AssetRepairWindow.axaml</code>）： 点「启动」时先做一次完整性体检，缺东西就弹出本窗口，列出<strong>缺什么</strong>、点一下<strong>只补缺的那部分</strong>， 带进度条与速度显示。补完自动重新体检，确认干净后提示「可以重新启动游戏」。"
+            },
+            {
+              "html": "<strong><code>Services/InstanceIntegrityChecker.cs</code></strong>（体检，纯本地 IO）： 沿 <code>inheritsFrom</code> 链检查四类资源 —— 同类问题聚合为一条，避免几千个资源对象把列表刷爆。"
+            },
+            {
+              "html": "<strong><code>Services/AssetRepairService.cs</code></strong>（补全，复用既有链路）： 阶段 ① 原版层走 <code>VanillaDownloader.InstallAsync</code> —— 库的 <code>MinecraftResourceDownloader</code> 本身就是「校验 + 只下缺的」，超时 / 双源 / 中文报错都在里面；"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>体检结果不再「一缺就拦死」</strong>：加载器实例的 <code>client.jar</code> / 资源索引在<strong>父版本</strong>目录里， 体检与补全都按 <code>inheritsFrom</code> 链定位到原版根版本（<code>ResolveRootVersion</code>）， 不会把 Forge / Fabric 实例误判成「客户端文件缺失」。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "体检失败（例如版本 JSON 坏到读不出来）只记 Debug 并放行，不阻断启动 —— 宁可让游戏自己报错，也不要因为体检器自己的问题挡路。"
+            },
+            {
+              "html": "补全期间「关闭」按钮禁用：底层下载没有外部取消令牌，中途关窗会让下载在后台空跑。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.6",
+      "date": "2026-10-17",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>安装页的模组加载器勾选框改为严格单选</strong>：勾上 Fabric 就立刻取消勾选并禁用 Forge / NeoForge / Quilt， 勾上 Forge 同理，其余依此类推。取消勾选后四个框恢复为「有货就能选」，可以换装别的加载器。"
+            },
+            {
+              "html": "<strong>勾选状态与已选版本号强绑定</strong>：未勾选的加载器，其 <code>Select*Version</code> 一律清空， 避免「框没勾却还带着版本号」被安装流程当成要装。"
+            },
+            {
+              "html": "<strong>安装前的兜底守卫</strong>：<code>InstallPageViewModel</code> 里若检测到同时有多个加载器版本号非空， 直接提示「同一个实例只能安装一个模组加载器，请只勾选其中一个」并中止， 不再静默只装第一个（防止将来新增入口没守住单选规则）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "卡片描边（<code>loaderCard.selected</code>）与勾选框状态保持同步，点哪个亮哪个。"
+            },
+            {
+              "html": "版本列表加载中时四个框仍统一禁用。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.5",
+      "date": "2026-10-17",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>版本清单改为「磁盘缓存优先」</strong>：上次成功拉到的清单存到 <code>%LOCALAPPDATA%\\VibrantbitLauncher\\cache\\version_manifest_v2.json</code>， 下次启动<strong>先秒出列表</strong>，网络刷新改到后台做（成功则同时更新磁盘与进程内缓存）。"
+            },
+            {
+              "html": "<strong>清单请求改为双源并行竞速</strong>：官方 <code>launchermeta.mojang.com</code> 与镜像 <code>bmclapi2.bangbang93.com</code> 最坏要挂 90 秒 —— 用户随手关窗口就会撞出 <code>SocketException 995</code> / <code>TaskCanceledException</code> 的中断异常。"
+            },
+            {
+              "html": "<strong>单次超时 15s → 8s，每源重试 3 → 2 次</strong>：清单只有几百 KB，正常 1 秒内到；卡住的主机应尽快让位。"
+            },
+            {
+              "html": "<strong>接入源健康度</strong>：清单拉取成功回报 <code>Good</code>、失败回报 <code>Failed</code>， 下次会自动把上次超时的主机排到后面（与下载层共用同一套降级记录）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>关窗口时日志里出现 <code>TaskCanceledException</code> / <code>SocketException 995</code> 堆栈</strong>： 这类异常是「程序退出时仍在飞的 HTTPS 被 CLR 掐断」，属正常收尾。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "磁盘缓存放用户目录而非程序目录：发布版 exe 可能被放在 Program Files 等不可写位置， 写缓存失败不应影响任何功能。"
+            },
+            {
+              "html": "清单结构解析仍是自实现（<code>versions[].id/type/url/releaseTime</code>）， 库接口仅作「官方改结构、库已升级」时的自愈兜底。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.4",
+      "date": "2026-10-17",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>加载 Minecraft 时弹出英文错误 “The operation was canceled.”</strong>。1.0.7.3 引入的双源清单拉取 用 <code>CancellationTokenSource</code> 做单次 15 秒超时，而<strong>超时抛出的正是 <code>TaskCanceledException</code>（<code>OperationCanceledException</code> 的子类）</strong>；重试的 修法： 照常重试、换源；"
+            },
+            {
+              "html": "<strong>顺手把「英文异常原文直接弹窗」这个通病收口</strong>。新增 <code>Helpers/FriendlyError.cs</code>： <code>OperationCanceledException / TaskCanceledException</code> → 「请求超时（网络太慢或代理不通）…」；"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "这次不改变任何行为逻辑，只保证「失败时说人话」——超时仍然是失败，但用户能看懂是网络问题， 并按提示重试或换源。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.3",
+      "date": "2026-10-17",
+      "changes": 6,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「工具箱」按钮放错了页面</strong>。1.0.7.0 把入口加在了 <code>RunPage</code>（运行页），但导航里的「启动」 实际是 <code>LaunchPage</code>，<code>RunPage</code> 早已没有导航入口 —— 用户根本看不到按钮。"
+            },
+            {
+              "html": "<strong>从启动页点「设置」后目录为空、列表不刷新</strong>。两个原因叠加： 1. <code>VersionManagePage</code> / <code>VersionManageViewModel</code> 在 DI 里是<strong>懒加载单例</strong>， 而消息是先发 <code>McVersionForManage</code> 再发 <code>NavigateTo</code> —— 第一次点击时接收方还没被创建， 修法：<strong>先导航（同步创建页面、注册接收方）再发版本号</strong>；<code>Load()</code> 改成真正重读；"
+            },
+            {
+              "html": "<strong>使用官方源时 Minecraft 版本列表加载不出来</strong>。<code>MinecraftVersionCache</code> 原来直接调 库的 <code>VanillaInstaller.EnumerableMinecraftAsync()</code>，它只看全局 <code>IsEnableMirror</code>： 下载源选「官方源」时清单只走 Mojang，国内网络下整页为空。"
+            },
+            {
+              "html": "<strong>官方源下「游戏起不来」缺少可读线索</strong>。启动前补两道体检，把静默失败变成明确提示： 并提示重装 / 换源（官方源被限速或代理拦截时会出现「文件在、内容不对」）；"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "目录约定未变：仍然固定使用 <code>versions/&lt;版本号&gt;</code> 作为隔离目录，与启动参数 <code>--gameDir</code> 同源。"
+            },
+            {
+              "html": "「设置」入口的行为改为「先切页、再定位版本」，因此从任意页面点进来都会带上正确的版本号。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.2",
+      "date": "2026-10-17",
+      "changes": 2,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Fabric 安装「卡在第 5 步：下载库」不动</strong>。用户表现为进度停在「下载库」，既不报错也不结束。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "「设置页改了不保存」经核查<strong>不成立</strong>：<code>settings.json</code> 里确实存着非默认值 （<code>UseBmclMirror: true</code>、<code>DownloadThreads: 8</code>、<code>EasyTierNetworkKey</code> 有值）， 设置页每个 setter 都调了 <code>SettingsService.Save()</code>，绑定名与 ViewModel 属性也一一对应。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.1",
+      "date": "2026-10-17",
+      "changes": 2,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「下载任务」页未完成任务点「查看详情」跳错页</strong>：安装型任务原本一律切到「下载中心」 的通用分类列表（原版 / 模组 Tab），那只是资源浏览的导航，看不到这一次安装到底装到哪了。"
+            },
+            {
+              "html": "整合包安装任务（<code>IsModpack</code>）维持原行为，直接打开整合包进度详情窗口。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.7.0",
+      "date": "2026-10-17",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>崩溃一键修复</strong>（<code>Services/CrashRepairService.cs</code> + 改造 <code>Views/Windows/CrashAnalysisWindow</code>）。"
+            },
+            {
+              "html": "<strong>模组依赖求解器</strong>（<code>Services/ModMetadataReader.cs</code> + <code>Services/ModDependencyResolver.cs</code> + <code>Services/ModrinthApi.cs</code>）。解决最大痛点「装完打不开、报一堆 mod 缺失」： Quilt（<code>quilt.mod.json</code>，含对象与裸字符串两种依赖写法）、Forge（<code>META-INF/mods.toml</code>）、"
+            },
+            {
+              "html": "<strong>配装分享码</strong>（<code>Services/LoadoutShareService.cs</code>）。把实例的模组清单压成一段可复制的短码： <code>/v2/version_file/&lt;sha1&gt;</code> 反查它属于哪个项目 / 版本，取<strong>哈希完全一致</strong>的那个文件（退化取主文件） 拿到官方下载地址；JSON → GZip → Base64URL，前缀 <code>VBL1-</code>。"
+            },
+            {
+              "html": "<strong>实例工具箱窗口</strong>（<code>Views/Windows/InstanceToolsWindow.axaml</code>）：顶部一个实例选择器， 两个 Tab（依赖体检 / 配装分享）共用它；入口在「运行」页每个版本行的<strong>「工具箱」</strong>按钮上 （点哪一行就预设哪个实例）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>测试口子</strong>：全部逻辑都在静态服务类里，UI 只做编排，因此可以直接反射验证。"
+            },
+            {
+              "html": "<code>ModMetadataReader</code> 里 <code>ModEntry</code> 刻意用<strong>引用类型</strong>：值类型的 <code>FirstOrDefault()</code> 会静默给出 全默认值，把「没有 <code>[[mods]]</code> 表」伪装成「有一个空 id 的模组」。"
+            },
+            {
+              "html": "依赖解析与分享码导出<strong>都要联网</strong>（Modrinth），且逐个文件串行查询以避免触发限流；"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.12",
+      "date": "2026-10-15",
+      "changes": 6,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong><code>Avalonia.Metal</code> 不再被裁剪</strong>（<code>VibrantbitLauncher.Avalonia.csproj</code> 的 <code>TrimPlatformPayload</code>，win 与 linux 两个分支都去掉了对它的删除）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>为什么「调试正常、一发布就透明」</strong>：<code>TrimPlatformPayload</code> / <code>TrimPublishPayload</code> 只在 <strong>publish</strong> 阶段生效，<code>dotnet build</code> 与 Visual Studio 调试都不经过它们。"
+            },
+            {
+              "html": "<strong>定位过程（同机对照，只差一个 dll）</strong>："
+            },
+            {
+              "html": "判据用的是 <code>PrintWindow</code> 抓窗口自身内容：正常 ≈ 510 KB，空白 ≈ 3 KB （窗口样式位 <code>WS_EX_LAYERED</code> 两版一致，说明不是窗口样式问题，是<strong>内容没渲染</strong>）。"
+            },
+            {
+              "html": "⚠️ <strong>教训</strong>：这轮之前把「白屏/透明」归因到主题资源（<code>ApplicationBackgroundBrush</code>）与 Mica 回退， 那两处确实是真问题、修得没错，但<strong>不是</strong>「整窗空白」的主因。<strong>遇到「窗口完全没内容」， 先比较 <code>build</code> 与 <code>publish</code> 的产物差异</strong>，别只在 XAML / 主题里找。"
+            },
+            {
+              "html": "版本产物体积：裁剪后仍能省掉 X11 / FreeDesktop / DBus / Native / Designer 等约 2.5 MB。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.11",
+      "date": "2026-10-15",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>主窗口 Mica 回退时整窗穿透</strong>：<code>TryEnableMicaEffect</code> 之前无条件把窗口背景设成透明 + 请求 Mica 材质，<strong>假设 Mica 一定生效</strong>。但 Mica 能否渲染由 DWM 决定——系统关闭「透明效果」、 远程桌面、部分虚拟机 / 显卡驱动下，请求 Mica 会<strong>回退</strong>到 Transparent 甚至 None，"
+            },
+            {
+              "html": "<strong>9 个二级窗口加窗口级不透明背景兜底</strong>：欢迎向导 / 登录 / 皮肤管理 / 崩溃分析等窗口 之前只靠根 <code>Grid</code> 的 <code>ApplicationBackgroundBrush</code>（1.0.6.10 补的定义）着色，窗口自身 <code>Background</code> 为空——一旦 Grid 层异常（资源解析失败、内容页未加载），窗口就是「无背景」，"
+            },
+            {
+              "html": "<strong>应用级窗口底色兜底</strong>：<code>App.axaml</code> 加一条 <code>Style Selector=\"Window\"</code>，把 <code>Background</code> 兜到 FluentAvalonia 官方键 <code>SolidBackgroundFillColorBase</code>（必然存在、随主题换色）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>「白屏」与「透明」是同一根因的两种表现</strong>：窗口无不透明背景时，DWM 合成开 → alpha 通道 真透明（看到桌面）；合成关 / 老显卡 → 透出白底。1.0.6.10 修的 <code>ApplicationBackgroundBrush</code>、本版的窗口级兜底与 Mica 级别校验，三层加起来才算闭环。"
+            },
+            {
+              "html": "排查时请先确认对方机器跑的 exe 版本（关于页 / 文件属性 → 详细信息）， 1.0.6.10 之前的产物<strong>必然</strong>有这族问题。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.10",
+      "date": "2026-10-13",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>所有二级窗口在别的电脑上全白（用户报：窗口出来了，内容一片空白）</strong>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>反向对照已验证</strong>：反射探针直接查编译好的产品程序集资源字典 —— 移除定义时 <code>ApplicationBackgroundBrush</code> 在 Light/Dark/Default 三个变体下<strong>全部返回 null</strong>（3 FAIL）， 补上定义后 <strong>全部可解析</strong>；再走 <code>SettingsService.Load()</code> + <code>ApplyTheme()</code> 验证运行时覆写，"
+            },
+            {
+              "html": "同一轮还修了 <code>FabricDownloader</code> 的<strong>空闲超时</strong>（见上一节），大文件在慢速链路上不再反复重下。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.9",
+      "date": "2026-10-11",
+      "changes": 12,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong><code>Services/LoaderInstaller.cs</code></strong>：自实现的加载器安装器，负责 ①选版本（含版本号归一化）②下载 installer jar（官方源 ↔ BMCLAPI 镜像互为兜底） ③解 <code>install_profile.json</code> / <code>version.json</code> ④铺实例版本 JSON ⑤下载全部依赖库 ⑥按 <code>processors</code> 跑 java 安装处理器。"
+            },
+            {
+              "html": "<strong>Quilt 也走自实现</strong>（<code>LoaderInstaller.InstallQuiltAsync</code>）：Quilt 的 profile 就是一份 现成版本 JSON（无 processor），拉下来改 id → 下库即可。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>Forge / NeoForge 装不上（<code>NullReferenceException</code>）</strong>。库的 <code>ForgeInstaller.DownloadForgePackageAsync</code> 硬编码 <code>maven.neoforged.net</code>， 既不参与 BMCLAPI 改写也无兜底；实测该主机直接连接失败（curl 退出码 7）， 现在自己拼下载地址并走双源兜底，并且补了 <code>DownloadSources</code> 的"
+            },
+            {
+              "html": "<strong>Quilt 装不上（<code>Nullable object must have a value</code>）</strong>。库的 <code>QuiltInstaller</code> → <code>MinecraftEntry.GetRequiredLibraries()</code> → <code>MinecraftLibrary.ParseJsonNode</code> 里有一句 <code>Sha1 = libNode.Sha1.Value</code>，"
+            },
+            {
+              "html": "<strong>BMCLAPI 的 NeoForge 版本号带 MC 前缀导致拼出 404</strong>。列表前 55 条是 <code>version = \"47.1.5\"</code>，最后 5 条却是 <code>version = \"1.20.1-47.1.105\"</code> （条目里另有 <code>rawVersion = \"1.20.1-forge-47.1.105\"</code> 与现成的 <code>installerPath</code>）。"
+            },
+            {
+              "html": "<strong>整合包安装会创建「空壳实例目录」，进而毒化之后的每次版本解析</strong>。"
+            },
+            {
+              "html": "<strong>安装器抛出的异常会掩盖真实原因</strong>。Quilt 安装器内部把失败咽进 <code>Completed</code> 事件后， 还会在 <code>return entry ?? throw new ArgumentNullException(\"entry\")</code> 处抛一个 与真实原因无关的 <code>ArgumentNullException</code>；Forge 安装器则是 <code>throw;</code> 原样再抛。"
+            },
+            {
+              "html": "<strong>Installer 版本号比较的两个坑</strong>（内联进上面的实现，一并记着防回归）： Quilt 的 <code>DisplayVersion</code> 是 <code>\"1.20.1-0.27.1\"</code>（<strong>带 MC 前缀</strong>）， 纯加载器版本在 <code>BuildVersion</code>；<code>ForgeInstallEntry.DisplayVersion == ForgeVersion</code> 才是纯版本。"
+            },
+            {
+              "html": "<strong>慢速链路下大文件（Forge/NeoForge 安装器 8~9 MB）会反复从 0 重下、永远装不上</strong>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>Fabric 分支不动</strong>：它本来就走 1.0.6.1 起的自实现 <code>FabricDownloader</code>，是四家里唯一没问题的。"
+            },
+            {
+              "html": "<strong>验证方式</strong>：① 反射验证台直接调<strong>编译好的产品程序集</strong>里的 <code>NormalizeLoaderVersion</code> / <code>BuildInstallerUrl</code> 与 <code>DownloadSources.ToMirror</code>， 17 项断言全 PASS（含 <code>1.20.1-forge-47.1.105</code> 这类双前缀形态、以及三条镜像改写）；"
+            },
+            {
+              "html": "排查过程确认了一个上层事实：库的 <code>HttpUtil.FlurlClient</code> 必须在启动时由 <code>InitializeHelper.Initialize()</code> 注入（应用里由 <code>App.axaml.cs</code> 的 <code>SettingsService.ApplyDownloadSettings()</code> 完成）—— 库内部多处直接"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.8",
+      "date": "2026-10-11",
+      "changes": 6,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>拖入 / 下载整合包报「目标目录不存在或已被删除，请检查游戏目录设置」</strong> （拖入 Modrinth 上的「Zombie Invade 100 Days」，1.20.1 / Forge 47.4.10，稳定复现）。"
+            },
+            {
+              "html": "<strong>一次失败的安装会永久占掉一个实例名</strong>。<code>BuildInstanceId</code> 判断重名用的是 「<code>versions/&lt;id&gt;</code> 目录在不在」，而 <code>ResolveGameRoot</code> 在安装一开始就先把该目录建出来了， 所以<strong>失败一次就留下一个空目录</strong>，下次重试被当成重名 → 名字一路 <code>(1) (2) (3)…</code> 加下去。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "这两个问题互相放大：<strong>崩 → 留下空目录 → 下次重试名字变了 → 再崩</strong>，用户看到的就是 「怎么试都装不上，而且实例列表越来越乱」。修好之后，缺基础版本的整合包会正常进入 「下载 Minecraft 版本 → 安装加载器 → 下载整合包文件 → 铺开覆盖层」的完整流程。"
+            },
+            {
+              "html": "同时确认了<strong>「基础版本已装好」的快路径没有被破坏</strong>：仍然直接复用、不会重新下载。"
+            },
+            {
+              "html": "验证方式：新增反射验证台，直接调用<strong>编译好的产品程序集</strong>里的私有方法（测的就是会发布出去的那份 IL）， 16 项断言全部通过（另 1 项因需要已初始化的 <code>SettingsService</code> 而跳过）， 其中包含「旧判据在同一现场会给出 <code>(3)</code>」的反向对照，确认用例能区分修复前后。"
+            },
+            {
+              "html": "已清理测试目录里那三个空残留目录。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.7",
+      "date": "2026-10-11",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>整合包安装进度详情页</strong>（<code>Views/Windows/ModpackProgressWindow</code>）。"
+            },
+            {
+              "html": "<strong>下载页数据自动刷新</strong>。两个时机各刷一次： 并顺手把版本清单催熟，这样用户走到下载中心时数据往往已经就绪；"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "下载资源页的<strong>版本列表与资源列表改为并行拉取</strong>。原先串行：版本清单是一条可能重试好几轮的 HTTPS（弱网下实测能拖十几秒），会把资源列表一起卡住。"
+            },
+            {
+              "html": "进度详情页的「已用时间」计时器改为可选：拿不到 UI 调度器时只是不显示时间，不再影响安装。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "启动刷新<strong>先广播、再催熟版本清单</strong>。反过来写会把广播一起拖住 —— 实测弱网下 <code>EnumerableMinecraftAsync</code> 重试能把这一句推到十几秒之后，刷新就失去了意义。"
+            },
+            {
+              "html": "详情页会话的状态机做过 56 项复现台校验（阶段推进、文件级事件、成功 / 失败 / 取消三种收尾、 原版包与带加载器两种阶段组合），全部通过。"
+            },
+            {
+              "html": "已用时间 / 剩余时间为估算值：并行下载时进度是「已完成文件数」的线性插值，不追求精确。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.6",
+      "date": "2026-10-11",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>整合包里的模组会下到 <code>.minecraft</code> 根目录，而不是实例目录</strong>（本次最严重）。"
+            },
+            {
+              "html": "<strong>实例版本 JSON 丢失，装完的整合包在启动页看不到</strong>。"
+            },
+            {
+              "html": "<strong>清单里 <code>http://</code> 的下载地址被全部丢弃</strong>。<code>FirstDownloadUrl()</code> 写死了 <code>https://</code> 前缀， 而整合包规范只要求「可直接下载的 URL」，并没有限定协议；自建镜像、局域网分发、 内网测试包因此会被判成「没有下载地址」而跳过。现在接受 http / https， 只挡 <code>file://</code> 之类其它协议。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "三个问题都由<strong>真实整合包端到端安装</strong>（本地 HTTP 服务 + 自建 <code>.mrpack</code>）发现： 清单解析测试台全 PASS 仍然漏掉了它们，因为它们全部发生在「写文件」阶段。"
+            },
+            {
+              "html": "顺带确认 <code>Task.ContinueWith</code> 只判 <code>IsFaulted</code> 不算「异常已观察」—— 弱网下版本清单读取失败会重试（日志 <code>获取 Minecraft 版本清单失败（第 N/3 次）</code>）， 属已知瞬时故障，不影响本次改动。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.5",
+      "date": "2026-10-11",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>整合包安装（新建实例）</strong>：支持 Modrinth 的 <code>.mrpack</code> 与 CurseForge 的 <code>.zip</code>。"
+            },
+            {
+              "html": "<strong>整合包详情页</strong>：下载中心打开整合包时，标题与提示文案会跟着资源类型变化 （整合包 / 资源包 / 光影 / 数据包各有自己的抬头与说明），整合包行提供「安装整合包」按钮。"
+            },
+            {
+              "html": "<strong>装完立刻可见</strong>：安装完成后自动通知「启动」页刷新实例列表，不需要重启启动器。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>下载中心所有资源都提示「没有匹配的资源」</strong>（用户报：社区资源五个分类 + 原版版本列表 「一直如此，必现」）。根因是资源搜索失败时会把列表清空，而空列表正好触发空状态文案 —— 用户看到的是「没有匹配的资源」，实际上根本没搜成功。Modrinth 服务器在境外， 原实现既无重试、也读不到代理设置、还有 20 秒单发超时，国内网络下必然失败。三处修掉："
+            },
+            {
+              "html": "<strong>版本清单加载失败不再静默</strong>：下载中心初始化时的版本列表加载原先是一个空 <code>catch {}</code>， 出问题时日志里完全无线索，现在会记一条警告（且不影响资源搜索）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "整合包安装是重操作（下载一整个 Minecraft + 加载器 + 模组），带全局防重入： 正在安装时再次拖入会提示等待，不会并发出两个安装互相抢带宽。"
+            },
+            {
+              "html": "CurseForge 整合包里的模组需要登录 CurseForge 才能自动下载，本实现会先建好实例与加载器， 并在提示里说明这些模组需要手动补齐（不静默跳过）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.4",
+      "date": "2026-10-10",
+      "changes": 11,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>临时文件重名导致的「文件被另一进程占用」</strong>（<code>Services/FabricDownloader.cs</code>）：下载库文件时， 临时文件从固定的 <code>xxx.jar.vbltmp</code> 改为<strong>每次尝试独立命名</strong>（<code>xxx.jar.&lt;随机&gt;.vbltmp</code>）。"
+            },
+            {
+              "html": "<strong>依赖库清单去重</strong>：<code>ExtractLibraries</code> 现在按落点路径去重，避免同一个 artifact 被下发两次。"
+            },
+            {
+              "html": "<strong>单个库失败不再拖垮整批</strong>：并行下载改为收集失败清单（最多列 5 个文件名 + 各自原因）， 其余文件照常下完再一次性报出。以前 <code>Parallel.ForEachAsync</code> 的第一个异常直接上抛， 外层还裹着 <code>AggregateException</code>，真实原因经常在这一层被吞掉。"
+            },
+            {
+              "html": "<strong>致命错误快速放弃</strong>：磁盘满 / 无权限 / 路径过长这几类重试也没用，现在立即停止， 不再把「重试次数」白跑完。"
+            },
+            {
+              "html": "<strong>写盘步骤也纳入保护</strong>：写版本 JSON、创建 libraries 目录失败时同样给出中文可操作的提示。"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong><code>Helpers/DownloadErrors.cs</code></strong>：统一的「本地文件系统异常」分类与翻译层。按异常类型 / Win32 HRESULT / 关键字识别<strong>文件被占用、磁盘已满、权限不足、路径过长、目录不存在</strong>五类， 每类给出「原因 + 怎么办」，并提供 <code>IsFatal</code>（重试无意义）供下载器决定是否快速放弃。"
+            },
+            {
+              "html": "<strong>原版下载器同样的错误捕捉</strong>（<code>Services/VanillaDownloader.cs</code>）：每一步（版本 JSON、写盘、解析、 依赖下载）的异常都翻成中文；版本 JSON 补上「官方 ↔ BMCLAPI 镜像」双源兜底与重试， 单次请求独立超时（不再受 HttpClient 默认 100 秒总超时影响）。"
+            },
+            {
+              "html": "<strong>模组下载（另存为 / 添加到实例）</strong>：改为「先写临时文件 → 整包写完改名」的原子落盘， mods 目录里不会再出现半截 <code>.jar</code>；错误提示同样接上统一翻译。"
+            },
+            {
+              "html": "<strong>版本清单预热不再抛「未观察到的任务异常」</strong>（<code>Services/MinecraftVersionCache.cs</code>）： <code>Preload()</code> 原先只判 <code>IsFaulted</code>、没读 <code>Task.Exception</code>，任务被 GC 时终结器会把它当 「未观察到的任务异常」抛出，日志里多一条带堆栈的 ERROR，看着像程序崩了（本机冒烟测试实测到）。"
+            },
+            {
+              "html": "<strong>首页新闻拉取加了重试与空数据保护</strong>（<code>Helpers/MojangNewsHelper.cs</code>）： 原来是裸 <code>GetStringAsync</code> + <code>Deserialize</code>，无重试、超时用默认 100 秒， 且 <code>root</code> 为 null 时会在 <code>root.Entries</code> 上直接空引用。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "报错文案里现在会明确区分「是网络问题」还是「是本地文件冲突」： 后者会提示关闭正在运行的游戏 / 杀毒软件，前者才引导去「设置 → 下载」切换下载源。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.3",
+      "date": "2026-10-10",
+      "changes": 12,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>实例加载器识别</strong>（<code>Helpers/GameInstanceHelper.cs</code>）：扫描版本 JSON 的 <code>libraries</code> Maven 坐标 （<code>net.fabricmc:<em></code> / <code>org.quiltmc:</em></code> / <code>net.neoforged<em></code> / <code>net.minecraftforge:</em></code> / <code>com.mumfrey:*</code>），"
+            },
+            {
+              "html": "<strong>加载器兼容判定</strong>：Fabric 模组 → Fabric / Quilt 实例（Quilt Loader 向下兼容 Fabric 模组，反之不成立）；"
+            },
+            {
+              "html": "<strong>每行显示「需要什么加载器」</strong>（如 <code>Fabric / Quilt</code>、<code>未标注加载器</code>）：按钮不出现时用户能立刻看懂原因， 不用去猜「为什么这行没有添加按钮」。"
+            },
+            {
+              "html": "<strong>默认选中有用的实例</strong>：列表加载完会自动选「能装上至少一个文件」的实例， 不会再默认停在原版实例上导致整页按钮全灭。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>模组加载器筛选框从来没生效过</strong>：<code>comboBox1</code> 的条目是 <code>ComboBoxItem</code>，原代码用 <code>SelectedItem as string</code> 取文字恒为 <code>null</code>，等于永远「全部」。现改为取 <code>ComboBoxItem.Content</code>。"
+            },
+            {
+              "html": "<strong>游戏版本筛选改用真实支持列表</strong>：优先用 Modrinth 标注的 <code>game_versions</code> 判定， 拿不到时才退回「文件名里含版本号」的旧做法（旧做法选 <code>1.21.4</code> 时，文件名不带该串的兼容文件会被漏掉）。"
+            },
+            {
+              "html": "两个筛选下拉的首项由空白改为「全部」，不再是看不懂的空条目。"
+            },
+            {
+              "html": "筛选不再重建列表项：原实现在每次筛选时 <code>new</code> 一批行对象，切筛选会丢掉按钮的显隐状态。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>NeoForge 必须先于 Forge 判断</strong>：NeoForge 1.20.1 发布在 <code>net.neoforged:forge</code> 下，与 Forge 自己的 <code>net.minecraftforge:forge</code> 只差 groupId；且两者都用 <code>cpw.mods</code> 的启动器类，只看 <code>mainClass</code> 分不开。"
+            },
+            {
+              "html": "<strong>OptiFine 单装版不算加载器</strong>：它也挂在 <code>launchwrapper</code> 上启动，若不特判，会被 <code>mainClass</code> 规则误判成 Forge， 进而放行 Forge 模组进一个其实装不了 Forge 模组的实例。"
+            },
+            {
+              "html": "<strong>加载器标签为空时不拦截</strong>（Modrinth 未标注 ≠ 不能装），拦下来只会变成「功能看起来坏了」。"
+            },
+            {
+              "html": "资源包 / 光影仍不校验加载器：它们由游戏或 Iris/OptiFine 读取，与模组加载器无关，加了拦截只会误伤。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.2",
+      "date": "2026-10-10",
+      "changes": 9,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>「添加到实例」按钮</strong>：列表每行在「另存为」旁多出一个按钮，直接把文件下进所选实例的对应目录。"
+            },
+            {
+              "html": "<strong>目标实例下拉框</strong>：页面顶部列出本地已安装实例（口径与启动页一致：排除被 <code>inheritsFrom</code> 继承的基础版本）。"
+            },
+            {
+              "html": "<strong>落点随「版本隔离」自动判定</strong>：开启 → <code>versions/&lt;版本&gt;/&lt;子目录&gt;</code>；关闭 → <code>.minecraft/&lt;子目录&gt;</code>。"
+            },
+            {
+              "html": "子目录按项目类型区分：模组 → <code>mods</code>、资源包 → <code>resourcepacks</code>、光影 → <code>shaderpacks</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>同名文件不覆盖</strong>：目标已存在同名文件时自动追加 <code> (1)</code>、<code> (2)</code>，不会把玩家已有的模组冲掉。"
+            },
+            {
+              "html": "<strong>失败清理半截文件</strong>：下载中断时删掉没写完的文件 —— 在 <code>mods</code> 里留一个损坏的 <code>.jar</code> 会让游戏直接崩， 比没下载更糟。"
+            },
+            {
+              "html": "<strong>文件名规范化</strong>：从下载链接取文件名时去掉查询串 / 片段并清洗非法字符，没带扩展名时自动补上推断的扩展名。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "新增 <code>Helpers/GameInstanceHelper.cs</code>：实例枚举与落点解析的统一入口（实例口径、版本隔离条件都只此一处）。"
+            },
+            {
+              "html": "<code>ModPage.LoadForProject</code> 增加 <code>projectType</code> 参数，由资源搜索页在跳转时传入，用于决定子目录与入口显隐。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6.1",
+      "date": "2026-10-07",
+      "changes": 11,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>每个请求独立超时</strong>：元数据 12 秒、库文件 90 秒、建连 8 秒。"
+            },
+            {
+              "html": "<strong>官方源与镜像互为兜底</strong>。新增 <code>Helpers/DownloadSources.cs</code> 维护一份<strong>已实测</strong>的映射表 （<code>meta.fabricmc.net</code>、<code>maven.fabricmc.net</code>、<code>maven.minecraftforge.net</code>、 <code>files.minecraftforge.net/maven</code>、<code>libraries.minecraft.net</code>），"
+            },
+            {
+              "html": "<strong>源健康度</strong>：某个主机被实测为「慢」（单次请求 &gt; 15 秒）或「坏」后，10 分钟内排到候选末尾。"
+            },
+            {
+              "html": "<strong>库文件改为并行下载</strong>（并发数取 <code>下载线程数</code>，但夹在 1~4 —— 实测按默认值 10 并发打 BMCLAPI 会触发瞬时限流 403，4 路已经比原来串行快好几倍）。"
+            },
+            {
+              "html": "<strong>落盘改为 <code>.vbltmp</code> + 改名</strong>。原来直接写目标路径，中途失败会留下半截 jar， 而下次 <code>File.Exists</code> 会把它当成「已下载」跳过 —— 之后要等启动游戏时才以 「找不到类」这种莫名其妙的方式炸出来，排查成本极高。"
+            },
+            {
+              "html": "<strong>限流（403 / 429）不再当致命错误</strong>：多给 4 轮重试 + 最长 6 秒退避。"
+            },
+            {
+              "html": "<strong>报错文案中文化且可操作</strong>。原来是一句 <code>The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.</code>， 现在会说清是超时还是 404/400/限流、试过哪几个源、以及下一步该做什么 （「设置 → 下载」切镜像 / 检查代理）。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>安装页的四个加载器版本列表改为并行查询</strong>（原来顺序 await，一家卡住后面三家排队干等）， 并给单家查询加了 25 秒上限。弱网下「安装页一直转圈」由此解决。"
+            },
+            {
+              "html": "<strong>Fabric 版本列表改走自实现版本</strong>（享受镜像 / 精准超时 / 重试），不再用库自带的裸请求。"
+            },
+            {
+              "html": "<strong>删掉安装时那次重复的联网查询</strong>。原来为了拿一个 entry 对象，会再调一次 <code>FabricInstaller.EnumerableFabricAsync</code> + <code>FabricInstaller.Create</code> —— 而实际安装走的是自实现下载器，那次请求纯属多余，且正是超时高发点之一。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "实测（<code>Helpers</code>+<code>Services</code> 源码直接编进独立探针工程）： <strong>12.0 秒</strong>准时放弃慢源并改用官方源，随后拿到全部 253 个版本 —— 修复前会干等 100 秒。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.6",
+      "date": "2026-10-07",
+      "changes": 15,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>性能模式（设置 → 个性化 → 性能模式）</strong>：一个总开关，专为低配电脑设计，开启后关闭 云母（Mica）材质、壁纸背景、页面切换与控件悬停 / 按下的动效、卡片阴影、平滑滚动， 并把位图缩放从「高质量重采样」降为低开销插值，同时改用<strong>软件渲染</strong>。"
+            },
+            {
+              "html": "<strong>运行环境自动探测</strong>（<code>Helpers/AppEnvironment.cs</code>）：启动时读注册表 <code>Windows NT\\CurrentVersion</code> 判定真实系统版本（不再依赖会谎报的 <code>Environment.OSVersion</code>）， 并用 <code>GlobalMemoryStatusEx</code> 取物理内存，连同 CPU 核数、是否 32 位进程一起写进启动日志。"
+            },
+            {
+              "html": "<strong>低配自动判定 + 一次性询问</strong>：满足「32 位进程 / Windows 7 及更早 / 内存 &lt; 6GB / CPU ≤ 3 核」任一条件且用户此前没被问过时，主窗口出来后弹一次确认框， 询问是否开启性能模式；无论选什么都不再问第二次（记录 <code>PerformanceModeAsked</code>）。"
+            },
+            {
+              "html": "新增两个设置项：<code>PerformanceMode</code>（是否开启）与 <code>PerformanceModeAsked</code>（是否已询问）。"
+            },
+            {
+              "html": "支持两个调试 / 兜底入口：命令行 <code>--software-render</code>、环境变量 <code>VBL_SOFTWARE_RENDER=1</code>， 用于在无法进入设置界面时强制软件渲染排查问题。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>修复 Windows 7 等非 Windows 11 系统上的启动白屏</strong>。"
+            },
+            {
+              "html": "<strong>修复 Mica 判定不可靠</strong>：原先用的是 <code>Window.IsWindows11</code>，它基于会谎报系统版本的 <code>Environment.OSVersion</code>（未声明 supportedOS 时 Win8.1 以上一律报 6.2）， 现改为读取注册表 <code>CurrentBuildNumber</code> 自行判定。"
+            },
+            {
+              "html": "<strong>修复高性能与低端机共用的一个观感问题</strong>：性能模式下跳过窗口入场动画并把 <code>AppRoot</code> 显式摆到终态（透明度 1、缩放 1、位移 0），避免动画在低配机器上一卡就长时间停在 「淡 + 缩」的半路，看上去像糊了一层。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>启动链路重排：把重活推到主窗口显示之后</strong>。下载参数初始化、版本清单预热、 版本 JSON 规范化这三步原先都在 <code>OnFrameworkInitializationCompleted</code> 里同步跑完才返回， 而窗口要到它返回后才由平台显示 —— 在低配机器上这段时间正是用户看到的白屏。"
+            },
+            {
+              "html": "性能模式下<strong>跳过版本清单预热</strong>：这一步要起线程 + 拉 HTTPS + 反序列化上万个条目， 在单核 / 32 位进程（用户态地址空间仅 2GB）上代价明显，而它只是为了让「下载中心」 首次打开快一点。"
+            },
+            {
+              "html": "性能模式下把<strong>版本 JSON 规范化</strong>再延后 3 秒，避开窗口首帧的资源竞争。"
+            },
+            {
+              "html": "样式层面用<strong>根类 <code>performanceMode</code></strong> 整体关动效（见 <code>Styles/Animations.axaml</code> 末尾）： Avalonia 的选择器读不到资源值，给窗口根节点挂一个类是唯一零运行时开销的做法。"
+            },
+            {
+              "html": "启动日志新增三行，便于远程排障：运行环境摘要、性能模式来源、实际使用的渲染后端。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": ".NET 10 <strong>官方不支持 Windows 7</strong>（Win7 上最后一个受支持的版本是 .NET 6， 且已于 2024-11-12 结束支持）。若目标机确实装上了可运行的 .NET 10 运行时， 本版本的所有优化都在此前提下生效；如果连运行时都起不来，需要先解决框架本身。"
+            },
+            {
+              "html": "32 位（x86）进程的用户态地址空间上限是 2GB，与机器装了多少物理内存无关， 大图 / 长列表会更快触顶 —— 这是性能模式默认关闭壁纸和清单预热的主要原因。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.21",
+      "date": "2026-10-07",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<code>win-<em></code>（<code>win-x64</code> / <code>win-x86</code> / <code>win-arm64</code>）现在只生成 <code>.zip</code></em>*，不再生成 <code>.tar.gz</code>。"
+            },
+            {
+              "html": "<code>linux-<em></code> 仍然只出 <code>.tar.gz</code>（要保留可执行位）；<code>osx-</em></code> 仍然只出 <code>.tar.gz</code> （内含 <code>.app</code> bundle，外加 <code>install.command</code> 与 <code>README-macOS.txt</code>）。"
+            },
+            {
+              "html": "<code>publish-all.sh</code> 在<strong>没有 <code>zip</code> 命令</strong>的环境里会退回 <code>tar.gz</code> 并打印提示，避免该平台一件产物都没有。"
+            },
+            {
+              "html": "两个脚本头部的产物结构说明同步更新。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "旧格式残留（<code>dist/<em>win</em>.tar.gz</code>）不在脚本的清理职责内：需要时用 <code>-Clean</code> / <code>--clean</code> 重跑一遍（会清空 <code>publish/</code> 与 <code>dist/</code>），本次已据此重发全部 7 个平台。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.20",
+      "date": "2026-10-07",
+      "changes": 12,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>打包丢了可执行位</strong>：Windows 文件系统没有「可执行位」，在 Windows 上打出来的 <code>.tar.gz</code> 里所有文件权限都是 0666、目录 0777 → 解压到 macOS 后 <code>.app</code> 的主可执行文件不可执行 （双击毫无反应），Linux 上 <code>./VibrantbitLauncher.Avalonia</code>、<code>./install.sh</code> 也都跑不起来。"
+            },
+            {
+              "html": "<strong><code>Info.plist</code> 带 UTF-8 BOM</strong>：PS 5.1 的 <code>Set-Content -Encoding UTF8</code> 会写 BOM，plist 以 <code>EF BB BF</code> 开头，macOS 的 <code>plutil</code> 会判为非法格式。改为 UTF-8 <strong>无 BOM</strong> 落盘。"
+            },
+            {
+              "html": "<strong><code>SHA256SUMS.txt</code> 带 UTF-8 BOM</strong>：同样来自 PS 5.1 的 <code>-Encoding UTF8</code>。带 BOM 时 <code>sha256sum -c SHA256SUMS.txt</code> 在 Linux / macOS 上会直接失败（首行文件名被拼上了 BOM）。改为无 BOM。"
+            },
+            {
+              "html": "<strong><code>install.sh</code> 的中文被写成问号</strong>：PS 5.1 用 <code>-Encoding ASCII</code> 落盘，中文注释全成 <code>?</code>。改为 UTF-8 无 BOM。"
+            },
+            {
+              "html": "<strong><code>SHA256SUMS.txt</code> 用了 CRLF 换行</strong>：写文件时取了 <code>[Environment]::NewLine</code>，在 Windows 上是 <code>\\r\\n</code>， 于是 Linux / macOS 上 <code>sha256sum -c</code> 读到的文件名尾部多一个 <code>\\r</code>，报 <code>No such file or directory</code>（十个包全报 FAILED）。改为 <code>\\n</code>。"
+            },
+            {
+              "html": "<strong>Windows 的 zip 覆盖被环境的删除钩子打断</strong>：<code>Compress-Archive</code> 覆盖同名文件时内部会先删一次， 而某些环境把「删除」改写成回收站操作并抛错（<code>SAFE_DELETE_FAIL_CLOSED</code>）， 会让整个平台被标记为失败。改为<strong>先用 <code>Remove-FileSafe</code> 清掉旧 zip</strong>（删完复查是否真的没了），"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>macOS 包内附 <code>install.command</code>（双击即执行）</strong>，一次做完三件事： ① <code>chmod +x</code> 补可执行位；② <code>xattr -dr com.apple.quarantine</code> 去掉下载隔离属性（绕过 Gatekeeper）；"
+            },
+            {
+              "html": "<strong>macOS 包内附 <code>README-macOS.txt</code></strong>：架构选择（M 系列 → osx-arm64 / Intel → osx-x64）、 装 .NET 10 Runtime（<strong>macOS 上没有 \"Desktop Runtime\"，就是 Runtime</strong>；Homebrew 装的可能需"
+            },
+            {
+              "html": "两个脚本的头部注释与 <code>-h</code> 帮助补上 macOS 首次运行说明。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<code>publish-all.ps1</code> 侧改用 Git 自带的 GNU tar，并把打包拆成两步：<code>tar --mode=... --force-local -cf</code> 打成裸 tar，再用 .NET 的 <code>GZipStream</code> 压成 <code>.tar.gz</code>。绕开两个坑： <code>publish-all.sh</code> 侧不需要这层，GNU tar + <code>-z</code> 直接可用。"
+            },
+            {
+              "html": "<strong>本机仍只能实跑 win-x64</strong>；osx / linux 六个平台只做了归档结构校验（权限位、BOM、<code>.app</code> 布局、 包内脚本存在）。macOS 上的实际启动需要真机验证。"
+            },
+            {
+              "html": "验证方式：<code>tar -tvzf</code> 看归档内权限位、<code>xxd</code> 看首字节（BOM / CR）、<code>sha256sum -c</code> 验全套哈希， 本次三个平台 7 个包全部通过；发布全量 7 平台一次跑通（退出码 0）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.19",
+      "date": "2026-10-07",
+      "changes": 10,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong><code>publish-all.ps1</code>（Windows）与 <code>publish-all.sh</code>（Linux / macOS / Git Bash）</strong>，两者功能等价： 一次产出 <code>win-x64</code> / <code>win-x86</code> / <code>win-arm64</code> / <code>linux-x64</code> / <code>linux-arm64</code> / <code>osx-x64</code> / <code>osx-arm64</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>csproj 的 <code>&lt;RuntimeIdentifier&gt;</code> 改为条件默认</strong>：<code>Condition=\"'$(RuntimeIdentifier)' == ''\"</code> 时才回落 <code>win-x64</code>。"
+            },
+            {
+              "html": "<strong><code>TrimPlatformPayload</code> 从「仅 win-x64」泛化为「按 RID 剥掉其它平台的后端程序集」</strong>： 实测每个平台再省 1.6 ~ 2.8 MB。逃生阀：<code>-p:SkipPlatformTrim=true</code>。"
+            },
+            {
+              "html": "csproj 显式写出 <code>PublishReadyToRun=false</code> / <code>EnableCompressionInSingleFile=false</code>， 与 IDE 的发布配置文件（pubxml）行为对齐（此前只有 pubxml 里有，命令行靠默认值）。"
+            },
+            {
+              "html": "<strong>CI（<code>.github/workflows/build.yml</code>）改为直接调用 <code>publish-all.sh</code></strong>，不再自己维护第二套打包逻辑， 避免两套逻辑长期漂移；同时补上此前缺失的 <strong><code>win-x86</code></strong>，矩阵从 6 个 RID 扩到 7 个。"
+            },
+            {
+              "html": "<code>.gitignore</code> 增加 <code>/publish/</code> 与 <code>/dist/</code>（都是几十 MB 的二进制产物）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "发布模式仍是<strong>框架依赖</strong>（不含 .NET 运行时）。目标机器需要自备： Windows → .NET 10 <strong>Desktop</strong> Runtime；Linux / macOS → .NET 10 Runtime。"
+            },
+            {
+              "html": "<strong>实测 7 个平台（单文件 / 压缩包 / 平台剥离省下的体积）</strong>： 全 7 个平台串行发布总耗时约 <strong>72 秒</strong>（本机增量实测）。"
+            },
+            {
+              "html": "<strong>只有 win-x64 能在本机实机验证</strong>（实跑结果：日志 <code>VibrantbitLauncher 1.0.5.19 启动</code>，异常数 0，配置正常加载）。"
+            },
+            {
+              "html": "写 <code>.ps1</code> 时踩到的两个环境坑（都已在脚本里处理）： 1. <strong>Windows PowerShell 5.1 会按系统 ANSI 代码页解析「无 BOM 的 .ps1」</strong>，中文注释会整体乱码并诱发语法错误 → 脚本必须存成 <strong>UTF-8 with BOM</strong>；"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.18",
+      "date": "2026-10-07",
+      "changes": 11,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>新增 <code>Helpers/RgbaBitmap.cs</code></strong>：基于 <strong>SkiaSharp</strong>（Avalonia 渲染后端本来就依赖它）的最小 RGBA 位图， 提供 PNG 解码 / 编码、像素读写、最近邻缩放。"
+            },
+            {
+              "html": "<strong><code>SkinService</code> 改用 <code>RgbaBitmap</code> 自己实现头像裁剪与正面立绘拼合</strong>，不再依赖 <code>MinecraftLaunch.Skin</code> 的 <code>CropSkinHeadBitmap()</code>；新增公开入口 <code>SkinService.WriteHeadBitmap(path, skinBytes)</code> 与 <code>SkinService.TryReadImageSize(...)</code>（只读尺寸、不解码像素）。"
+            },
+            {
+              "html": "<code>SkinService.ValidateSkinFile</code> 改为只读图片头拿尺寸，不再为校验而整图解码。"
+            },
+            {
+              "html": "<code>AccountPageViewModel</code> 的三处头像裁剪（微软登录 / 外置登录 / 离线默认皮肤）统一改走 <code>SkinService.WriteHeadBitmap</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "移除",
+          "items": [
+            {
+              "html": "<strong><code>SixLabors.ImageSharp</code>（2.0 MB）</strong>：全项目仅皮肤裁剪用到，已由 SkiaSharp 顶替。"
+            },
+            {
+              "html": "<strong><code>MinecraftLaunch.Skin</code>（0.02 MB）</strong>：唯一被用到的是 <code>CropSkinHeadBitmap()</code>，其实现正是 ImageSharp。"
+            },
+            {
+              "html": "新增显式 <code>SkiaSharp</code> 引用（版本与 Avalonia 12.1.0 解析出的 3.119.4 一致，不改变发布载荷， 只是把原先的隐式传递引用写明白，避免将来 Avalonia 换版本时编译静默失效）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>踩到的坑：<code>SKBitmap.Decode</code> 返回的是预乘（Premul）位图。</strong> 半透明像素在预乘 / 反预乘往返时会有 ±1 取整误差， <code>A=1</code> 的像素 RGB 甚至会被抹成 0。改用 <code>SKCodec</code> 并显式要求 <code>SKAlphaType.Unpremul</code> 后， 实测可与 PNG 原值<strong>逐字节一致</strong>。"
+            },
+            {
+              "html": "头像裁剪的算法与参数（底图 (8,8)–(16,16)、叠加层 (40,8)–(48,16)、叠加层仅 <code>A=255</code> 时覆盖、 最近邻放大到 60×60）<strong>逐字照搬原库行为</strong>，刻意连它「叠加层必须完全不透明才生效」这个略显粗糙的规则一起保留， 就是为了让换库前后生成的头像逐像素一致。"
+            },
+            {
+              "html": "<strong>对照验证 18 项全过</strong>：新实现 vs 旧库 <code>CropSkinHeadBitmap</code>、新实现 vs 旧 <code>SaveFrontView</code>（ImageSharp 复现）， 以及<strong>新实现 vs 改动前旧代码真实产出的存量头像 / 立绘 PNG</strong>，逐像素一致；"
+            },
+            {
+              "html": "发布产物确认：<code>SixLabors.ImageSharp</code> 与 <code>MinecraftLaunch.Skin</code> 已不在载荷中；实跑 0 异常。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.17",
+      "date": "2026-10-07",
+      "changes": 22,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>剥掉打进发布目录、但 Windows 上永远不会加载的平台程序集</strong>（新增 <code>TrimPlatformPayload</code> 目标， 带 <code>RuntimeIdentifier == win-x64</code> 条件，其它平台发布不受影响）： <code>Avalonia.X11</code>、<code>Avalonia.FreeDesktop</code>、<code>Avalonia.FreeDesktop.AtSpi</code>、<code>Tmds.DBus.Protocol</code>（Linux）、"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "实测排除的几条路：<strong>框架依赖 + 单文件 + 压缩</strong>被 SDK 直接拒绝（<code>NETSDK1176</code>：压缩仅支持独立部署）；"
+            },
+            {
+              "html": "<code>Avalonia.Controls.DataGrid</code> / <code>Avalonia.Controls.ColorPicker</code>（共 0.8 MB）虽然本工程没直接用， 但 FluentAvalonia 有引用，删除有风险，保持不动。"
+            }
+          ]
+        },
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>启动 · Java 虚拟机与内存</strong>：Java 版本选择（带「重新检测」）、最大内存（-Xmx）/ 初始内存（-Xms） 下拉（默认 2G/1G，可「自动推荐」按本机内存一半挑档）、附加 JVM 参数多行输入（一行一条，<code>#</code> 开头忽略）。"
+            },
+            {
+              "html": "<strong>启动 · 游戏目录</strong>：Minecraft 文件夹可选可打开；<strong>版本隔离</strong>开关（每个版本用独立 saves/mods/config）。"
+            },
+            {
+              "html": "<strong>启动 · 高级</strong>：禁用 IPv6（<code>-Djava.net.preferIPv4Stack=true</code>）、GC 模式（自动/G1GC/ZGC/Parallel/Serial）、 全屏启动、Minecraft 窗体大小（宽×高，改后同时用于 <code>${resolution_width/height}</code> 与 <code>--width/--height</code>）。"
+            },
+            {
+              "html": "<strong>个性化 · 主界面</strong>：启动游戏后对启动器自身的行为（不处理 / 最小化 / 关闭）——只在游戏进程确实起来后才执行。"
+            },
+            {
+              "html": "<strong>网络 · 下载</strong>：BMCLAPI 镜像开关（改动立即影响后续所有下载的 URL 改写）、下载线程数、失败重试次数。"
+            },
+            {
+              "html": "<strong>日志分类</strong>独立成页：记录等级、保留天数、是否输出到调试器、日志目录与打开/导出/清空、最近日志列表。"
+            },
+            {
+              "html": "<strong>关于分类</strong>：版本号、简介与致谢。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>启动链路全部接入用户设置</strong>：内存、GC、IPv6、自定义 JVM 参数、窗体大小 / 全屏、版本隔离 原先都写死在代码里，现在一律读配置（启动日志会打印实际生效的参数）。"
+            },
+            {
+              "html": "设置项改动即落盘（<code>settings.json</code>），初始化回填控件时用抑制标志挡住无意义的重复保存。"
+            },
+            {
+              "html": "新增 <code>Models/SettingOption.cs</code>（通用「键-显示名」选项）与内存档位模型，供各下拉复用。"
+            },
+            {
+              "html": "下载并发数改为读配置（原版安装器的并发也从 10 固定值改为跟随设置）。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>设置页「关于」图标用了不存在的 <code>FASymbol</code> 成员 <code>Info</code></strong>，导致 XAML 编译报 <code>AVLN3000: Unable to find suitable setter ... for property Symbol</code>。已改为合法成员 <code>Help</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>老版本（1.13 以前）装不上、也列不出来</strong>。根因在 MinecraftLaunch 4.0.7 的解析器： <code>MinecraftParser.IsVanilla()</code> 拿版本 JSON 里的 <code>arguments</code> 直接调 <code>JsonElement.TryGetProperty(\"game\")</code>，而 1.13 以前的版本用的是老式的"
+            },
+            {
+              "html": "<strong>修法：给缺 <code>arguments</code> 的版本 JSON 补一个 <code>\"arguments\": {\"game\": []}</code></strong> （见新增的 <code>Helpers/VersionJsonNormalizer.cs</code>）。库没有留出「JSON 落盘后、解析前」的钩子， 所以新写了 <code>Services/VanillaDownloader.cs</code>——按 <code>VanillaInstaller</code> 同样的步骤走一遍："
+            },
+            {
+              "html": "<strong>补的 <code>arguments</code> 里只放 <code>game</code>、不放 <code>jvm</code></strong>。这是踩出来的：<code>JvmArgumentParser</code> 靠「有没有 <code>jvm</code> 键」区分新旧两套 JVM 参数，一旦写了 <code>\"jvm\": []</code> 就会走现代分支， 只吐一个 <code>-cp</code>、<strong>丢掉 <code>-Djava.library.path=${natives_directory}</code></strong>，"
+            },
+            {
+              "html": "<strong>已经装好的老版本会在启动时被自动修复</strong>。App 启动的第 ⑨ 步原本只修 JSON 的 <code>+HHMM</code> 时区格式，现在改成统一的 <code>NormalizeVersionJsons()</code>：顺带补 <code>arguments</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "原版安装的进度文案改为「下载版本信息 / 解析版本 / 下载文件 n/m / 安装完成」， 并恢复了速度显示（自实现安装器同样回调 <code>Speed</code>）。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "改动文件：<code>Helpers/VersionJsonNormalizer.cs</code>（新增）、<code>Services/VanillaDownloader.cs</code>（新增）、 <code>ViewModels/Pages/InstallPageViewModel.cs</code>、<code>App.axaml.cs</code>。"
+            },
+            {
+              "html": "实测：1.12.2 原版安装 8 秒完成、26.4-snapshot-2 原版安装 3 秒完成（均已缓存）， 启动日志无任何异常；版本列表能解析出 3 个已装版本。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.14",
+      "date": "2026-10-06",
+      "changes": 7,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「安装」按钮不再被误判禁用</strong>。原判断是 <code>CanInstall =&gt; !IsLoading</code>，而 <code>IsLoading</code> 是个 「什么都算」的总开关，进页面拉取加载器版本列表时它也是 <code>true</code>，于是刚进页面那几秒按钮就是灰的。"
+            },
+            {
+              "html": "<strong><code>IsInstalling</code> 永远会被复位</strong>。原先整个安装流程只有开头一次 <code>IsLoading = true</code>、结尾一次 <code>IsLoading = false</code>，中间好几处网络调用（Java 探测、版本清单、加载器枚举）都在 <code>try</code> 之外；"
+            },
+            {
+              "html": "<strong>连续切换版本时不再互相串台</strong>。<code>SetMcVersion</code> 是 <code>async void</code>，<code>await</code> 期间用户可能又点了 另一个版本；旧那次加载回来后会拿过期数据去改界面（勾选框被错误禁用、占位文案显示成别的版本的状态）。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>加载期间列表占位文案改为「正在加载中」</strong>。原先只要列表为空就显示「该版本暂无可用版本」， 而列表在拉取完成前本来就是空的，所以加载中看到的是「没有可用版本」—— 更糟的是首次进入页面时代码还没刷过占位文案，显示的可能是<strong>上一个版本残留的状态</strong>。"
+            },
+            {
+              "html": "<strong>加载器勾选框与列表状态对齐</strong>。四个 <code>CheckBox</code> 的可用性统一由 <code>UpdateLoaderAvailability()</code> 计算， 优先级从高到低： 1. 版本列表还没拉完 → <strong>四个框全部禁用</strong>（加载好之前不给勾）；"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "实机验证（<code>VBL_SMOKE</code> 跳安装页 + <code>VBL_PROBE</code> 每 120ms 采样，日志 <code>logs/vibrantbit-*.log</code>）： NeoForge 卡片显示「该版本暂无可用版本」，其余卡片占位隐藏；"
+            },
+            {
+              "html": "探针代码与 <code>VBL_SMOKE</code> 冒烟钩子验证完已全部删除（全局 grep <code>PROBE</code> = 0）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.13",
+      "date": "2026-10-06",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>下载资源页平滑滚动</strong>：<code>DownloadResourcesPage</code> 的资源列表加上 <code>Classes=\"smoothScroll\"</code>， 滚轮 / 键盘翻页时的位移由硬跳改为 260ms <code>CubicEaseOut</code> 补间。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong><code>FolderProfile.pubxml</code> 关掉 <code>PublishReadyToRun</code></strong>：这才是「用发布档案发布出来还是 70MB」的真正原因。"
+            },
+            {
+              "html": "<strong><code>&lt;RuntimeIdentifier&gt;win-x64&lt;/RuntimeIdentifier&gt;</code> 补回</strong>（1.0.5.12 整理 csproj 时被误删）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.12",
+      "date": "2026-10-06",
+      "changes": 8,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>页面切换过渡动画</strong>：新增 <code>Helpers/FluidPageTransition.cs</code>（自定义 <code>IPageTransition</code>）， 旧页淡出并轻微收缩（200ms），新页自下方浮起 + 淡入 + 从 98.2% 推到 100%（300ms）， 交叉的那几帧有明确的层次感，不是单纯叠两张半透明页面。"
+            },
+            {
+              "html": "<strong>窗口入场动画</strong>：主窗口首次显示时整体淡入 + 从 98.5% 推到 100%（360ms）。"
+            },
+            {
+              "html": "<strong><code>Helpers/AnimationHelper.cs</code></strong>：动效底层工具，把「透明度 + 缩放 + 纵向位移」的 组合动画收敛成一份实现，页面切换、分栏切换、窗口入场、点击反馈共用同一套节奏。"
+            },
+            {
+              "html": "<strong><code>Helpers/InteractionFeedback.cs</code></strong>：点击反馈（按下缩到 0.97，松开用 <code>BackEaseOut</code> 弹回）。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>新增 <code>Styles/Animations.axaml</code>（交互动效规范）</strong>，在 <code>App.axaml</code> 里置于 <code>Controls.axaml</code> 之后： <code>Expander</code> / <code>InfoBar</code> / <code>ContentDialog</code> / <code>SnackBar</code> / <code>ToolTip</code> / <code>ScrollBar</code> 由 FluentAvalonia 自带过渡，未重复添加。"
+            },
+            {
+              "html": "<strong><code>PageTransitionHelper</code></strong> 内部改用 <code>AnimationHelper</code>，分栏切换（下载中心 / 设置页） 的观感与新页面切换统一，并由「纯上浮 + 淡入」升级为「上浮 + 淡入 + 轻微推近」。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>发布目录体积</strong>：<code>bin/Release/net10.0/publish</code> 从 <strong>147 MB 降到 41 MB</strong>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<strong>动效实现要点</strong>（踩过的坑，写下来备用）： 1. <code>Animation.RunAsync</code> 的宿主<strong>必须是 <code>Visual</code></strong>。Avalonia 的 <code>TransformAnimator</code> 会去 <code>visual.RenderTransform</code> 里按类型找对应的 <code>Scale</code> / <code>Translate</code> 子变换；"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.11",
+      "date": "2026-10-06",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>「下载任务」页任务列表整片空白（核心）</strong>：<code>DownloadCenterPage.axaml</code> 自定义了 <code>ListBoxItem</code> 模板， 里面只写了一个裸 <code>&lt;ContentPresenter /&gt;</code>。Avalonia 的 <code>ContentPresenter</code> 在自定义 <code>ControlTemplate</code> 中 于是项容器内容恒为空 —— 列表有数据、有项容器，却什么都画不出来。"
+            },
+            {
+              "html": "<strong>点击项内按钮直接崩溃 / 命令失效</strong>：<code>DownloadCenterPage</code>、<code>MultiplayerPage</code>、<code>VersionManagePage</code> 共 11 处绑定写成 <code>$parent[UserControl].((vm:XxxViewModel)DataContext).SomeCommand</code>。"
+            },
+            {
+              "html": "<strong>首次运行向导里「添加账户」报 <code>PlatformImpl is null, couldn't handle input</code></strong>： 账户相关的对话框一律用 <code>ShowDialog(AppLifetime.MainWindow!)</code> 硬编码主窗口当 owner， 而向导显示期间主窗口是 <code>Hide</code> 状态（没有平台实现），拿它当 owner 就会报这个错。"
+            },
+            {
+              "html": "<strong>离线 / 外置账户第一次添加无效</strong>：<code>AuthenticateOffline()</code> 与 <code>AuthenticateYggdrasilAsync()</code> 里 <code>ShowDialog(...)</code> 返回的 <code>Task</code> <strong>没有 await</strong>，方法在弹窗还开着的时候就继续往下跑并检查 用户名 / 账户资料（此时还是 null 或上次的残留值），导致第一次点击什么都不发生、第二次却用旧值创建。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "<code>LaunchPage</code> 的新闻 <code>ItemsControl</code> 改为在 code-behind 直接赋 <code>ItemsSource</code>： 写成 <code>{Binding News}</code> 时，<code>InitializeComponent()</code> 阶段会先按页面的「启动」VM 求值一次， 而该 VM 没有 <code>News</code> 属性，运行时会刷一条绑定告警。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.10",
+      "date": "2026-10-06",
+      "changes": 4,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>官方新闻不显示</strong>：<code>Views/Pages/LaunchPage.axaml</code> 的新闻 <code>ItemsControl x:Name=\"NewsHost\"</code> 数据上下文在 code-behind 里挂好了（<code>NewsHost.DataContext = DashboardPageViewModel</code>）， 新闻也确实抓到了 100 条，但 ItemsControl 没有数据源，所以一片空白。"
+            },
+            {
+              "html": "<strong>开机向导显示时隐藏主窗口</strong>：<code>ShowWelcomeWizard</code> 里先 <code>mainWindow.Hide()</code>， 向导关闭后在 <code>Closed</code> 中 <code>mainWindow.Show() + Activate()</code> 恢复；"
+            },
+            {
+              "html": "<strong>向导重复创建导致崩溃（连带修复）</strong>：主窗口 <code>Hide → Show</code> 会<strong>再次触发 <code>Opened</code></strong>， 原本的一次性订阅于是又弹一次向导；向导页面是 <strong>DI 单例</strong>，同一实例被第二个 <code>PageHost</code> 二次挂载会抛 <code>InvalidOperationException: already has a visual parent</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "向导改为<strong>不设 owner</strong> 显示（<code>welcome.Show()</code>）：owner 处于隐藏状态时， 部分平台会把子窗口一起藏掉。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.9",
+      "date": "2026-10-06",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>主题色只改到一半</strong>：之前只在 <code>Application.Current.Resources</code> 上硬写 <code>SystemAccentColor</code> / <code>AccentFillColorDefault</code> 等<strong>少数几个键</strong>，而 FluentAvalonia 会按主色派生出 这些键硬写覆盖不到，于是只有部分控件跟着变。"
+            },
+            {
+              "html": "<strong>首次运行不显示开机向导</strong>：<code>WelcomeWindow</code> 在整个代码里<strong>从未被实例化</strong>—— <code>App.axaml.cs</code> 只建了 <code>MainWindow</code>，<code>IsFirstRun</code> 也只在启动日志里被读了一次、从来没人置 false， 向导窗口和四个向导页面等于死代码。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "未采用 <code>mainWindow.Hide()</code> 先藏主窗口的方案：Avalonia 的 <code>Hide()</code> 会真正关闭平台窗口并触发 生命周期的窗口关闭处理，有提前退出进程的风险，因此改为向导叠加在主窗口之上。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.8",
+      "date": "2026-10-06",
+      "changes": 4,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>改主题色侧边栏不变</strong>：<code>App.axaml</code> 里 <code>FluentAvaloniaTheme</code> 带 <code>PreferUserAccentColor=\"True\"</code>， FluentAvalonia 会把<strong>操作系统</strong>的强调色写进 NavigationView 的专属资源 （<code>NavigationViewSelectionIndicatorForeground</code> 实测恒为系统蓝 <code>#ff0067c0</code>），"
+            },
+            {
+              "html": "<strong>页面切换后侧边栏不高亮</strong>：<code>NavigationService</code> 只把页面塞进 <code>_navView.Content</code>，从不碰 <code>SelectedItem</code>；"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误。"
+            },
+            {
+              "html": "运行时验证（冒烟脚本）：主题色改红后 <code>NavigationViewSelectionIndicatorForeground</code> / <code>NavigationViewItemBackgroundSelected</code> 均由 <code>#ff0067c0</code>（系统蓝）变为红色 ✔；代码路径跳「下载中心」→ 侧边栏选中「下载中心」✔，再跳「启动」→ 选中「启动」✔；日志 0 错误 / 0 致命。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.7",
+      "date": "2026-10-05",
+      "changes": 4,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>下载资源页图标不显示</strong>：<code>Image.Source</code> 被绑到了<strong>字符串</strong> <code>ImagePath</code>（形如 <code>https://cdn.modrinth.com/...</code>）。"
+            },
+            {
+              "html": "<strong>新闻配图同源缺陷</strong>：<code>DashboardPage</code> / <code>LaunchPage</code> / <code>NewsDetailPage</code> 的 <code>Image.Source</code> 同样直绑字符串 <code>ImagePath</code> （http 地址），属同一问题，一并修复。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误。"
+            },
+            {
+              "html": "运行时验证（冒烟脚本）：启动页新闻 <strong>100/100</strong> 条图片加载成功；下载资源页模组 <strong>20 条 / 有 URL 20 条 / 已加载图标 20 条</strong>，判定 PASS；日志 0 错误 / 0 致命。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.6",
+      "date": "2026-10-05",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>版本管理返回落错页面</strong>：<code>VersionManageViewModel.GoBack()</code> 原先写死发送 <code>WeakReferenceMessenger.Send&lt;Type,string&gt;(typeof(RunPage), \"NavigateTo\")</code>，硬编码回到已从导航菜单移除的旧独立运行页 <code>RunPage</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误（仅既存可空性等警告，与本次改动无关）。"
+            },
+            {
+              "html": "运行时验证（冒烟脚本）：起点 <code>LaunchPage</code> → 进入版本管理 <code>VersionManagePage</code>（<code>CanGoBack = True</code>）→ 点返回后 <code>CurrentPage = LaunchPage</code>，判定 PASS；日志 0 错误 / 0 致命 / 0 绑定失败。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.5",
+      "date": "2026-10-05",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>启动页右侧改回「官方新闻」</strong>：此前面板被替换为「账户（选择启动身份）」，现按需求回退为官方新闻图墙。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误；导航到启动页日志显示右侧新闻条数 100、0 绑定错误、0 异常。"
+            },
+            {
+              "html": "与 WPF 版的差异：WPF 版的启动页右侧同样是账户面板；本分支按需求改为新闻，属有意为之的差异化。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.4",
+      "date": "2026-10-05",
+      "changes": 5,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>进入设置页不刷新 Java</strong>：<code>NavigationService</code> 把「页面控件」设为导航内容，因此 <code>INavigationAware</code> 回调落在 <code>SettingsPage</code>（UserControl）上；而实现该接口的是 <code>SettingsPageViewModel</code>，页面控件并没有实现它 —— 于是 <code>OnNavigatedToAsync</code> <strong>从未被调用</strong>，Java 检测只在首帧初始化时跑过一次。"
+            },
+            {
+              "html": "<strong>Minecraft 文件夹显示相对路径</strong>：配置里默认存的是可移植的 <code>./.minecraft</code>，界面直接展示让人摸不着头脑。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>Minecraft 文件夹输入框拉长并左对齐</strong>：去掉 <code>MaxWidth=\"560\"</code> 限制，改为占满整行（<code>HorizontalAlignment=Stretch</code>）， 文本明确左对齐（<code>HorizontalContentAlignment=Left</code>）；Java 版本下拉同步去掉宽度上限，两者与右侧「选择 / 刷新」 按钮的排版保持一致。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误；启动与进入设置页日志均无异常。"
+            },
+            {
+              "html": "验证：模拟「进入设置页 → 切到别的页 → 再进设置页」，日志显示 Java 检测执行 <strong>2 次</strong>（每次进入各一次）， <code>MinecraftFolder</code> 显示为绝对路径（本机为 <code>&lt;程序目录&gt;\\.minecraft</code>），Java 候选 5 条且默认选中 jdk-27。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.3",
+      "date": "2026-10-05",
+      "changes": 13,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>设置页绑定全部失效（核心问题）</strong>：进入设置页后，页面文字、开关、色板全部为空，日志刷满 <code>Could not find a matching property accessor for 'Xxx' on 'VibrantbitLauncher.ViewModels.Windows.MainWindowViewModel'</code>。"
+            },
+            {
+              "html": "<strong>设置页右侧色板 / 壁纸命令抛 <code>Unable to resolve type vm:SettingsPageViewModel</code></strong>：主题色、渐变终点色、 内置壁纸三处 <code>Command</code> 用了 <code>{Binding $parent[UserControl].((vm:SettingsPageViewModel)DataContext).Xxx}</code> 写法。"
+            },
+            {
+              "html": "<strong>内置壁纸缩略图空白</strong>：<code>WallpaperOption.ImagePath</code> 存的是应用内相对路径 <code>/Assets/bg1.png</code>，直接绑到 <code>Image.Source</code> 时 Avalonia 解析不了这种相对资源 URI，壁纸画廊四格全空。"
+            },
+            {
+              "html": "<strong>主题色 / 渐变终点色选中环画不出</strong>：原先用 <code>Style Selector=\"Button[Tag=True]\"</code> 表达选中态 —— Avalonia 的 属性选择器拿 Boxed <code>bool</code> 做字符串比较并不可靠。"
+            },
+            {
+              "html": "<strong><code>EnumToBooleanConverter</code> 为 <code>internal</code></strong>：<code>SettingsPage</code> / <code>WelcomeSetupPage</code> 通过 <code>helpers:</code> 命名空间在 资源字典里实例化它，Avalonia 编译期 XAML 只能解析可公开访问的类型。已改为 <code>public</code>，并让其 <code>Convert</code> /"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>日志列表启用虚拟化</strong>：设置页「最近日志」的 <code>ListBox</code> 加回 <code>VirtualizingStackPanel</code>，日志上千条时滚动不再卡顿。"
+            },
+            {
+              "html": "Java 版本下拉项补回 <code>body</code> / <code>secondary</code> / <code>caption</code> 文本样式类，与 WPF 版视觉对齐。"
+            },
+            {
+              "html": "内置壁纸缩略图加圆角裁剪，观感更整齐。"
+            },
+            {
+              "html": "<code>OnChangeTheme</code> 参数改为可空 <code>string?</code>，消除一处空引用警告。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 错误；启动日志无异常。"
+            },
+            {
+              "html": "已用独立冒烟脚本逐页导航（启动参数注入）核对绑定：<code>DashboardPage</code> / <code>LaunchPage</code> / <code>AccountPage</code> / <code>RunPage</code> / <code>DownloadHubPage</code> / <code>DownloadPage</code> / <code>ModPage</code> / <code>DownloadCenterPage</code> / <code>MultiplayerPage</code> /"
+            },
+            {
+              "html": "排查提示：Avalonia 项目若关闭编译绑定（<code>AvaloniaUseCompiledBindingsByDefault=false</code>）， 反射绑定解析不了命名空间前缀，运行时会直接抛异常。跨模板取父级 ViewModel 请用 <code>$parent[ItemsControl].DataContext.Xxx</code>。"
+            },
+            {
+              "html": "排查提示：每个 <code>UserControl</code> 页面若由 DI 提供 ViewModel，<strong>务必在构造函数里赋值 <code>DataContext</code></strong>， 否则会静默继承父级 DataContext，整页绑定落空且只在打开该页时于日志暴露。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.2",
+      "date": "2026-10-05",
+      "changes": 3,
+      "sections": [
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong>切换社区资源分类崩溃（核心问题）</strong>：下载中心左侧点开「光影」「数据包」「资源包」等分类，第二次切换即抛"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "编译 0 警告 / 0 错误；启动与分类切换日志均无异常。"
+            },
+            {
+              "html": "排查提示：Avalonia（及 WPF）中<strong>同一个控件对象只能有一个可视父级</strong>，任何「动态把一个控件加进容器」的代码都必须保证该控件是当前容器独占的、且未被加过。共享控件的场景应改为共享数据（ViewModel / 数据模板），而不是共享控件本身。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.5.1",
+      "date": "2026-10-05",
+      "changes": 23,
+      "sections": [
+        {
+          "kind": "新增",
+          "items": [
+            {
+              "html": "<strong>版本管理页（<code>VersionManagePage</code>）</strong>：模组 / 存档双标签管理。支持导入模组（多选）、全部启用 / 全部禁用、勾选框即改磁盘文件名（<code>foo.jar</code> ↔ <code>foo.jar.disabled</code>）、模组搜索过滤；存档导入（文件夹或 <code>.zip</code>）、备份导出、内联重命名、删除、打开目录。三个空状态与计数文案由集合变更事件驱动实时刷新。"
+            },
+            {
+              "html": "<strong>多人联机页（<code>MultiplayerPage</code>）</strong>：EasyTier 组网全流程 —— 中继服务器配置、启动 / 停止服务、房主生成 / 复制密钥、房客粘贴密钥、虚拟 IP 展示与复制、网络成员列表（每 3 秒自动刷新）。缺核心 / 缺管理员权限时给出引导卡片。"
+            },
+            {
+              "html": "<strong>新闻页（<code>DashboardPage</code>）</strong>：接入 <code>DashboardPageViewModel.LoadNewsAsync()</code>，首次进入自动拉取 Mojang 新闻并按卡片瀑布流展示；页面实例走 DI 单例，<code>IsLoaded</code> 保证只加载一次。"
+            },
+            {
+              "html": "<strong>安装联机模块窗口（<code>InstallEasyTierWindow</code>）</strong>：从 GitHub 镜像下载 EasyTier 核心（约 10 MB）并解压到 VBL 目录，带进度条与状态文案；下载进度经 <code>Dispatcher.UIThread</code> 回到 UI 线程更新。"
+            },
+            {
+              "html": "<strong>开机向导宿主窗口（<code>WelcomeWindow</code>）</strong>：用 <code>ContentControl</code> 承载 <code>WelcomePage</code> 等向导页面，并新增 <code>ContentControlNavigationHost</code> —— 窗口打开时临时接管 <code>AppNavigation.Current</code>，使向导页面里统一的 <code>AppNavigation.Navigate(...)</code> 落到本窗口，关闭时还原给主窗口。"
+            },
+            {
+              "html": "<strong>外置登录窗口（<code>YggdrasilAuthenticatorWindow</code>）</strong>：收集服务器地址 / 邮箱 / 密码，经 <code>WeakReferenceMessenger</code> 发回 <code>AccountPageViewModel</code> 触发 Yggdrasil 认证。"
+            }
+          ]
+        },
+        {
+          "kind": "改进",
+          "items": [
+            {
+              "html": "<strong>安装版本页（<code>InstallPage</code>）复选框事件</strong>：Avalonia 的 <code>ToggleButton</code> 没有 XAML <code>Checked</code> / <code>Unchecked</code> 事件属性，改为订阅 <code>IsCheckedChanged</code> 并统一转发到对应的勾选 / 取消勾选处理器，行为与 WPF 完全一致。"
+            },
+            {
+              "html": "<strong><code>UserControl.Resources</code> 里误放 <code>Style</code> 的两处页面</strong>（<code>VersionManagePage</code> / <code>InstallPage</code>）改为 <code>UserControl.Styles</code> —— Avalonia 的 <code>Resources</code> 不接受 <code>Style</code> 节点。"
+            },
+            {
+              "html": "新增 <code>Border</code> 类样式 <code>AppSuccessSurfaceBrush</code>（成功提示底色），补齐 <code>AppTheme.axaml</code> 的语义色。"
+            },
+            {
+              "html": "新增 <code>Button.danger</code> 样式（删除类操作红色前景），补齐 <code>Controls.axaml</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "修复",
+          "items": [
+            {
+              "html": "<strong><code>InstallPage</code> 编译错误</strong>：<code>CheckBox</code> 的 <code>Checked</code> / <code>Unchecked</code> 属性在 Avalonia 不存在，导致 <code>AVLN2000</code>，现改为代码订阅。"
+            },
+            {
+              "html": "<strong>图标名不匹配</strong>：<code>FASymbol</code> 枚举中没有 <code>Warning</code> / <code>Info</code> / <code>ReportHacked</code>，多人联机页改用 <code>Alert</code> / <code>ContactInfo</code>。"
+            },
+            {
+              "html": "<strong><code>VersionManagePage</code> 编译错误</strong>：<code>UserControl.Resources</code> 内放 <code>Style</code> 触发 <code>AVLN3000</code>，改用 <code>UserControl.Styles</code>。"
+            }
+          ]
+        },
+        {
+          "kind": "说明",
+          "items": [
+            {
+              "html": "本工程编译为 <strong>0 警告 / 0 错误</strong>；启动日志确认主窗口、依赖注入容器与全部页面均可正常解析。"
+            },
+            {
+              "html": "页面迁移清单（19/19）：LaunchPage、AccountPage、DownloadHubPage、DownloadCenterPage、MultiplayerPage、SettingsPage、DashboardPage、InstallPage、RunPage、VersionManagePage、DownloadPage、DownloadResourcesPage、ModPage、NewsDetailPage、WelcomePage、WelcomeSetupPage、HelloEffectPage、WelcomeAccountPage、WelcomeCompletePage。"
+            },
+            {
+              "html": "窗口迁移清单（9/9）：MainWindow、CrashAnalysisWindow、MicrosoftAuthWindow、OfflineAuthenticatorWindow、SkinManagerWindow、SkinUrlInputWindow、InstallEasyTierWindow、WelcomeWindow、YggdrasilAuthenticatorWindow。"
+            }
+          ]
+        },
+        {
+          "kind": "与本分支约定一致的 Avalonia API 差异",
+          "items": [
+            {
+              "html": "FluentAvalonia 3.x 所有控件 XAML 别名带 <code>FA</code> 前缀；内联图标控件是 <code>FASymbolIcon</code>，<code>IconSource</code> 属性用 <code>FASymbolIconSource</code>；窗口基类是 <code>FAAppWindow</code>。"
+            },
+            {
+              "html": "<code>FASymbol</code> 枚举 442 个值，<strong>没有</strong> <code>Warning</code> / <code>Info</code> / <code>OK</code>，对应概念用 <code>Alert</code> / <code>ContactInfo</code>。"
+            },
+            {
+              "html": "<code>ComboBox.DisplayMemberPath</code> 不存在 → 用 <code>ItemTemplate</code> + <code>DataTemplate</code>。"
+            },
+            {
+              "html": "<code>ListBox.ItemContainerStyle</code> 不存在 → 用 <code>ListBox.Styles</code> + <code>&lt;Style Selector=\"ListBoxItem\"&gt;</code>。"
+            },
+            {
+              "html": "无 <code>Style.Triggers</code> / <code>DataTrigger</code> → 用 <code>IsVisible</code> 直接绑定布尔（含 <code>!</code> 取反）、代码后置切 <code>Classes</code>，或 <code>Button[Tag=True]</code> 选择器。"
+            },
+            {
+              "html": "<code>TextBox.Watermark</code> 已废弃 → <code>PlaceholderText</code>。"
+            },
+            {
+              "html": "无 <code>ListCollectionView</code> / <code>Frame</code> / <code>NavigationUIVisibility</code> → 手动过滤集合、缓存页面实例切换 <code>IsVisible</code>。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
