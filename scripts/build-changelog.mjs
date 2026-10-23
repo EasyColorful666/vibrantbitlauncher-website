@@ -11,7 +11,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const SOURCE = process.env.CHANGELOG_PATH || 'E:/VibrantbitLauncher.Avalonia/CHANGELOG.md'
+const SOURCE = process.env.CHANGELOG_PATH || 'https://raw.githubusercontent.com/EasyColorful666/VibrantbitLauncher.Avalonia/refs/heads/master/CHANGELOG.md'
 const OUT = resolve(root, 'assets/data/changelog.json')
 
 if (!existsSync(SOURCE)) {
