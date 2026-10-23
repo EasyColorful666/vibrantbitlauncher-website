@@ -1,0 +1,62 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+# GITHUB_TOKEN 需要这几项才能发布 Pages：
+#   pages: write  → 创建 / 更新 Pages 站点
+#   id-token: write → deploy-pages 的 OIDC 校验
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个发布，不要中途取消，避免线上站点被半成品覆盖
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 静态预渲染。部署在 https://<user>.github.io/<repo>/ 时必须是 /<repo>/，
+      # 否则 /_nuxt/*、/screens/* 全部 404。用自定义域名或 <user>.github.io 根仓库时删掉这个 env。
+      - name: Generate static site
+        run: npm run generate
+        env:
+          NUXT_APP_BASE_URL: /vbl-website/
+
+      # enablement: true 允许 Action 在 Pages 尚未启用时自动创建站点（需要 pages: write）
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .output/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

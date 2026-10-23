@@ -1,4 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// 部署到 GitHub Pages 的项目页时站点挂在 /<repo>/ 下，
+// 由 CI 通过 NUXT_APP_BASE_URL 注入；本地开发默认根路径。
+const baseURL = process.env.NUXT_APP_BASE_URL || '/'
+const withBase = (p: string) => `${baseURL.replace(/\/+$/, '')}/${p.replace(/^\/+/, '')}`
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
@@ -6,6 +12,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   app: {
+    baseURL,
     head: {
       htmlAttrs: { lang: 'zh-CN', 'data-theme': 'light' },
       title: 'Vibrantbit Launcher — 跨平台 Minecraft 启动器',
@@ -26,8 +33,8 @@ export default defineNuxtConfig({
         }
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'apple-touch-icon', href: '/favicon.svg' }
+        { rel: 'icon', type: 'image/svg+xml', href: withBase('favicon.svg') },
+        { rel: 'apple-touch-icon', href: withBase('favicon.svg') }
       ],
       // 首屏前同步应用主题，避免闪白 / 闪黑
       script: [
@@ -41,6 +48,7 @@ var l=localStorage.getItem('vbl-locale');if(l){document.documentElement.setAttri
   },
 
   nitro: {
-    prerender: { routes: ['/'], crawlLinks: true }
+    // 预渲染入口要跟着 baseURL 走，否则只会生成一条 / → baseURL 的跳转页
+    prerender: { routes: [baseURL], crawlLinks: true }
   }
 })

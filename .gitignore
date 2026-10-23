@@ -4,5 +4,6 @@ node_modules
 .preview
 .npm-cache
 dist
+.vs
 *.log
 .DS_Store

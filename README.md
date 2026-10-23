@@ -15,6 +15,30 @@ npm run preview    # 预览已生成的产物
 
 发布时把 `.output/public` 整个目录丢到任意静态托管（Nginx / OSS / Pages）即可，不需要 Node 运行时。
 
+## 部署到 GitHub Pages
+
+`.github/workflows/deploy.yml` 已经写好：push 到 `master` 就 `npm ci` → `npm run generate` →
+上传 `.output/public` → `deploy-pages`。仓库这边只需要把
+
+**Settings → Pages → Build and deployment → Source** 选成 **GitHub Actions**。
+（workflow 里带了 `enablement: true`，多数情况下第一次跑完会自动建站；如果组织策略不允许，
+就一直卡在上面那条 `Get Pages site failed`，用手动选一次最稳。）
+
+两个容易踩的点：
+
+1. **站点挂在 `/<repo>/` 子路径下**，所以 CI 里设了 `NUXT_APP_BASE_URL=/vbl-website/`，
+   Nuxt 会把 `_nuxt/*`、`screens/*`、`favicon.svg` 的引用都加上前缀。
+   换成自定义域名或 `<user>.github.io` 根仓库时，删掉这个环境变量即可，不设就是 `/`。
+   `public/` 下的新资源不要手写 `/xxx.png`，用 `useAsset()` 拼一下前缀。
+2. **workflow 的权限**必须是 `pages: write` + `id-token: write`，缺一个 `deploy-pages` 就报 401/404。
+
+本地想验证子路径形态：
+
+```bash
+NUXT_APP_BASE_URL=/vbl-website/ npm run generate   # Git Bash 前面加 MSYS_NO_PATHCONV=1
+```
+
+
 ## 内容写在哪
 
 | 想改什么 | 改哪里 |
@@ -35,7 +59,7 @@ app.vue                 应用外壳（主题 / 语言的本地存储恢复）
 layouts/default.vue     顶栏 + 内容 + 页脚，含跳转到主内容的链接
 pages/index.vue         单页，按顺序拼各个区块
 components/             各区块组件（Hero / Features / Why / Download / Changelog / Faq / Footer）
-composables/            useSite（中英文案）、useTheme（亮暗切换）
+composables/            useSite（中英文案）、useTheme（亮暗切换）、useAsset（拼 baseURL 前缀）
 plugins/reveal.ts       v-reveal 指令，进视口淡入，尊重 prefers-reduced-motion
 ```
 
