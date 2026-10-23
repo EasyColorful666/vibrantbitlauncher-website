@@ -18,6 +18,9 @@
   CI 用 `NUXT_APP_BASE_URL=/${{ github.event.repository.name }}/` 注入 `app.baseURL`；
   `public/` 资源一律用 `useAsset()` 拼前缀，不要手写 `/xxx.png`。Pages 的 Source 必须是
   「GitHub Actions」，workflow 见 `.github/workflows/deploy.yml`。
+  **`configure-pages` 的 `enablement: true` 不可用**：创建 Pages 站点需要仓库管理权限，
+  `GITHUB_TOKEN` 一定拿不到，只会 403 `Resource not accessible by integration`。
+  workflow 改成开头用 API 探一次 Pages 状态再 fail-fast。
 - **`package-lock.json` 是在 Windows 上生成的，缺 Linux 原生可选依赖**（npm/cli#4828：
   `@rollup/rollup-linux-x64-gnu`、`lightningcss-linux-x64-gnu` 都不在锁里）。
   workflow 里靠 `Add missing linux native bindings` 步骤按版本号补装；彻底解决要在 Linux 上删锁重装。

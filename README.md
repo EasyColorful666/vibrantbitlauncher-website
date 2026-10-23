@@ -18,11 +18,12 @@ npm run preview    # 预览已生成的产物
 ## 部署到 GitHub Pages
 
 `.github/workflows/deploy.yml` 已经写好：push 到 `master` 就 `npm ci` → `npm run generate` →
-上传 `.output/public` → `deploy-pages`。仓库这边只需要把
+上传 `.output/public` → `deploy-pages`。
 
-**Settings → Pages → Build and deployment → Source** 选成 **GitHub Actions**。
-（workflow 里带了 `enablement: true`，多数情况下第一次跑完会自动建站；如果组织策略不允许，
-就一直卡在上面那条 `Get Pages site failed`，用手动选一次最稳。）
+**跑之前必须手动做一次**：仓库 → **Settings → Pages → Build and deployment → Source**，
+选 **GitHub Actions**。这一步只能人点，`GITHUB_TOKEN` 没有创建 Pages 站点的权限——
+`configure-pages` 的 `enablement: true` 会直接 403 `Resource not accessible by integration`，
+所以 workflow 里已经去掉了它，改成开头用 API 探一次，没启用就带提示失败。
 
 两个容易踩的点：
 
@@ -32,6 +33,19 @@ npm run preview    # 预览已生成的产物
    换成自定义域名或 `<user>.github.io` 根仓库时，把这条 env 改成 `/`。
    `public/` 下的新资源不要手写 `/xxx.png`，用 `useAsset()` 拼一下前缀。
 2. **workflow 的权限**必须是 `pages: write` + `id-token: write`，缺一个 `deploy-pages` 就报 401/404。
+
+### 报错对照
+
+| CI 报的错误 | 实际原因 | 怎么修 |
+| --- | --- | --- |
+| `Get Pages site failed` / `Not Found ... /pages` | Pages 没启用 | Settings → Pages → Source 选 GitHub Actions |
+| `Create Pages site failed: Resource not accessible by integration` | 想让 token 代替你去建站，权限不够 | 同上，手动启用一次；把 `enablement: true` 删掉 |
+| `Cannot find module @rollup/rollup-linux-x64-gnu` | Windows 生成的锁文件缺 Linux 原生包 | 见下面「锁文件与原生依赖」 |
+| 页面能开但 JS/CSS 全 404 | `NUXT_APP_BASE_URL` 跟仓库名不一致 | 检查 `env` 里的前缀 |
+
+如果仓库是**私有**的，免费账号没有 Pages，怎么点都建不出来——需要 Pro/Team/Enterprise，
+或者把仓库设为 public。也可以直接用 Cloudflare Pages / Netlify 这类第三方托管，
+产物就是 `.output/public` 一个目录，不需要任何 GitHub 侧配置。
 
 本地想验证子路径形态：
 
