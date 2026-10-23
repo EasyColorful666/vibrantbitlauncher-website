@@ -27,11 +27,13 @@ npm run preview    # 预览已生成的产物
 
 两个容易踩的点：
 
-1. **站点挂在 `/<repo>/` 子路径下**，所以 CI 里设了
-   `NUXT_APP_BASE_URL=/${{ github.event.repository.name }}/`（跟着仓库名走，改名不用改 workflow），
-   Nuxt 会把 `_nuxt/*`、`screens/*`、`favicon.svg` 的引用都加上前缀。
-   换成自定义域名或 `<user>.github.io` 根仓库时，把这条 env 改成 `/`。
-   `public/` 下的新资源不要手写 `/xxx.png`，用 `useAsset()` 拼一下前缀。
+1. **baseURL 取决于访问路径**，现在是自定义域名 `https://vbl.easycolorful.cn/`，站点在根路径，
+   所以 workflow 里**没有**设 `NUXT_APP_BASE_URL`，走 `nuxt.config.ts` 的默认 `'/'`，
+   `_nuxt/*`、`screens/*`、`favicon.svg` 都是根绝对路径。
+   如果哪天去掉自定义域名、退回 `https://<user>.github.io/<repo>/`，必须把
+   `env: NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/` 加回来，
+   否则页面能开、所有 JS/CSS/截图全 404。
+   `public/` 下的新资源不要手写 `/xxx.png`，用 `useAsset()` 拼前缀，换部署路径时只改一处。
 2. **workflow 的权限**必须是 `pages: write` + `id-token: write`，缺一个 `deploy-pages` 就报 401/404。
 
 ### 报错对照
@@ -41,13 +43,13 @@ npm run preview    # 预览已生成的产物
 | `Get Pages site failed` / `Not Found ... /pages` | Pages 没启用 | Settings → Pages → Source 选 GitHub Actions |
 | `Create Pages site failed: Resource not accessible by integration` | 想让 token 代替你去建站，权限不够 | 同上，手动启用一次；把 `enablement: true` 删掉 |
 | `Cannot find module @rollup/rollup-linux-x64-gnu` | Windows 生成的锁文件缺 Linux 原生包 | 见下面「锁文件与原生依赖」 |
-| 页面能开但 JS/CSS 全 404 | `NUXT_APP_BASE_URL` 跟仓库名不一致 | 检查 `env` 里的前缀 |
+| 页面能开但 JS/CSS/截图 404，路径里多出仓库名 | 绑了自定义域名却还留着 `/<repo>/` 前缀 | 删掉 `NUXT_APP_BASE_URL`，让它回落到 `/` |
 
 如果仓库是**私有**的，免费账号没有 Pages，怎么点都建不出来——需要 Pro/Team/Enterprise，
 或者把仓库设为 public。也可以直接用 Cloudflare Pages / Netlify 这类第三方托管，
 产物就是 `.output/public` 一个目录，不需要任何 GitHub 侧配置。
 
-本地想验证子路径形态：
+本地想验证子路径形态（把产物丢到 `/<repo>/` 下时用）：
 
 ```bash
 MSYS_NO_PATHCONV=1 NUXT_APP_BASE_URL=/vibrantbitlauncher-website/ npm run generate

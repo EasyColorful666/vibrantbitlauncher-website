@@ -13,9 +13,9 @@
   下载区取第一条的 version/date，不再手写常量。
 - 截图：`public/screens/{launch,account,download}.png`，替换即生效（1602 宽，启动页 1002 高，另两张 856 高）。
 - 命令：`npm run dev` / `npm run generate`（产物 `.output/public`，`dist` 是它的软链）/ `npm run changelog`。
-- 部署：GitHub Pages 项目页，仓库已改名 **`vibrantbitlauncher-website`**（本地 remote 还是旧的
-  `vbl-website`），站点在 `https://easycolorful666.github.io/vibrantbitlauncher-website/`。
-  CI 用 `NUXT_APP_BASE_URL=/${{ github.event.repository.name }}/` 注入 `app.baseURL`；
+- 部署：GitHub Pages + 自定义域名 **`https://vbl.easycolorful.cn/`**（仓库 `vibrantbitlauncher-website`，
+  原来叫 `vbl-website`）。域名是根路径，所以**不要**设 `NUXT_APP_BASE_URL`，走 `app.baseURL` 默认的 `/`；
+  一旦去掉自定义域名退回 `github.io/<repo>/`，必须加回 `/${{ github.event.repository.name }}/`。
   `public/` 资源一律用 `useAsset()` 拼前缀，不要手写 `/xxx.png`。Pages 的 Source 必须是
   「GitHub Actions」，workflow 见 `.github/workflows/deploy.yml`。
   **`configure-pages` 的 `enablement: true` 不可用**：创建 Pages 站点需要仓库管理权限，

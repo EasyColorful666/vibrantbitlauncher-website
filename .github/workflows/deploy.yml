@@ -13,10 +13,10 @@ permissions:
   pages: write
   id-token: write
 
-# 站点地址是 https://<user>.github.io/<repo>/，资源必须带 /<repo>/ 前缀，
-# 否则 _nuxt/*、screens/*、favicon 全部 404。用自定义域名时改成 '/'。
-env:
-  NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+# 已绑定自定义域名 vbl.easycolorful.cn，站点挂在根路径，baseURL 用默认的 '/'。
+# 如果哪天去掉自定义域名、退回 https://<user>.github.io/<repo>/，把下面两行加回来：
+# env:
+#   NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
 
 # 同一时间只跑一个发布，不要中途取消，避免线上站点被半成品覆盖
 concurrency:
