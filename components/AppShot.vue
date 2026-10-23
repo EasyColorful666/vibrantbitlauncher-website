@@ -4,9 +4,9 @@ const props = defineProps<{ view: 'home' | 'account' | 'download' }>()
 const asset = useAsset()
 
 const SHOTS: Record<string, { src: string; alt: string }> = {
-  home: { src: 'screens/launch.png', alt: '启动页：版本列表与快捷设置' },
-  account: { src: 'screens/account.png', alt: '账户页：微软、外置、离线三种登录方式' },
-  download: { src: 'screens/download.png', alt: '下载中心：游戏版本与筛选' }
+  home: { src: './screens/launch.png', alt: '启动页：版本列表与快捷设置' },
+  account: { src: './screens/account.png', alt: '账户页：微软、外置、离线三种登录方式' },
+  download: { src: './screens/download.png', alt: '下载中心：游戏版本与筛选' }
 }
 
 const current = computed(() => {
