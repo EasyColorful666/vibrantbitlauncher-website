@@ -13,3 +13,13 @@
   下载区取第一条的 version/date，不再手写常量。
 - 截图：`public/screens/{launch,account,download}.png`，替换即生效（1602 宽，启动页 1002 高，另两张 856 高）。
 - 命令：`npm run dev` / `npm run generate`（产物 `.output/public`，`dist` 是它的软链）/ `npm run changelog`。
+- 部署：GitHub Pages 项目页，仓库已改名 **`vibrantbitlauncher-website`**（本地 remote 还是旧的
+  `vbl-website`），站点在 `https://easycolorful666.github.io/vibrantbitlauncher-website/`。
+  CI 用 `NUXT_APP_BASE_URL=/${{ github.event.repository.name }}/` 注入 `app.baseURL`；
+  `public/` 资源一律用 `useAsset()` 拼前缀，不要手写 `/xxx.png`。Pages 的 Source 必须是
+  「GitHub Actions」，workflow 见 `.github/workflows/deploy.yml`。
+- **`package-lock.json` 是在 Windows 上生成的，缺 Linux 原生可选依赖**（npm/cli#4828：
+  `@rollup/rollup-linux-x64-gnu`、`lightningcss-linux-x64-gnu` 都不在锁里）。
+  workflow 里靠 `Add missing linux native bindings` 步骤按版本号补装；彻底解决要在 Linux 上删锁重装。
+- 本机网络：github.com 与 npm registry 常常不可达（`Empty reply from server` / npm 挂死），
+  涉及 `npm install`、`git push` 的动作不要假设能成功，先探一下。

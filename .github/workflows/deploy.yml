@@ -13,6 +13,11 @@ permissions:
   pages: write
   id-token: write
 
+# 站点地址是 https://<user>.github.io/<repo>/，资源必须带 /<repo>/ 前缀，
+# 否则 _nuxt/*、screens/*、favicon 全部 404。用自定义域名时改成 '/'。
+env:
+  NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
+
 # 同一时间只跑一个发布，不要中途取消，避免线上站点被半成品覆盖
 concurrency:
   group: pages
@@ -32,12 +37,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 静态预渲染。部署在 https://<user>.github.io/<repo>/ 时必须是 /<repo>/，
-      # 否则 /_nuxt/*、/screens/* 全部 404。用自定义域名或 <user>.github.io 根仓库时删掉这个 env。
+      # package-lock.json 是在 Windows 上生成的，npm 会把它认作“非本平台”的 optional
+      # 原生绑定裁掉（npm/cli#4828），于是 Linux runner 上 rollup 找不到
+      # @rollup/rollup-linux-x64-gnu，直接 Cannot find module。
+      # 这里按已装版本号把缺的两个补回来；在 Linux 上删锁重装可以永久解决。
+      - name: Add missing linux native bindings
+        run: |
+          set -e
+          ROLLUP_V=$(node -e "console.log(require('./node_modules/rollup/package.json').version)")
+          DEPS="@rollup/rollup-linux-x64-gnu@${ROLLUP_V}"
+          if [ -f node_modules/lightningcss/package.json ]; then
+            LIGHT_V=$(node -e "console.log(require('./node_modules/lightningcss/package.json').version)")
+            DEPS="$DEPS lightningcss-linux-x64-gnu@${LIGHT_V}"
+          fi
+          npm i --no-save --no-audit --no-fund $DEPS
+          node -e "require('@rollup/rollup-linux-x64-gnu'); console.log('rollup native binding ok')"
+
       - name: Generate static site
         run: npm run generate
-        env:
-          NUXT_APP_BASE_URL: /vbl-website/
 
       # enablement: true 允许 Action 在 Pages 尚未启用时自动创建站点（需要 pages: write）
       - name: Configure Pages

@@ -26,17 +26,36 @@ npm run preview    # 预览已生成的产物
 
 两个容易踩的点：
 
-1. **站点挂在 `/<repo>/` 子路径下**，所以 CI 里设了 `NUXT_APP_BASE_URL=/vbl-website/`，
+1. **站点挂在 `/<repo>/` 子路径下**，所以 CI 里设了
+   `NUXT_APP_BASE_URL=/${{ github.event.repository.name }}/`（跟着仓库名走，改名不用改 workflow），
    Nuxt 会把 `_nuxt/*`、`screens/*`、`favicon.svg` 的引用都加上前缀。
-   换成自定义域名或 `<user>.github.io` 根仓库时，删掉这个环境变量即可，不设就是 `/`。
+   换成自定义域名或 `<user>.github.io` 根仓库时，把这条 env 改成 `/`。
    `public/` 下的新资源不要手写 `/xxx.png`，用 `useAsset()` 拼一下前缀。
 2. **workflow 的权限**必须是 `pages: write` + `id-token: write`，缺一个 `deploy-pages` 就报 401/404。
 
 本地想验证子路径形态：
 
 ```bash
-NUXT_APP_BASE_URL=/vbl-website/ npm run generate   # Git Bash 前面加 MSYS_NO_PATHCONV=1
+MSYS_NO_PATHCONV=1 NUXT_APP_BASE_URL=/vibrantbitlauncher-website/ npm run generate
 ```
+
+`MSYS_NO_PATHCONV=1` 不是可选项：Git Bash 会把 `/xxx/` 这种值当路径改写成 `D:\...\xxx`，
+构建直接报 `ENOENT: mkdir '.output\public\D:\...'`。CI 是 Linux，不受影响。
+
+### 锁文件与原生依赖
+
+`package-lock.json` 是在 Windows 上生成的，npm 会把“非本平台”的 optional 原生绑定裁掉
+（[npm/cli#4828](https://github.com/npm/cli/issues/4828)），于是 Linux runner 上 rollup 找不到
+`@rollup/rollup-linux-x64-gnu`，报 `Cannot find module`。
+
+workflow 里有一个 `Add missing linux native bindings` 步骤，按已装版本号把缺的包补回来，
+所以 Windows 生成的锁文件也能在 CI 里跑通。想彻底去掉这个步骤，在 Linux/WSL/容器里执行一次：
+
+```bash
+rm -rf node_modules package-lock.json && npm install
+```
+
+再把新的 `package-lock.json` 提交上去（锁文件里应该出现 `@rollup/rollup-linux-x64-gnu`）。
 
 
 ## 内容写在哪
