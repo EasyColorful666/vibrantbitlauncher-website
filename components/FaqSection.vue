@@ -32,10 +32,10 @@ function toggle(i: number) {
           :key="item.q"
           class="tile qa"
           :class="{ open: open === i }"
-          v-reveal="i * 40"
+          v-reveal="i * 45"
         >
           <button class="q" type="button" :aria-expanded="open === i" @click="toggle(i)">
-            <span>{{ item.q }}</span>
+            <span class="q-text">{{ item.q }}</span>
             <span class="q-icon"><AppIcon name="plus" :size="16" /></span>
           </button>
           <div class="a-wrap">
@@ -53,7 +53,7 @@ function toggle(i: number) {
 .board {
   display: grid;
   grid-template-columns: 4fr 8fr;
-  gap: 48px;
+  gap: 52px;
   align-items: start;
 }
 
@@ -68,34 +68,36 @@ function toggle(i: number) {
 .ask {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   align-self: flex-start;
-  margin-top: 8px;
-  padding: 7px 12px;
-  border-radius: var(--radius-sm);
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--border-strong);
   background: var(--tile);
   color: var(--fg-muted);
   font-size: var(--fs-xs);
-  font-weight: 600;
-  transition: color 0.16s var(--ease), border-color 0.16s var(--ease), background-color 0.16s var(--ease);
+  font-weight: 620;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease),
+    transform 0.2s var(--ease);
 }
 .ask:hover {
   color: var(--fg);
-  border-color: var(--fg-subtle);
-  background: var(--surface);
+  border-color: var(--accent);
+  background: var(--tile-hover);
+  transform: translateY(-2px);
 }
 
 .accordion {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .qa {
   overflow: hidden;
-  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease),
-    background-color 0.18s var(--ease);
+  transition: border-color 0.24s var(--ease), box-shadow 0.24s var(--ease),
+    background-color 0.24s var(--ease), transform 0.24s var(--ease);
 }
 
 .qa:hover {
@@ -103,8 +105,9 @@ function toggle(i: number) {
 }
 
 .qa.open {
-  border-color: color-mix(in srgb, var(--accent) 34%, var(--border));
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
   box-shadow: var(--shadow-4), var(--inset-hi);
+  background: var(--tile-hover);
 }
 
 .q {
@@ -113,11 +116,19 @@ function toggle(i: number) {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  padding: 17px 20px;
+  padding: 19px 22px;
   font-size: var(--fs-body);
-  font-weight: 600;
+  font-weight: 620;
   text-align: left;
   color: var(--fg);
+}
+
+.q-text {
+  flex: 1;
+  transition: color 0.2s var(--ease);
+}
+.qa.open .q-text {
+  color: var(--accent-text);
 }
 
 .q-icon {
@@ -125,32 +136,36 @@ function toggle(i: number) {
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--accent-text);
-  transition: transform 0.26s var(--ease), background-color 0.2s var(--ease),
-    color 0.2s var(--ease), border-color 0.2s var(--ease);
+  transition: transform 0.3s var(--ease), background 0.24s var(--ease), color 0.24s var(--ease),
+    border-color 0.24s var(--ease);
+}
+
+.qa:hover .q-icon {
+  border-color: var(--border-strong);
 }
 
 .qa.open .q-icon {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: linear-gradient(120deg, var(--accent), var(--violet));
+  border-color: transparent;
   color: #fff;
 }
 
-/* 只转加号，别把圆角方块也转成菱形 */
+/* 只转加号，别把圆圈也转成菱形 */
 .qa.open .q-icon :deep(svg) {
   transform: rotate(45deg);
-  transition: transform 0.26s var(--ease);
+  transition: transform 0.3s var(--ease);
 }
 
 .a-wrap {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s var(--ease);
+  transition: grid-template-rows 0.36s var(--ease);
 }
 
 .qa.open .a-wrap {
@@ -162,17 +177,17 @@ function toggle(i: number) {
 }
 
 .a {
-  padding: 0 20px 18px;
+  padding: 0 22px 20px;
   color: var(--fg-muted);
   font-size: var(--fs-sm);
-  line-height: 1.75;
+  line-height: 1.78;
   max-width: 66ch;
 }
 
 @media (max-width: 980px) {
   .board {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 30px;
   }
   .head {
     position: static;
@@ -181,11 +196,11 @@ function toggle(i: number) {
 
 @media (max-width: 640px) {
   .q {
-    padding: 15px 16px;
+    padding: 16px 18px;
     font-size: var(--fs-sm);
   }
   .a {
-    padding: 0 16px 16px;
+    padding: 0 18px 18px;
     font-size: var(--fs-xs);
   }
 }

@@ -20,5 +20,6 @@ useSeoMeta({
     <DownloadSection />
     <ChangelogSection />
     <FaqSection />
+    <CreditsSection />
   </div>
 </template>

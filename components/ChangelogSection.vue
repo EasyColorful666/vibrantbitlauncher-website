@@ -57,6 +57,7 @@ function toggle(version: string) {
           v-for="(r, idx) in visible"
           :key="r.version"
           class="release"
+          :class="{ newest: idx === 0 }"
           v-reveal
         >
           <div class="side">
@@ -128,22 +129,41 @@ function toggle(version: string) {
 .head-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 620;
+}
+.head-link :deep(svg) {
+  transition: transform 0.3s var(--ease);
+}
+.head-link:hover :deep(svg) {
+  transform: translateX(3px);
 }
 
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  position: relative;
+}
+/* 时间轴竖线 */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 84px;
+  top: 20px;
+  bottom: 20px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent), var(--violet) 40%, transparent 92%);
+  opacity: 0.45;
 }
 
 .release {
   display: grid;
   grid-template-columns: 170px 1fr;
-  gap: 12px;
+  gap: 16px;
   align-items: start;
+  position: relative;
 }
 
 .side {
@@ -151,11 +171,33 @@ function toggle(version: string) {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 16px 18px;
+  padding: 18px 18px;
   border-radius: var(--radius-lg);
   background: var(--tile);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-2), var(--inset-hi);
+  position: relative;
+}
+/* 轴上的节点 */
+.side::after {
+  content: "";
+  position: absolute;
+  right: -13px;
+  top: 26px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.release.newest .side::after {
+  background: linear-gradient(120deg, var(--accent), var(--violet));
+  border-color: transparent;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.section--alt .side::after {
+  background: var(--layer);
 }
 
 .ver-row {
@@ -169,11 +211,11 @@ function toggle(version: string) {
   font-family: var(--font-mono);
   font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .latest {
-  height: 19px;
+  height: 21px;
   font-size: 0.6875rem;
 }
 
@@ -192,35 +234,41 @@ function toggle(version: string) {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 18px 22px;
+  gap: 20px;
+  padding: 20px 24px;
   border-radius: var(--radius-lg);
   background: var(--tile);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-2), var(--inset-hi);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.body:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-4), var(--inset-hi);
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .group-head {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
 }
 
 .kind {
   display: inline-flex;
   align-items: center;
-  height: 20px;
-  padding-inline: 7px;
-  border-radius: var(--radius-sm);
+  height: 22px;
+  padding-inline: 9px;
+  border-radius: var(--radius-pill);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--fg-muted);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -228,24 +276,24 @@ function toggle(version: string) {
 
 .kind--new {
   color: var(--success);
-  background: color-mix(in srgb, var(--success) 10%, transparent);
-  border-color: color-mix(in srgb, var(--success) 22%, transparent);
+  background: color-mix(in srgb, var(--success) 11%, transparent);
+  border-color: color-mix(in srgb, var(--success) 26%, transparent);
 }
 .kind--fix {
   color: var(--critical);
-  background: color-mix(in srgb, var(--critical) 10%, transparent);
-  border-color: color-mix(in srgb, var(--critical) 22%, transparent);
+  background: color-mix(in srgb, var(--critical) 11%, transparent);
+  border-color: color-mix(in srgb, var(--critical) 26%, transparent);
 }
 .kind--change,
 .kind--improve {
   color: var(--caution);
-  background: color-mix(in srgb, var(--caution) 10%, transparent);
-  border-color: color-mix(in srgb, var(--caution) 22%, transparent);
+  background: color-mix(in srgb, var(--caution) 11%, transparent);
+  border-color: color-mix(in srgb, var(--caution) 26%, transparent);
 }
 .kind--ui {
-  color: var(--violet);
-  background: color-mix(in srgb, var(--violet) 12%, transparent);
-  border-color: color-mix(in srgb, var(--violet) 24%, transparent);
+  color: var(--violet-text);
+  background: color-mix(in srgb, var(--violet) 13%, transparent);
+  border-color: color-mix(in srgb, var(--violet) 28%, transparent);
 }
 
 .group-n {
@@ -257,24 +305,25 @@ function toggle(version: string) {
 .items {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 9px;
 }
 
 .item {
   display: flex;
-  gap: 10px;
+  gap: 11px;
   align-items: flex-start;
   font-size: var(--fs-sm);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .bullet {
   flex: none;
   width: 5px;
   height: 5px;
-  margin-top: 0.62em;
+  margin-top: 0.66em;
   border-radius: 50%;
-  background: var(--border-strong);
+  background: linear-gradient(120deg, var(--accent), var(--violet));
+  opacity: 0.65;
 }
 
 .text {
@@ -285,7 +334,7 @@ function toggle(version: string) {
 
 .text :deep(strong) {
   color: var(--fg);
-  font-weight: 600;
+  font-weight: 620;
 }
 
 .text :deep(code) {
@@ -294,17 +343,18 @@ function toggle(version: string) {
 
 .more {
   align-self: flex-start;
-  padding: 3px 9px;
-  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
   border: 1px dashed var(--border-strong);
   color: var(--fg-muted);
   font-size: var(--fs-xs);
-  font-weight: 600;
-  transition: color 0.16s var(--ease), border-color 0.16s var(--ease);
+  font-weight: 620;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
 }
 .more:hover {
   color: var(--accent-text);
   border-color: var(--accent);
+  background: var(--accent-tint);
 }
 
 .more--collapse {
@@ -315,13 +365,13 @@ function toggle(version: string) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-top: 26px;
+  gap: 14px;
+  margin-top: 30px;
 }
 
 .tail .btn :deep(svg) {
   transform: rotate(180deg);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .src {
@@ -330,6 +380,9 @@ function toggle(version: string) {
 }
 
 @media (max-width: 820px) {
+  .timeline::before {
+    display: none;
+  }
   .release {
     grid-template-columns: 1fr;
   }
@@ -340,8 +393,11 @@ function toggle(version: string) {
     gap: 10px;
     padding: 12px 14px;
   }
+  .side::after {
+    display: none;
+  }
   .body {
-    padding: 14px 16px;
+    padding: 16px 16px;
   }
 }
 

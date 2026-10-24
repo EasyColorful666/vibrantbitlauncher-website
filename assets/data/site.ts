@@ -68,7 +68,8 @@ export const CONTENT = {
       why: '参数',
       download: '下载',
       changelog: '更新日志',
-      faq: '常见问题'
+      faq: '常见问题',
+      credits: '贡献者'
     },
     actions: {
       download: '下载',
@@ -117,18 +118,34 @@ export const CONTENT = {
       cols: ['项目', '说明'],
       rows: [
         { label: '运行环境', ours: '自包含发布，目标机器不用装 .NET（win-x64 剪裁后 29 MB）' },
-        { label: '平台', ours: 'Windows x64 / x86 / ARM64，Linux x64 / ARM64，macOS Intel / Apple Silicon' },
         { label: '模组来源', ours: 'Modrinth' },
-        { label: '账号', ours: '微软、离线、Yggdrasil 外置登录' },
+        { label: '账号', ours: '微软正版、离线名字、Yggdrasil 外置登录' },
         { label: '界面', ours: 'Avalonia + Fluent，亮暗主题、主题色可改' },
+        { label: '联机', ours: '内置 EasyTier 虚拟局域网，不用公网 IP' },
         { label: '许可', ours: 'AGPL-3.0' }
       ],
-      stats: [
-        { value: '7', label: '个平台架构' },
-        { value: '3', label: '种登录方式' },
-        { value: '2', label: '套界面主题' },
-        { value: 'AGPL', label: '开源许可' }
-      ]
+      matrix: {
+        title: { zh: '平台与架构', en: 'Platforms and architectures' },
+        sub: { zh: '七个构建目标，覆盖桌面三平台。', en: 'Seven build targets across three desktop platforms.' },
+        foot: { zh: '个构建目标', en: 'build targets' },
+        groups: [
+          {
+            os: 'Windows',
+            note: { zh: '10 / 11，老机器可用兼容模式', en: '10 / 11, compatibility mode for older machines' },
+            archs: ['x64', 'x86', 'ARM64']
+          },
+          {
+            os: 'macOS',
+            note: { zh: '11 及以上', en: '11 or later' },
+            archs: ['Apple Silicon', 'Intel']
+          },
+          {
+            os: 'Linux',
+            note: { zh: 'glibc 2.31 以上', en: 'glibc 2.31+' },
+            archs: ['x64', 'ARM64']
+          }
+        ]
+      }
     },
     download: {
       kicker: '下载',
@@ -169,15 +186,34 @@ export const CONTENT = {
         { q: '有问题去哪说？', a: 'GitHub Issues。把设置页里「打开日志目录」的日志和崩溃报告带上，查起来快很多。' }
       ]
     },
+    credits: {
+      kicker: '贡献者',
+      title: '这个启动器是谁做的',
+      sub: '两个人，一个写启动器，一个一起把它打磨到能用。',
+      people: [
+        {
+          name: '阳路相逢',
+          role: { zh: '开发者', en: 'Developer' },
+          avatar: 'avatars/yang.jpg',
+          bio: {
+            zh: '项目定架构、跑发布，大部分核心代码和 UI 设计都是他肝出来的。',
+            en: 'Sets the architecture and runs the releases. Most of the core code and the UI design came out of his hands.'
+          }
+        },
+        {
+          name: '叶冷',
+          role: { zh: '开发者贡献', en: 'Contributor' },
+          avatar: 'avatars/ye.jpg',
+          bio: {
+            zh: 'UI 设计、修 Bug、解决疑难杂症。',
+            en: 'UI design, bug fixes, and the weird edge cases nobody else wanted to touch.'
+          }
+        }
+      ]
+    },
     footer: {
       mark: 'Vibrantbit',
-      markTail: 'Launcher',
       tagline: '跨平台 Minecraft 启动器，AGPL-3.0 开源。',
-      badges: [
-        { label: 'AGPL-3.0', tone: 'green' },
-        { label: '.NET 10', tone: 'blue' },
-        { label: 'Avalonia', tone: 'violet' }
-      ],
       cols: [
         {
           title: '产品',
@@ -220,7 +256,8 @@ export const CONTENT = {
       why: 'Specs',
       download: 'Download',
       changelog: 'Changelog',
-      faq: 'FAQ'
+      faq: 'FAQ',
+      credits: 'Credits'
     },
     actions: {
       download: 'Download',
@@ -269,18 +306,34 @@ export const CONTENT = {
       cols: ['Item', 'Detail'],
       rows: [
         { label: 'Runtime', ours: 'Self-contained; nothing to install (win-x64 is 29 MB after trimming)' },
-        { label: 'Platforms', ours: 'Windows x64 / x86 / ARM64, Linux x64 / ARM64, macOS Intel / Apple Silicon' },
         { label: 'Mod source', ours: 'Modrinth' },
         { label: 'Accounts', ours: 'Microsoft, offline, Yggdrasil' },
         { label: 'Interface', ours: 'Avalonia + Fluent, light and dark themes, editable accent colour' },
+        { label: 'Multiplayer', ours: 'EasyTier virtual LAN built in, no public IP needed' },
         { label: 'Licence', ours: 'AGPL-3.0' }
       ],
-      stats: [
-        { value: '7', label: 'build targets' },
-        { value: '3', label: 'sign-in methods' },
-        { value: '2', label: 'interface themes' },
-        { value: 'AGPL', label: 'licence' }
-      ]
+      matrix: {
+        title: { zh: 'Platforms and architectures', en: 'Platforms and architectures' },
+        sub: { zh: 'Seven build targets across three desktop platforms.', en: 'Seven build targets across three desktop platforms.' },
+        foot: { zh: 'build targets', en: 'build targets' },
+        groups: [
+          {
+            os: 'Windows',
+            note: { zh: '10 / 11, compatibility mode for older machines', en: '10 / 11, compatibility mode for older machines' },
+            archs: ['x64', 'x86', 'ARM64']
+          },
+          {
+            os: 'macOS',
+            note: { zh: '11 or later', en: '11 or later' },
+            archs: ['Apple Silicon', 'Intel']
+          },
+          {
+            os: 'Linux',
+            note: { zh: 'glibc 2.31+', en: 'glibc 2.31+' },
+            archs: ['x64', 'ARM64']
+          }
+        ]
+      }
     },
     download: {
       kicker: 'Download',
@@ -321,15 +374,34 @@ export const CONTENT = {
         { q: 'Where do I report problems?', a: 'GitHub Issues. Attach the logs and crash report from "Open log folder" in Settings and it is much quicker to trace.' }
       ]
     },
+    credits: {
+      kicker: 'Credits',
+      title: 'Who builds this launcher',
+      sub: 'Two people: one writes the launcher, the other helps make it something you can actually use.',
+      people: [
+        {
+          name: '阳路相逢',
+          role: { zh: 'Developer', en: 'Developer' },
+          avatar: 'avatars/yang.jpg',
+          bio: {
+            zh: 'Sets the architecture and runs the releases. Most of the core code and the UI design came out of his hands.',
+            en: 'Sets the architecture and runs the releases. Most of the core code and the UI design came out of his hands.'
+          }
+        },
+        {
+          name: '叶冷',
+          role: { zh: 'Contributor', en: 'Contributor' },
+          avatar: 'avatars/ye.jpg',
+          bio: {
+            zh: 'UI design, bug fixes, and the weird edge cases nobody else wanted to touch.',
+            en: 'UI design, bug fixes, and the weird edge cases nobody else wanted to touch.'
+          }
+        }
+      ]
+    },
     footer: {
       mark: 'Vibrantbit',
-      markTail: 'Launcher',
       tagline: 'A cross-platform Minecraft launcher, AGPL-3.0.',
-      badges: [
-        { label: 'AGPL-3.0', tone: 'green' },
-        { label: '.NET 10', tone: 'blue' },
-        { label: 'Avalonia', tone: 'violet' }
-      ],
       cols: [
         {
           title: 'Product',

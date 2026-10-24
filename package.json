@@ -6,6 +6,8 @@
     "dev": "nuxi dev",
     "build": "nuxi build",
     "generate": "nuxi generate",
+    "generate:offline": "VBL_OFFLINE=1 nuxi generate && node scripts/offline-paths.mjs",
+    "generate:single": "VBL_OFFLINE=1 nuxi generate && node scripts/build-single.mjs",
     "preview": "nuxi preview",
     "changelog": "node scripts/build-changelog.mjs"
   },

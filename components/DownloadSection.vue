@@ -11,6 +11,12 @@ const latest = computed(
 )
 
 const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? PLATFORMS[0]!)
+
+/** 切换平台时让内容重新入场 */
+const swapKey = ref(0)
+watch(active, () => {
+  swapKey.value++
+})
 </script>
 
 <template>
@@ -23,6 +29,8 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
       </div>
 
       <div class="tile card" v-reveal>
+        <div class="card-glow" aria-hidden="true" />
+
         <div class="platforms" role="tablist">
           <button
             v-for="p in PLATFORMS"
@@ -51,7 +59,7 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
           <span class="muted os">{{ L(current.arch) }}</span>
         </div>
 
-        <div class="assets">
+        <div class="assets" :key="swapKey">
           <div class="asset-head">
             <span>{{ c.download.rid }}</span>
             <span>{{ c.download.file }}</span>
@@ -86,16 +94,38 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
 
 <style scoped>
 .card {
-  padding: 28px;
+  padding: 32px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card-glow {
+  position: absolute;
+  inset: -50% 30% auto -20%;
+  height: 120%;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 72%
+  );
 }
 
 .platforms {
+  position: relative;
   display: flex;
-  gap: 4px;
-  padding: 4px;
+  gap: 5px;
+  padding: 5px;
   border-radius: var(--radius-pill);
   background: var(--surface);
   border: 1px solid var(--border);
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.platforms::-webkit-scrollbar {
+  display: none;
 }
 
 .platform {
@@ -104,21 +134,22 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 38px;
+  height: 40px;
+  padding-inline: 22px;
   border-radius: var(--radius-pill);
   color: var(--fg-muted);
   font-size: var(--fs-sm);
-  font-weight: 600;
-  transition: background-color 0.18s var(--ease), color 0.18s var(--ease),
-    box-shadow 0.18s var(--ease);
+  font-weight: 620;
+  white-space: nowrap;
+  transition: color 0.24s var(--ease), background 0.24s var(--ease), box-shadow 0.24s var(--ease);
 }
 .platform:hover {
   color: var(--fg);
 }
 .platform.on {
-  background: var(--tile);
-  color: var(--fg);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09), var(--inset-hi);
+  background: linear-gradient(120deg, var(--accent), var(--violet));
+  color: #fff;
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--accent) 85%, transparent);
 }
 
 .meta {
@@ -127,8 +158,8 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
-  margin-top: 22px;
-  padding-bottom: 14px;
+  margin-top: 26px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -136,14 +167,18 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 9px;
   font-size: var(--fs-sm);
 }
 
 .ver b {
   font-family: var(--font-mono);
-  font-size: 1.02em;
-  letter-spacing: -0.01em;
+  font-size: 1.04em;
+  letter-spacing: -0.015em;
+  background: linear-gradient(120deg, var(--accent), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .muted {
@@ -156,23 +191,35 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
 }
 
 .assets {
-  margin-top: 6px;
+  margin-top: 8px;
+  animation: swap 0.45s var(--ease);
+}
+
+@keyframes swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .asset-head,
 .asset {
   display: grid;
-  grid-template-columns: 108px 1fr 96px 92px;
+  grid-template-columns: 108px 1fr 96px 96px;
   align-items: center;
   gap: 14px;
 }
 
 .asset-head {
-  padding: 10px 12px;
+  padding: 12px 14px;
   color: var(--fg-subtle);
   font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 650;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -181,9 +228,9 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
 }
 
 .asset {
-  padding: 12px;
+  padding: 14px;
   border-radius: var(--radius);
-  transition: background-color 0.16s var(--ease);
+  transition: background-color 0.22s var(--ease), transform 0.22s var(--ease);
 }
 .asset + .asset {
   box-shadow: inset 0 1px 0 var(--border);
@@ -191,6 +238,7 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
 .asset:hover {
   background: var(--surface);
   box-shadow: none;
+  transform: translateX(3px);
 }
 
 .arch {
@@ -198,19 +246,25 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   align-items: center;
   justify-content: center;
   justify-self: start;
-  height: 24px;
-  padding-inline: 9px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-soft);
+  height: 26px;
+  padding-inline: 10px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    color-mix(in srgb, var(--violet) 12%, transparent)
+  );
   color: var(--accent-text);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
   font-size: var(--fs-xs);
-  font-weight: 600;
+  font-weight: 650;
+  font-family: var(--font-mono);
 }
 
 .file {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   min-width: 0;
 }
 
@@ -246,22 +300,35 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   align-items: center;
   justify-content: space-between;
   gap: 10px 20px;
-  margin-top: 18px;
-  padding-top: 16px;
+  margin-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid var(--border);
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: var(--fs-sm);
-  font-weight: 600;
+  font-weight: 620;
+}
+.link :deep(svg) {
+  transition: transform 0.3s var(--ease);
+}
+.link:hover :deep(svg) {
+  transform: translateX(3px);
 }
 
 @media (max-width: 780px) {
   .card {
-    padding: 16px;
+    padding: 18px;
+  }
+  .platforms {
+    width: 100%;
+  }
+  .platform {
+    flex: 1;
+    padding-inline: 12px;
   }
   .asset-head {
     display: none;
@@ -273,7 +340,7 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
       'file file'
       'fmt fmt';
     gap: 8px;
-    padding: 14px 8px;
+    padding: 16px 8px;
   }
   .arch {
     grid-area: arch;
