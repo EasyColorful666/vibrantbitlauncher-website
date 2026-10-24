@@ -96,6 +96,7 @@ pages/index.vue         单页，按顺序拼各个区块
 components/             各区块组件（Hero / Features / Why / Download / Changelog / Faq / Footer）
 composables/            useSite（中英文案）、useTheme（亮暗切换）、useAsset（拼 baseURL 前缀）
 plugins/reveal.ts       v-reveal 指令，进视口淡入，尊重 prefers-reduced-motion
+public/fonts/           页脚字标用的 Inter 700（latin 子集 24 KB），自托管，不请求外网
 ```
 
 ## 说明
@@ -104,3 +105,9 @@ plugins/reveal.ts       v-reveal 指令，进视口淡入，尊重 prefers-reduc
 - 顶栏语言键切换 zh / en，主题键切换亮暗，两者都存 localStorage，首屏前由内联脚本读取，避免闪色。
 - 下载按钮目前指向 GitHub Releases 页面，等 release 打上 tag 后可以改成
   `releases/latest/download/<文件名>`。
+- 按钮、胶囊标签、分段控件的圆角统一走 `--radius-btn` / `--radius-pill`（999px），
+  要回到 Fluent 的 4px 方角只需把 `--radius-btn` 改成 4px。
+- 页脚字标（Vibrantbit Launcher）用 Inter 700，两段各自一条渐变；字距 `-0.038em` /
+  `-0.061em`、词间距 `0.317em` 是按参考稿量出来的，改了字重就得跟着重调。
+  暗色下的浅色版本靠 `:global(:root[data-theme='dark'] .mark-a)` 覆盖，
+  注意 `:global()` 必须包住整条选择器，否则 scoped 编译只会留下 `:root`。

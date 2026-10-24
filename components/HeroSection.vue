@@ -210,7 +210,7 @@ const ghost = computed(() => c.value.hero.facts)
   display: flex;
   gap: 2px;
   padding: 3px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -218,7 +218,7 @@ const ghost = computed(() => c.value.hero.facts)
 .seg {
   flex: 1;
   height: 30px;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--fg-muted);

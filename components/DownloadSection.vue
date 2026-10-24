@@ -93,7 +93,7 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   display: flex;
   gap: 4px;
   padding: 4px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -105,7 +105,7 @@ const current = computed(() => PLATFORMS.find((p) => p.id === active.value) ?? P
   justify-content: center;
   gap: 8px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   color: var(--fg-muted);
   font-size: var(--fs-sm);
   font-weight: 600;

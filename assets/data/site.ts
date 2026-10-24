@@ -171,7 +171,13 @@ export const CONTENT = {
     },
     footer: {
       mark: 'Vibrantbit',
+      markTail: 'Launcher',
       tagline: '跨平台 Minecraft 启动器，AGPL-3.0 开源。',
+      badges: [
+        { label: 'AGPL-3.0', tone: 'green' },
+        { label: '.NET 10', tone: 'blue' },
+        { label: 'Avalonia', tone: 'violet' }
+      ],
       cols: [
         {
           title: '产品',
@@ -317,7 +323,13 @@ export const CONTENT = {
     },
     footer: {
       mark: 'Vibrantbit',
+      markTail: 'Launcher',
       tagline: 'A cross-platform Minecraft launcher, AGPL-3.0.',
+      badges: [
+        { label: 'AGPL-3.0', tone: 'green' },
+        { label: '.NET 10', tone: 'blue' },
+        { label: 'Avalonia', tone: 'violet' }
+      ],
       cols: [
         {
           title: 'Product',

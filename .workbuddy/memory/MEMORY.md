@@ -3,6 +3,12 @@
 - 目录：`E:/vbl-website`（独立仓库，与 `E:/VibrantbitLauncher.Avalonia` 分开；更新日志从后者读取）。
 - 技术栈：Nuxt 3 + Vue 3 SFC + 手写 scoped CSS + lucide-vue-next。没有 Tailwind，不引外部字体
   （用 Segoe UI Variable / 微软雅黑栈，国内不打 Google Fonts）。
+  **唯一例外**是页脚字标：Inter 700 的 latin 子集自托管在 `public/fonts/inter-latin-700.woff2`（24 KB），
+  `@font-face` 写在 `nuxt.config.ts` 的 `head.style`，并用 `withBase()` 拼前缀 + preload。
+- 圆角：按钮 / 胶囊标签 / 分段控件统一 999px，令牌 `--radius-btn` 与 `--radius-pill`；
+  Fluent 原生的 4px 方角只需改 `--radius-btn`。
+- scoped CSS 里覆盖暗色样式必须写成 `:global(:root[data-theme='dark'] .foo)`——
+  `:global(...)` 只包前半段时，编译器会把后代选择器丢掉，规则会落到 `:root` 上。
 - 视觉：Fluent 设计语言，强调色 `#0078D4` 与启动器默认 CustomAccentColor 对齐；
   令牌集中在 `assets/css/main.css`，亮/暗用 `:root[data-theme]`，首屏内联脚本读 localStorage。
 - 文案：平铺直叙，禁止口号式排比与「——」解释腔；只写能用仓库核对的数字

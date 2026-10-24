@@ -34,7 +34,23 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: withBase('favicon.svg') },
-        { rel: 'apple-touch-icon', href: withBase('favicon.svg') }
+        { rel: 'apple-touch-icon', href: withBase('favicon.svg') },
+        {
+          rel: 'preload',
+          as: 'font',
+          type: 'font/woff2',
+          href: withBase('fonts/inter-latin-700.woff2'),
+          crossorigin: 'anonymous'
+        }
+      ],
+      // 页脚字标用的 Inter 700（latin 子集，放在 public/fonts，不走 Google Fonts）
+      style: [
+        {
+          key: 'font-mark',
+          innerHTML: `@font-face{font-family:"Inter";src:url("${withBase(
+            'fonts/inter-latin-700.woff2'
+          )}") format("woff2");font-weight:700;font-style:normal;font-display:swap;}`
+        }
       ],
       // 首屏前同步应用主题，避免闪白 / 闪黑
       script: [

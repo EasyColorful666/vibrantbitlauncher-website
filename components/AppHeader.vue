@@ -179,8 +179,8 @@ watch(open, (v) => {
 }
 
 .nav-link {
-  padding: 7px 12px;
-  border-radius: var(--radius-sm);
+  padding: 7px 13px;
+  border-radius: var(--radius-pill);
   color: var(--fg-muted);
   font-size: var(--fs-sm);
   font-weight: 500;
@@ -204,7 +204,7 @@ watch(open, (v) => {
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   color: var(--fg-muted);
   border: 1px solid transparent;
   transition: background-color 0.16s var(--ease), color 0.16s var(--ease),
@@ -265,8 +265,8 @@ watch(open, (v) => {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 11px 12px;
-    border-radius: var(--radius-sm);
+    padding: 11px 14px;
+    border-radius: var(--radius-pill);
     color: var(--fg);
     font-size: var(--fs-body);
     font-weight: 500;
