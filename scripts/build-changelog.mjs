@@ -2,8 +2,10 @@
  * 把启动器仓库的 CHANGELOG.md 解析成站点用的 JSON。
  *
  *   node scripts/build-changelog.mjs
+ *   CHANGELOG_PATH=E:/VibrantbitLauncher.Avalonia/CHANGELOG.md node scripts/build-changelog.mjs
  *
- * 默认读取 E:/VibrantbitLauncher.Avalonia/CHANGELOG.md，可用 CHANGELOG_PATH 覆盖。
+ * 默认从 GitHub 上拉启动器仓库 master 分支的 CHANGELOG.md（需要 Node 18+ 的 fetch），
+ * 也可用 CHANGELOG_PATH 指向本地文件或别的地址。
  * 输出 assets/data/changelog.json，供「更新日志」区块静态渲染（不依赖运行时接口）。
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
@@ -11,15 +13,46 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const SOURCE = process.env.CHANGELOG_PATH || 'https://raw.githubusercontent.com/EasyColorful666/VibrantbitLauncher.Avalonia/refs/heads/master/CHANGELOG.md'
+const SOURCE =
+  process.env.CHANGELOG_PATH ||
+  'https://raw.githubusercontent.com/EasyColorful666/VibrantbitLauncher.Avalonia/master/CHANGELOG.md'
 const OUT = resolve(root, 'assets/data/changelog.json')
 
-if (!existsSync(SOURCE)) {
+const isRemote = /^https?:\/\//i.test(SOURCE)
+
+/**
+ * 读上游 CHANGELOG.md 正文。
+ * - 远程地址：用 fetch 拉（返回 null 表示拉不到）
+ * - 本地路径：直接读（返回 null 表示文件不存在）
+ */
+async function readSource(src) {
+  if (!isRemote) {
+    return existsSync(src) ? readFileSync(src, 'utf8') : null
+  }
+  if (typeof fetch !== 'function') {
+    throw new Error('当前 Node 版本没有全局 fetch（需要 Node 18+）')
+  }
+  const res = await fetch(src, { redirect: 'follow' })
+  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`)
+  return await res.text()
+}
+
+let text
+try {
+  text = await readSource(SOURCE)
+} catch (err) {
+  // 远程拉取失败：CI 里要能看见，别静默用旧数据发一个看起来正常的站点
+  console.error(`[changelog] 读取 ${SOURCE} 失败：${err.message}`)
+  process.exit(1)
+}
+
+if (text === null) {
+  // 本地路径不存在属于正常情况（没 clone 启动器仓库的机器），保留现有 json
   console.error(`[changelog] 找不到 ${SOURCE}，保留现有的 changelog.json`)
   process.exit(0)
 }
 
-const raw = readFileSync(SOURCE, 'utf8').replace(/\r\n/g, '\n')
+const raw = text.replace(/\r\n/g, '\n')
 
 const esc = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')

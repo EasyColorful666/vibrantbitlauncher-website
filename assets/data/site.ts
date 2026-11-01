@@ -228,7 +228,7 @@ export const CONTENT = {
           title: '资源',
           links: [
             { label: 'GitHub Releases', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases', external: true },
-            { label: 'CHANGELOG.md', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/blob/main/CHANGELOG.md', external: true },
+            { label: 'CHANGELOG.md', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/blob/master/CHANGELOG.md', external: true },
             { label: 'Modrinth', href: 'https://modrinth.com', external: true },
             { label: 'BMCLAPI', href: 'https://bmclapidoc.bangbang93.com/', external: true }
           ]
@@ -416,7 +416,7 @@ export const CONTENT = {
           title: 'Resources',
           links: [
             { label: 'GitHub Releases', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases', external: true },
-            { label: 'CHANGELOG.md', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/blob/main/CHANGELOG.md', external: true },
+            { label: 'CHANGELOG.md', href: 'https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/blob/master/CHANGELOG.md', external: true },
             { label: 'Modrinth', href: 'https://modrinth.com', external: true },
             { label: 'BMCLAPI', href: 'https://bmclapidoc.bangbang93.com/', external: true }
           ]
