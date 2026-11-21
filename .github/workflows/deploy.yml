@@ -117,11 +117,20 @@ jobs:
 
   build:
     needs: changelog
+    # ⚠️ 这里的 always() 不能删。
+    # 只要 depends 的 job 被跳过，GitHub 就会把依赖它的 job 一起跳过——即使 if 里
+    # 明明写了 needs.changelog.result == 'skipped'。不加状态函数时，job 级 if 会被
+    # 隐式当成 success() && (...)，而「上游 job 被跳过」不算 success，于是 push /
+    # 手动触发（探测 job 必然跳过）连 build 都进不去，整条流水线 2 秒结束、状态 Skipped。
+    # always() 是状态函数，能阻止这个隐式 success()，后面的条件才真正生效。
+    #
     # 探测 job 被跳过（本仓库 push / 手动触发）→ 直接构建；
     # 探测跑了且上游内容有变化 → 构建；没变化 → 整个 workflow 到此为止。
     if: >-
-      needs.changelog.result == 'skipped' ||
-      needs.changelog.outputs.changed == 'true'
+      always() && (
+        needs.changelog.result == 'skipped' ||
+        needs.changelog.outputs.changed == 'true'
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
