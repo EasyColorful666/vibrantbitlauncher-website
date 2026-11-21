@@ -223,6 +223,13 @@ jobs:
 
   deploy:
     needs: build
+    # 同样必须带 always()。changelog 被跳过时，跳过状态会沿着 needs 链一路传到
+    # deploy——哪怕中间的 build 已经成功，只要 if 里没有状态函数，它就被当成
+    # success() && (...) 而整条链路上有一个 skipped 就判 false，deploy 直接跳过。
+    # 显式写 needs.build.result == 'success'：build 真的跑成功了才发布，
+    # 定时任务判定「上游没变化」导致 build 被跳过时，deploy 也安静跳过。
+    if: >-
+      always() && needs.build.result == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
