@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-11-21T01:25:48.361Z",
+  "source": "https://api.github.com/repos/EasyColorful666/VibrantbitLauncher.Avalonia/releases/latest",
+  "tag": "v1.0.36.2",
+  "version": "1.0.36.2",
+  "publishedAt": "2026-11-16",
+  "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.36.2",
+  "assets": {
+    "SHA256SUMS.txt": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/SHA256SUMS.txt",
+      "size": 764
+    },
+    "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+      "size": 22205966
+    },
+    "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+      "size": 22767269
+    },
+    "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+      "size": 24900455
+    },
+    "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+      "size": 25417914
+    },
+    "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-arm64.zip",
+      "size": 23809175
+    },
+    "VibrantbitLauncher.Avalonia-win-x64.zip": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x64.zip",
+      "size": 24709188
+    },
+    "VibrantbitLauncher.Avalonia-win-x86.zip": {
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x86.zip",
+      "size": 23206816
+    }
+  }
+}

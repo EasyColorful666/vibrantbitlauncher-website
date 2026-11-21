@@ -1,8 +1,22 @@
 name: Deploy to GitHub Pages
 
+# 触发来源
+#   1. push（master / main）—— 本仓库改代码，常规部署
+#   2. schedule —— 定时轮询上游 CHANGELOG.md，内容真变了才构建，不变只跑一次轻量检测
+#   3. repository_dispatch(changelog-updated) —— 启动器仓库推 CHANGELOG.md 后即时部署
+#      （可选加速通道，需要 PAT，配置方法见文件末尾注释）
+#   4. workflow_dispatch —— 手动触发
+#
+# 注意：GitHub 原生不支持「监听另一个仓库的 push」，所以 2 和 3 是唯一的两条路。
 on:
   push:
     branches: [master, main]
+  repository_dispatch:
+    types: [changelog-updated]
+  schedule:
+    # GitHub 的 cron 只有 UTC。00/06/12/18 点过 17 分 = 北京时间 08:17 / 14:17 / 20:17 / 次日 02:17。
+    # 每 6 小时探一次：检测本身只跑 checkout + 一次 API 请求，真正构建只在上游内容变化时发生。
+    - cron: '17 */6 * * *'
   workflow_dispatch:
 
 # GITHUB_TOKEN 需要这几项才能发布 Pages：
@@ -12,6 +26,11 @@ permissions:
   contents: read
   pages: write
   id-token: write
+
+env:
+  # 站点更新日志的来源：CHANGELOG.md 所在的仓库与分支
+  UPSTREAM_REPO: EasyColorful666/VibrantbitLauncher.Avalonia
+  UPSTREAM_REF: master
 
 # 已绑定自定义域名 vbl.easycolorful.cn，站点挂在根路径，baseURL 用默认的 '/'。
 # 如果哪天去掉自定义域名、退回 https://<user>.github.io/<repo>/，把下面两行加回来：
@@ -24,7 +43,85 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 先单独判断上游 CHANGELOG.md 有没有真变化。
+  # 定时任务每天跑 4 次，没有这一步等于每次都要完整构建一遍内容相同的站点。
+  changelog:
+    name: Detect upstream CHANGELOG
+    # 只有定时任务和跨仓库通知需要先探路；本仓库 push / 手动触发无论如何都要发布，
+    # 直接跳到 build，省一次 checkout + 一次 API 请求。
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch CHANGELOG.md from launcher repo
+        run: |
+          set -euo pipefail
+          # 留一份已提交的版本作为比较基准
+          cp assets/data/changelog.json "$RUNNER_TEMP/prev.json"
+          # 走 contents API 而不是 raw.githubusercontent.com：raw 有 CDN 缓存，
+          # 刚推完几分钟内可能还是旧内容，定时任务会误判成「没变化」。
+          if curl -fsSL --retry 3 --retry-delay 2 \
+               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.raw" \
+               -H "X-GitHub-Api-Version: 2022-11-28" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/contents/CHANGELOG.md?ref=${UPSTREAM_REF}" \
+               -o "$RUNNER_TEMP/CHANGELOG.md"; then
+            CHANGELOG_PATH="$RUNNER_TEMP/CHANGELOG.md" node scripts/build-changelog.mjs
+          else
+            echo "::warning::拉取上游 CHANGELOG.md 失败，本次沿用仓库里已提交的 changelog.json"
+          fi
+
+      - name: Fetch latest release from launcher repo
+        run: |
+          set -euo pipefail
+          # 同样留一份基准。就算下面拉取失败，后续比较结果也会是「没变化」，
+          # 不会误触发一次构建。
+          cp assets/data/releases.json "$RUNNER_TEMP/prev-releases.json"
+          if curl -fsSL --retry 3 --retry-delay 2 \
+               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github+json" \
+               -H "X-GitHub-Api-Version: 2022-11-28" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/releases/latest" \
+               -o "$RUNNER_TEMP/release-latest.json"; then
+            RELEASE_JSON="$RUNNER_TEMP/release-latest.json" node scripts/build-releases.mjs
+          else
+            echo "::warning::拉取最新 Release 失败，本次沿用仓库里已提交的 releases.json"
+          fi
+
+      - id: diff
+        name: Compare with committed data files
+        run: |
+          set -euo pipefail
+          # CHANGELOG：generatedAt / source 每次生成都会变（一个是时间戳，一个是临时路径），
+          # 不能算作内容更新，只比 count + releases。
+          # Release：只比 tag —— 新版发出来时即使 CHANGELOG 一字没改，下载链接也变了。
+          CHANGED=$(node -e '
+            const fs = require("fs");
+            const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
+            const changelogBody = (p) => {
+              const j = read(p);
+              return JSON.stringify([j.count, j.releases]);
+            };
+            const tag = (p) => read(p).tag;
+            const changed =
+              changelogBody(process.argv[1]) !== changelogBody(process.argv[2]) ||
+              tag(process.argv[3]) !== tag(process.argv[4]);
+            console.log(changed ? "true" : "false");
+          ' "$RUNNER_TEMP/prev.json" assets/data/changelog.json \
+            "$RUNNER_TEMP/prev-releases.json" assets/data/releases.json)
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "上游有变化：$CHANGED"
+
   build:
+    needs: changelog
+    # 探测 job 被跳过（本仓库 push / 手动触发）→ 直接构建；
+    # 探测跑了且上游内容有变化 → 构建；没变化 → 整个 workflow 到此为止。
+    if: >-
+      needs.changelog.result == 'skipped' ||
+      needs.changelog.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -70,6 +167,40 @@ jobs:
           npm i --no-save --no-audit --no-fund $DEPS
           node -e "require('@rollup/rollup-linux-x64-gnu'); console.log('rollup native binding ok')"
 
+      # 真正把上游 CHANGELOG.md 拉下来覆盖 assets/data/changelog.json，
+      # 否则触发归触发，构建出来的站点还是上次的内容。
+      # 这里不做强制失败：上游临时 4xx/5xx 不该让整个站点发不出去，
+      # 退化成「用仓库里已有的 changelog.json 发布」，warning 会在 Actions 里标黄。
+      - name: Sync CHANGELOG.md from launcher repo
+        run: |
+          set -uo pipefail
+          if curl -fsSL --retry 3 --retry-delay 2 \
+               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github.raw" \
+               -H "X-GitHub-Api-Version: 2022-11-28" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/contents/CHANGELOG.md?ref=${UPSTREAM_REF}" \
+               -o "$RUNNER_TEMP/CHANGELOG.md"; then
+            CHANGELOG_PATH="$RUNNER_TEMP/CHANGELOG.md" node scripts/build-changelog.mjs
+          else
+            echo "::warning::拉取上游 CHANGELOG.md 失败，本次沿用仓库里已提交的 changelog.json"
+          fi
+
+      # 同上，下载弹窗里的直链和加速链接都要指向真实的最新 Release；
+      # 拿不到就沿用仓库里已提交的 releases.json，不让整个发布挂掉。
+      - name: Sync latest release from launcher repo
+        run: |
+          set -uo pipefail
+          if curl -fsSL --retry 3 --retry-delay 2 \
+               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Accept: application/vnd.github+json" \
+               -H "X-GitHub-Api-Version: 2022-11-28" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/releases/latest" \
+               -o "$RUNNER_TEMP/release-latest.json"; then
+            RELEASE_JSON="$RUNNER_TEMP/release-latest.json" node scripts/build-releases.mjs
+          else
+            echo "::warning::拉取最新 Release 失败，本次沿用仓库里已提交的 releases.json"
+          fi
+
       - name: Generate static site
         run: npm run generate
 
@@ -91,3 +222,31 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# ---------------------------------------------------------------------------
+# 可选：让启动器仓库「推了 CHANGELOG.md 就立刻通知本站」（不等定时任务）。
+# 不做也能用，最迟 6 小时内站点会跟上。要做的话在启动器仓库里加两样东西：
+#
+# 1. 生成 PAT（classic：勾 repo；或 fine-grained：只给本站仓库
+#    EasyColorful666/vibrantbitlauncher-website 的 Contents: Read and write），
+#    存成启动器仓库的 secret，名字比如 SITE_DISPATCH_TOKEN。
+#
+# 2. 在启动器仓库加 .github/workflows/notify-site.yml：
+#
+#    name: Notify website
+#    on:
+#      push:
+#        branches: [master]
+#        paths: ['CHANGELOG.md']
+#    jobs:
+#      dispatch:
+#        runs-on: ubuntu-latest
+#        steps:
+#          - name: Send repository_dispatch to website repo
+#            run: |
+#              curl -fsSL -X POST \
+#                -H "Authorization: Bearer ${{ secrets.SITE_DISPATCH_TOKEN }}" \
+#                -H "Accept: application/vnd.github+json" \
+#                https://api.github.com/repos/EasyColorful666/vibrantbitlauncher-website/dispatches \
+#                -d '{"event_type":"changelog-updated"}'
+# ---------------------------------------------------------------------------

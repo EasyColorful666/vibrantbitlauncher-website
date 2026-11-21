@@ -22,8 +22,8 @@ const current = computed(() => {
         :key="current.src"
         :src="current.src"
         :alt="current.alt"
-        width="1602"
-        height="1002"
+        width="1477"
+        height="927"
         loading="eager"
         decoding="async"
       />

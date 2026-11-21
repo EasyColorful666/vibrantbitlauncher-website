@@ -19,7 +19,7 @@ export const PLATFORMS = [
     name: { zh: 'Windows', en: 'Windows' },
     arch: { zh: 'Windows 10 / 11，老机器可用兼容模式', en: 'Windows 10 / 11, compatibility mode for older machines' },
     assets: [
-      { rid: 'win-x64', arch: 'x64', file: 'VibrantbitLauncher.Avalonia-win-x64.zip', fmt: 'zip', note: { zh: '大多数机器选这个，29 MB', en: 'For most machines, 29 MB' } },
+      { rid: 'win-x64', arch: 'x64', file: 'VibrantbitLauncher.Avalonia-win-x64.zip', fmt: 'zip', note: { zh: '大多数机器选这个', en: 'For most machines' } },
       { rid: 'win-x86', arch: 'x86', file: 'VibrantbitLauncher.Avalonia-win-x86.zip', fmt: 'zip', note: { zh: '32 位系统', en: '32-bit systems' } },
       { rid: 'win-arm64', arch: 'ARM64', file: 'VibrantbitLauncher.Avalonia-win-arm64.zip', fmt: 'zip', note: { zh: 'ARM 笔记本', en: 'ARM laptops' } }
     ]
@@ -94,7 +94,7 @@ export const CONTENT = {
         { id: 'download', label: '下载中心' }
       ],
       caption: '截图来自启动器实际界面。',
-      facts: ['自带 .NET 10 运行时', '7 个平台架构', 'AGPL-3.0 开源']
+      facts: ['不含运行时，需 .NET 10', '7 个平台架构', 'AGPL-3.0 开源']
     },
     features: {
       kicker: '功能',
@@ -150,16 +150,28 @@ export const CONTENT = {
     download: {
       kicker: '下载',
       title: '下载',
-      sub: 'Windows 用 zip，macOS 和 Linux 用 tar.gz。运行时打在包里，机器上不用另装东西。',
+      sub: 'Windows 用 zip，macOS 和 Linux 用 tar.gz。包内不含运行时，需要先装 .NET 10。',
       latest: '最新版',
       published: '发布于',
-      form: '自带运行时',
-      note: '解压就能开。也支持 --framework-dependent 打成 15 MB 左右的小包，那种才需要自己装 .NET 10。',
+      form: '不含运行时',
+      note: '解压就能开，前提是机器上已经有 .NET 10 运行时。加速节点只换下载线路，文件还是同一份。',
       rid: '架构',
       file: '文件',
       format: '格式',
       action: '下载',
-      all: '去 GitHub 看全部版本和校验值'
+      all: '去 GitHub 看全部版本和校验值',
+      dialog: {
+        title: '选择下载方式',
+        close: '关闭',
+        direct: '直连 GitHub',
+        directNote: '从 github.com 官方地址下载，国内可能很慢',
+        v4: 'GH V4 加速',
+        v4Note: '经 v4.gh-proxy.com 中转，一般最快',
+        v6: 'GH V6 加速',
+        v6Note: '经 v6.gh-proxy.com 中转，V4 不通时换这个',
+        hint: '加速节点只做中转，文件仍来自 GitHub 官方 Release，校验值不变。',
+        runtime: '这个包不含运行时，没装 .NET 10 会起不来。'
+      }
     },
     changelog: {
       kicker: '更新日志',
@@ -177,7 +189,7 @@ export const CONTENT = {
       title: '常见问题',
       sub: '没写到的，去 Issues 问。',
       items: [
-        { q: '要自己装 Java 或 .NET 吗？', a: '都不用。发布包自带 .NET 10 运行时，Java 会按游戏版本自动下载；不想用自动下的，可以在设置里指到本地 JDK。' },
+        { q: '要自己装 Java 或 .NET 吗？', a: 'Java 不用，.NET 10 要先装。发布包不含运行时，去 dotnet.microsoft.com 下个 Desktop Runtime 装一次即可；Java 会按游戏版本自动下载，不想用自动下的可以在设置里指到本地 JDK。' },
         { q: '支持哪些加载器？', a: 'Forge、NeoForge、Fabric、Quilt 和原版。Forge 和 NeoForge 的 maven 在国内经常连不上，会自己换 BMCLAPI 镜像。' },
         { q: '愚人节版本怎么回事？', a: 'Mojang 清单里没这个分类，15w14a、24w14potato 这些都写成 snapshot。启动器按 id 单独认了 8 个，不然它们会混在测试版里。' },
         { q: '能导入别的启动器的实例吗？', a: '标准 .minecraft 的版本目录放进 versions 就行；版本页也能导入模组和 zip。整合包支持 mrpack 和 zip，装的时候会把缺的资源补上。' },
@@ -282,7 +294,7 @@ export const CONTENT = {
         { id: 'download', label: 'Downloads' }
       ],
       caption: 'Screenshots taken from the actual launcher.',
-      facts: ['Runtime bundled', '7 build targets', 'AGPL-3.0']
+      facts: ['Requires .NET 10', '7 build targets', 'AGPL-3.0']
     },
     features: {
       kicker: 'Features',
@@ -338,16 +350,28 @@ export const CONTENT = {
     download: {
       kicker: 'Download',
       title: 'Download',
-      sub: 'Windows ships as zip, macOS and Linux as tar.gz. The runtime is bundled, so there is nothing else to install.',
+      sub: 'Windows ships as zip, macOS and Linux as tar.gz. The runtime is not bundled — install .NET 10 first.',
       latest: 'Latest',
       published: 'Released',
-      form: 'Runtime bundled',
-      note: 'Unzip and run. A framework-dependent build (~15 MB) is also available if you already have .NET 10.',
+      form: 'No runtime',
+      note: 'Unzip and run, provided .NET 10 is already installed. Mirrors only change the route, not the file.',
       rid: 'Target',
       file: 'File',
       format: 'Format',
       action: 'Get',
-      all: 'All releases and checksums on GitHub'
+      all: 'All releases and checksums on GitHub',
+      dialog: {
+        title: 'Choose a download route',
+        close: 'Close',
+        direct: 'GitHub direct',
+        directNote: 'Official github.com link, often slow from mainland China',
+        v4: 'GH V4 mirror',
+        v4Note: 'Relayed via v4.gh-proxy.com, usually the fastest',
+        v6: 'GH V6 mirror',
+        v6Note: 'Relayed via v6.gh-proxy.com, try this when V4 fails',
+        hint: 'Mirrors only relay the request. The file still comes from the official GitHub release, so checksums are unchanged.',
+        runtime: 'This build ships without a runtime — it will not start until .NET 10 is installed.'
+      }
     },
     changelog: {
       kicker: 'Changelog',
@@ -365,7 +389,7 @@ export const CONTENT = {
       title: 'Questions',
       sub: 'Anything missing? Ask in Issues.',
       items: [
-        { q: 'Do I need to install Java or .NET?', a: 'Neither. The .NET 10 runtime is bundled in the package, and Java is downloaded to match the game version; if you would rather use your own, point Settings at a local JDK.' },
+        { q: 'Do I need to install Java or .NET?', a: 'Java no, .NET 10 yes. The package ships without a runtime — install the Desktop Runtime from dotnet.microsoft.com once. Java is downloaded to match the game version; if you would rather use your own, point Settings at a local JDK.' },
         { q: 'Which loaders work?', a: 'Forge, NeoForge, Fabric, Quilt and vanilla. Forge and NeoForge maven hosts are often unreachable in mainland China, so it switches to the BMCLAPI mirror.' },
         { q: 'What are the April Fools versions?', a: 'Mojang\'s manifest has no such category — 15w14a, 24w14potato and friends are tagged as snapshots. The launcher recognises the eight by id so they do not clutter the snapshot list.' },
         { q: 'Can it import instances from another launcher?', a: 'A standard .minecraft version folder can go into versions, and the version page imports mods and zip archives. Modpacks work as mrpack or zip, with missing assets restored during install.' },

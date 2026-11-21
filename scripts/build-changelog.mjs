@@ -13,9 +13,11 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const SOURCE =
-  process.env.CHANGELOG_PATH ||
+// 数据源头永远是启动器仓库的这个文件；CHANGELOG_PATH 只是「从哪儿读」的覆盖，
+// 不影响写进 JSON 的 source（否则 CI 里会记成 $RUNNER_TEMP 的临时路径）。
+const UPSTREAM_URL =
   'https://raw.githubusercontent.com/EasyColorful666/VibrantbitLauncher.Avalonia/master/CHANGELOG.md'
+const SOURCE = process.env.CHANGELOG_PATH || UPSTREAM_URL
 const OUT = resolve(root, 'assets/data/changelog.json')
 
 const isRemote = /^https?:\/\//i.test(SOURCE)
@@ -144,7 +146,7 @@ const cleaned = releases
 
 const payload = {
   generatedAt: new Date().toISOString(),
-  source: SOURCE.replace(/\\/g, '/'),
+  source: UPSTREAM_URL,
   count: cleaned.length,
   releases: cleaned
 }

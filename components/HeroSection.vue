@@ -50,10 +50,6 @@ const ghost = computed(() => c.value.hero.facts)
         <div class="shot">
           <div class="shot-glow" aria-hidden="true" />
           <div class="shot-frame">
-            <div class="shot-bar" aria-hidden="true">
-              <span class="tl"><i /><i /><i /></span>
-              <span class="taddr" />
-            </div>
             <AppShot :view="active" />
           </div>
 
@@ -269,44 +265,6 @@ const ghost = computed(() => c.value.hero.facts)
 }
 .shot-frame:hover {
   transform: perspective(1400px) rotateY(-1.5deg) rotateX(0.5deg) translateY(-4px);
-}
-
-/* 仿窗口标题栏 */
-.shot-bar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  height: 30px;
-  padding-inline: 12px;
-  background: color-mix(in srgb, var(--fg) 6%, transparent);
-  border-bottom: 1px solid var(--border);
-}
-.tl {
-  display: flex;
-  gap: 6px;
-}
-.tl i {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--fg-subtle) 55%, transparent);
-}
-.tl i:first-child {
-  background: color-mix(in srgb, var(--critical) 70%, transparent);
-}
-.tl i:nth-child(2) {
-  background: color-mix(in srgb, var(--caution) 70%, transparent);
-}
-.tl i:nth-child(3) {
-  background: color-mix(in srgb, var(--success) 70%, transparent);
-}
-.taddr {
-  flex: 1;
-  height: 16px;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--fg) 5%, transparent);
-  max-width: 220px;
-  margin-inline: auto;
 }
 
 .switcher {
