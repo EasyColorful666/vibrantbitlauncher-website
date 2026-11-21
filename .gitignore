@@ -7,3 +7,4 @@ dist
 .vs
 *.log
 .DS_Store
+/.workbuddy/memory
