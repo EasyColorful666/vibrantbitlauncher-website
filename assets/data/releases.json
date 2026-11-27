@@ -1,42 +1,844 @@
 {
-  "generatedAt": "2026-11-21T01:25:48.361Z",
-  "source": "https://api.github.com/repos/EasyColorful666/VibrantbitLauncher.Avalonia/releases/latest",
-  "tag": "v1.0.36.2",
-  "version": "1.0.36.2",
-  "publishedAt": "2026-11-16",
-  "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.36.2",
+  "generatedAt": "2026-11-27T12:49:07.455Z",
+  "source": "https://api.github.com/repos/EasyColorful666/VibrantbitLauncher.Avalonia/releases?per_page=100",
+  "tag": "v1.0.37.0",
+  "version": "1.0.37.0",
+  "publishedAt": "2026-11-22",
+  "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.37.0",
   "assets": {
     "SHA256SUMS.txt": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/SHA256SUMS.txt",
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/SHA256SUMS.txt",
       "size": 764
     },
     "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
-      "size": 22205966
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+      "size": 22210980
     },
     "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
-      "size": 22767269
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+      "size": 22772276
     },
     "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
-      "size": 24900455
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+      "size": 24724395
     },
     "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
-      "size": 25417914
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+      "size": 25423907
     },
     "VibrantbitLauncher.Avalonia-win-arm64.zip": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-arm64.zip",
-      "size": 23809175
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+      "size": 23815062
     },
     "VibrantbitLauncher.Avalonia-win-x64.zip": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x64.zip",
-      "size": 24709188
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+      "size": 24714583
     },
     "VibrantbitLauncher.Avalonia-win-x86.zip": {
-      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x86.zip",
-      "size": 23206816
+      "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.37.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+      "size": 23212688
     }
-  }
+  },
+  "history": [
+    {
+      "tag": "v1.0.36.5",
+      "version": "1.0.36.5",
+      "publishedAt": "2026-11-21",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.36.5",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22207025
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22768304
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24720090
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25419181
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23810504
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24710467
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.5/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23208205
+        }
+      }
+    },
+    {
+      "tag": "v1.0.36.2",
+      "version": "1.0.36.2",
+      "publishedAt": "2026-11-16",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.36.2",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22205966
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22767269
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24900455
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25417914
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23809175
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24709188
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.36.2/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23206816
+        }
+      }
+    },
+    {
+      "tag": "v1.0.34.6",
+      "version": "1.0.34.6",
+      "publishedAt": "2026-11-09",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.34.6",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22188205
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22749131
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24881769
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25399015
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23791454
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24690931
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.6/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23189056
+        }
+      }
+    },
+    {
+      "tag": "v1.0.34.4",
+      "version": "1.0.34.4",
+      "publishedAt": "2026-11-08",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.34.4",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22183372
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22743597
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24877782
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25395092
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23787031
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24686176
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.4/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23184954
+        }
+      }
+    },
+    {
+      "tag": "v1.0.34.3",
+      "version": "1.0.34.3",
+      "publishedAt": "2026-11-07",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.34.3",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22184002
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22744878
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24878425
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25395734
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23787866
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24686699
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.34.3/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23185562
+        }
+      }
+    },
+    {
+      "tag": "v1.0.32.1",
+      "version": "1.0.32.1",
+      "publishedAt": "2026-11-02",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.32.1",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 22174927
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22735483
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24867885
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25385691
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23777962
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24678056
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.32.1/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23176455
+        }
+      }
+    },
+    {
+      "tag": "v1.0.28.0",
+      "version": "1.0.28.0",
+      "publishedAt": "2026-10-31",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.28.0",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21714880
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22345868
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24685089
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25201322
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23676605
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24576109
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.28.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23074074
+        }
+      }
+    },
+    {
+      "tag": "v1.0.24.0",
+      "version": "1.0.24.0",
+      "publishedAt": "2026-10-30",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.24.0",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21722791
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22354732
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24694081
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 25209867
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23685321
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24585063
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.24.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 23083073
+        }
+      }
+    },
+    {
+      "tag": "v1.0.22.1",
+      "version": "1.0.22.1",
+      "publishedAt": "2026-10-30",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.22.1",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21466669
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22096022
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24432417
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24948164
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23426494
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24323997
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.22.1/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22822569
+        }
+      }
+    },
+    {
+      "tag": "v1.0.17.1",
+      "version": "1.0.17.1",
+      "publishedAt": "2026-10-26",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.17.1",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21391004
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22021054
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24357481
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24873302
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23351666
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24250015
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.17.1/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22747763
+        }
+      }
+    },
+    {
+      "tag": "v1.0.16.1",
+      "version": "1.0.16.1",
+      "publishedAt": "2026-10-26",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.16.1",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21381556
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22012298
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24347894
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24864292
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23325737
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24223624
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.1/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22721628
+        }
+      }
+    },
+    {
+      "tag": "v1.0.16.0",
+      "version": "1.0.16.0",
+      "publishedAt": "2026-10-25",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.16.0",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21380160
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 22011975
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24347734
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24864094
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23326300
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24223284
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.16.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22721513
+        }
+      }
+    },
+    {
+      "tag": "v1.0.15.0",
+      "version": "1.0.15.0",
+      "publishedAt": "2026-10-25",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.15.0",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21363486
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21995514
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24330949
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24847229
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23309221
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24206362
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.15.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22704442
+        }
+      }
+    },
+    {
+      "tag": "v1.0.13.1",
+      "version": "1.0.13.1",
+      "publishedAt": "2026-10-25",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.13.1",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21355604
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21987417
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24322605
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24838837
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23300696
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24198441
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.13.1/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22696499
+        }
+      }
+    },
+    {
+      "tag": "v1.0.11.9",
+      "version": "1.0.11.9",
+      "publishedAt": "2026-10-25",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.11.9",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21316835
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21947960
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24283320
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24799831
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23262441
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24159324
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.9/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22657480
+        }
+      }
+    },
+    {
+      "tag": "v1.0.11.8",
+      "version": "1.0.11.8",
+      "publishedAt": "2026-10-24",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.11.8",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21315400
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21946675
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24282270
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24798739
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23260872
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24158056
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.8/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22656200
+        }
+      }
+    },
+    {
+      "tag": "v1.0.11.6",
+      "version": "1.0.11.6",
+      "publishedAt": "2026-10-24",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.11.6",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21310620
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21941983
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24277977
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24794419
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23256209
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24153375
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.6/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22651657
+        }
+      }
+    },
+    {
+      "tag": "v1.0.11.5",
+      "version": "1.0.11.5",
+      "publishedAt": "2026-10-24",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.11.5",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21310358
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21941405
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24277759
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24794204
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23255997
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24153240
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.5/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22651291
+        }
+      }
+    },
+    {
+      "tag": "v1.0.11.0",
+      "version": "1.0.11.0",
+      "publishedAt": "2026-10-24",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.11.0",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21286084
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21917811
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24252177
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24768915
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23239503
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24137039
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.11.0/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22635411
+        }
+      }
+    },
+    {
+      "tag": "v1.0.10.9",
+      "version": "1.0.10.9",
+      "publishedAt": "2026-10-23",
+      "htmlUrl": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/tag/v1.0.10.9",
+      "assets": {
+        "SHA256SUMS.txt": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/SHA256SUMS.txt",
+          "size": 764
+        },
+        "VibrantbitLauncher.Avalonia-linux-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-linux-arm64.tar.gz",
+          "size": 21276275
+        },
+        "VibrantbitLauncher.Avalonia-linux-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-linux-x64.tar.gz",
+          "size": 21907686
+        },
+        "VibrantbitLauncher.Avalonia-osx-arm64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-osx-arm64.tar.gz",
+          "size": 24243682
+        },
+        "VibrantbitLauncher.Avalonia-osx-x64.tar.gz": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-osx-x64.tar.gz",
+          "size": 24759493
+        },
+        "VibrantbitLauncher.Avalonia-win-arm64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-win-arm64.zip",
+          "size": 23230155
+        },
+        "VibrantbitLauncher.Avalonia-win-x64.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-win-x64.zip",
+          "size": 24126738
+        },
+        "VibrantbitLauncher.Avalonia-win-x86.zip": {
+          "url": "https://github.com/EasyColorful666/VibrantbitLauncher.Avalonia/releases/download/v1.0.10.9/VibrantbitLauncher.Avalonia-win-x86.zip",
+          "size": 22625494
+        }
+      }
+    }
+  ]
 }

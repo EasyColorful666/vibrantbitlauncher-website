@@ -74,7 +74,7 @@ jobs:
             echo "::warning::拉取上游 CHANGELOG.md 失败，本次沿用仓库里已提交的 changelog.json"
           fi
 
-      - name: Fetch latest release from launcher repo
+      - name: Fetch releases from launcher repo
         run: |
           set -euo pipefail
           # 同样留一份基准。就算下面拉取失败，后续比较结果也会是「没变化」，
@@ -84,20 +84,22 @@ jobs:
                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                -H "Accept: application/vnd.github+json" \
                -H "X-GitHub-Api-Version: 2022-11-28" \
-               "https://api.github.com/repos/${UPSTREAM_REPO}/releases/latest" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/releases?per_page=100" \
                -o "$RUNNER_TEMP/release-latest.json"; then
             RELEASE_JSON="$RUNNER_TEMP/release-latest.json" node scripts/build-releases.mjs
           else
-            echo "::warning::拉取最新 Release 失败，本次沿用仓库里已提交的 releases.json"
+            echo "::warning::拉取 Release 列表失败，本次沿用仓库里已提交的 releases.json"
           fi
 
       - id: diff
         name: Compare with committed data files
         run: |
           set -euo pipefail
-          # CHANGELOG：generatedAt / source 每次生成都会变（一个是时间戳，一个是临时路径），
-          # 不能算作内容更新，只比 count + releases。
-          # Release：只比 tag —— 新版发出来时即使 CHANGELOG 一字没改，下载链接也变了。
+          # 两个文件都只比「内容」，剔除每次生成都会变的字段：
+          #   changelog.json → generatedAt（时间戳）、source（临时路径）
+          #   releases.json  → generatedAt、source
+          # releases.json 整份比（而不只是 tag）：历史版本列表里多一条、少一条，
+          # 或者某个文件的大小变了，页面上都该重新生成一次。
           CHANGED=$(node -e '
             const fs = require("fs");
             const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
@@ -105,10 +107,15 @@ jobs:
               const j = read(p);
               return JSON.stringify([j.count, j.releases]);
             };
-            const tag = (p) => read(p).tag;
+            const releasesBody = (p) => {
+              const j = read(p);
+              delete j.generatedAt;
+              delete j.source;
+              return JSON.stringify(j);
+            };
             const changed =
               changelogBody(process.argv[1]) !== changelogBody(process.argv[2]) ||
-              tag(process.argv[3]) !== tag(process.argv[4]);
+              releasesBody(process.argv[3]) !== releasesBody(process.argv[4]);
             console.log(changed ? "true" : "false");
           ' "$RUNNER_TEMP/prev.json" assets/data/changelog.json \
             "$RUNNER_TEMP/prev-releases.json" assets/data/releases.json)
@@ -194,20 +201,20 @@ jobs:
             echo "::warning::拉取上游 CHANGELOG.md 失败，本次沿用仓库里已提交的 changelog.json"
           fi
 
-      # 同上，下载弹窗里的直链和加速链接都要指向真实的最新 Release；
-      # 拿不到就沿用仓库里已提交的 releases.json，不让整个发布挂掉。
-      - name: Sync latest release from launcher repo
+      # 同上，下载弹窗里的直链和加速链接都要指向真实的 Release，历史版本列表
+      # 也要跟着更新；拿不到就沿用仓库里已提交的 releases.json，不让整个发布挂掉。
+      - name: Sync releases from launcher repo
         run: |
           set -uo pipefail
           if curl -fsSL --retry 3 --retry-delay 2 \
                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                -H "Accept: application/vnd.github+json" \
                -H "X-GitHub-Api-Version: 2022-11-28" \
-               "https://api.github.com/repos/${UPSTREAM_REPO}/releases/latest" \
+               "https://api.github.com/repos/${UPSTREAM_REPO}/releases?per_page=100" \
                -o "$RUNNER_TEMP/release-latest.json"; then
             RELEASE_JSON="$RUNNER_TEMP/release-latest.json" node scripts/build-releases.mjs
           else
-            echo "::warning::拉取最新 Release 失败，本次沿用仓库里已提交的 releases.json"
+            echo "::warning::拉取 Release 列表失败，本次沿用仓库里已提交的 releases.json"
           fi
 
       - name: Generate static site

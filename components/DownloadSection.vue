@@ -7,15 +7,25 @@ const { c, L } = useSite()
 const active = ref(PLATFORMS[0]!.id)
 
 type Platform = (typeof PLATFORMS)[number]
-type Asset = Platform['assets'][number]
 
-const REL = releases as {
-  version: string
+type RelEntry = {
   tag: string
+  version: string
   publishedAt: string
   htmlUrl: string
   assets: Record<string, { url: string; size: number }>
 }
+
+// releases.json 的顶层就是最新版（tag / assets 直接铺在根上），history 是旧版列表
+const REL = releases as RelEntry & { history?: RelEntry[] }
+const HISTORY = (REL.history ?? []) as RelEntry[]
+
+/** 历史版本默认只露 5 条，其余靠「展开全部」 */
+const HISTORY_PREVIEW = 5
+const showAllHistory = ref(false)
+const visibleHistory = computed(() =>
+  showAllHistory.value ? HISTORY : HISTORY.slice(0, HISTORY_PREVIEW)
+)
 
 // 版本号优先取真实 Release 的 tag：更新日志可能已经写了下一版，但那版还没发出来，
 // 列表头写着新版本、点下载却 404 会很怪。
@@ -41,23 +51,25 @@ watch(active, () => {
 const MIRROR_V4 = 'https://gh-proxy.com/'
 const MIRROR_V6 = 'https://v6.gh-proxy.com/'
 
-const picked = ref<Asset | null>(null)
+/** 选中的文件 + 它属于哪个版本（历史版本按钮也要复用同一个弹窗） */
+const picked = ref<{ file: string; rel: RelEntry } | null>(null)
 
-/** 官方直链；静态数据里查不到就退回 Release 总页，不拼一个可能 404 的地址 */
-function officialUrl(file: string) {
-  return REL.assets[file]?.url ?? REL.htmlUrl ?? SITE.releases
+/** 官方直链；静态数据里查不到就退回那个版本的 Release 页，不拼一个可能 404 的地址 */
+function officialUrl(file: string, rel: RelEntry = REL) {
+  return rel.assets[file]?.url ?? rel.htmlUrl ?? SITE.releases
 }
 
 /** 体积，数据来自 Release API，拿不到就返回空串（不显示） */
-function sizeOf(file: string) {
-  const bytes = REL.assets[file]?.size ?? 0
+function sizeOf(file: string, rel: RelEntry = REL) {
+  const bytes = rel.assets[file]?.size ?? 0
   if (!bytes) return ''
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`
 }
 
 const routes = computed(() => {
   if (!picked.value) return []
-  const base = officialUrl(picked.value.file)
+  const { file, rel } = picked.value
+  const base = officialUrl(file, rel)
   const d = c.value.download.dialog
   return [
     { id: 'direct', icon: 'github', label: d.direct, note: d.directNote, url: base },
@@ -66,8 +78,13 @@ const routes = computed(() => {
   ]
 })
 
-function openPicker(asset: Asset) {
-  picked.value = asset
+/** 弹窗里显示的文件体积 */
+const pickedSize = computed(() =>
+  picked.value ? sizeOf(picked.value.file, picked.value.rel) : ''
+)
+
+function openPicker(file: string, rel: RelEntry = REL) {
+  picked.value = { file, rel }
 }
 
 function closePicker() {
@@ -150,12 +167,61 @@ onBeforeUnmount(() => {
             <button
               class="btn btn--primary btn--sm dl"
               type="button"
-              @click="openPicker(a)"
+              @click="openPicker(a.file)"
             >
               {{ c.download.action }}
               <AppIcon name="download" :size="13" class="btn__icon" />
             </button>
           </div>
+        </div>
+
+        <!-- 历史版本：每个版本按当前选中的平台列出对应架构，点开还是同一个下载弹窗 -->
+        <div v-if="HISTORY.length" class="hist">
+          <div class="hist-head">
+            <span class="hist-title">{{ c.download.history }}</span>
+            <span class="hist-note">{{ c.download.historyNote }}</span>
+          </div>
+
+          <div class="hist-list">
+            <div v-for="h in visibleHistory" :key="h.tag" class="hist-row">
+              <span class="hist-ver">v{{ h.version }}</span>
+              <span class="hist-date">{{ h.publishedAt }}</span>
+              <span class="hist-archs">
+                <button
+                  v-for="a in current.assets"
+                  :key="a.rid"
+                  class="hist-btn"
+                  type="button"
+                  :disabled="!h.assets[a.file]"
+                  :title="
+                    h.assets[a.file]
+                      ? `${a.file} · ${sizeOf(a.file, h)}`
+                      : c.download.missing
+                  "
+                  @click="openPicker(a.file, h)"
+                >
+                  {{ a.arch }}
+                </button>
+              </span>
+            </div>
+          </div>
+
+          <button
+            v-if="HISTORY.length > HISTORY_PREVIEW"
+            class="hist-toggle"
+            type="button"
+            :aria-expanded="showAllHistory"
+            @click="showAllHistory = !showAllHistory"
+          >
+            {{ showAllHistory ? c.download.historyLess : c.download.historyMore }}
+            <span class="hist-count">{{ HISTORY.length }}</span>
+            <AppIcon
+              name="chevron"
+              :size="14"
+              class="hist-chev"
+              :class="{ up: showAllHistory }"
+            />
+          </button>
         </div>
 
         <div class="foot">
@@ -191,10 +257,10 @@ onBeforeUnmount(() => {
             <span class="picker__kicker">{{ c.download.dialog.title }}</span>
 
             <div class="picker__head">
-              <b class="picker__ver">v{{ REL.version }}</b>
-              <span v-if="sizeOf(picked.file)" class="picker__size">
-                {{ sizeOf(picked.file) }}
-              </span>
+              <b class="picker__ver">v{{ picked.rel.version }}</b>
+              <span v-if="pickedSize" class="picker__size">{{ pickedSize }}</span>
+              <span v-if="pickedSize" class="sep">·</span>
+              <span class="picker__date">{{ picked.rel.publishedAt }}</span>
             </div>
 
             <code class="picker__file">{{ picked.file }}</code>
@@ -454,6 +520,133 @@ onBeforeUnmount(() => {
   transform: translateX(3px);
 }
 
+/* ------------------------------------------------------------- 历史版本 */
+
+.hist {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.hist-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.hist-title {
+  color: var(--fg);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+}
+
+.hist-note {
+  flex: 1;
+  min-width: 200px;
+  color: var(--fg-subtle);
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+}
+
+.hist-list {
+  margin-top: 10px;
+}
+
+.hist-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 6px;
+  border-radius: var(--radius);
+  transition: background-color 0.2s var(--ease);
+}
+.hist-row + .hist-row {
+  box-shadow: inset 0 1px 0 var(--border);
+}
+.hist-row:hover {
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.hist-ver {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.hist-date {
+  color: var(--fg-subtle);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.hist-archs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.hist-btn {
+  height: 27px;
+  padding-inline: 11px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--layer);
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 620;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.hist-btn:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: var(--surface);
+  color: var(--accent-text);
+  transform: translateY(-1px);
+}
+.hist-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hist-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 6px 2px;
+  color: var(--fg-muted);
+  font-size: var(--fs-xs);
+  font-weight: 620;
+  transition: color 0.2s var(--ease);
+}
+.hist-toggle:hover {
+  color: var(--accent-text);
+}
+
+.hist-count {
+  font-family: var(--font-mono);
+  color: var(--fg-subtle);
+}
+
+.hist-chev {
+  transition: transform 0.24s var(--ease);
+}
+.hist-chev.up {
+  transform: rotate(180deg);
+}
+
+.picker__date {
+  color: var(--fg-subtle);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ------------------------------------------------------------- 下载方式弹窗 */
 
 .picker {
@@ -701,6 +894,31 @@ onBeforeUnmount(() => {
   .file code {
     white-space: normal;
     word-break: break-all;
+  }
+
+  /* 历史版本：版本号 + 日期一行，架构按钮换行到下面一行 */
+  .hist-row {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'ver date'
+      'archs archs';
+    gap: 8px 12px;
+    padding: 12px 6px;
+  }
+  .hist-ver {
+    grid-area: ver;
+  }
+  .hist-date {
+    grid-area: date;
+    justify-self: end;
+  }
+  .hist-archs {
+    grid-area: archs;
+    justify-content: flex-start;
+  }
+  .hist-btn {
+    height: 30px;
+    padding-inline: 14px;
   }
 }
 </style>
