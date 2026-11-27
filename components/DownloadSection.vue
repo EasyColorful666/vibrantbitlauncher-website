@@ -38,7 +38,7 @@ watch(active, () => {
 /* ---------------------------------------------------------------- 下载弹窗 */
 
 // gh-proxy 是路径式代理：前缀 + 完整的 GitHub 地址
-const MIRROR_V4 = 'https://v4.gh-proxy.com/'
+const MIRROR_V4 = 'https://gh-proxy.com/'
 const MIRROR_V6 = 'https://v6.gh-proxy.com/'
 
 const picked = ref<Asset | null>(null)
