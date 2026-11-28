@@ -246,6 +246,33 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      # 主动通知搜索引擎「这个页面变了」，不用干等蜘蛛下次排期。
+      # IndexNow 是 Bing / Yandex / Seznam / Naver / Yep 共用的协议，
+      # 一次 POST 会被 api.indexnow.org 分发到上面所有家（Google 不参与，只能靠 sitemap）。
+      # 校验方式是站点根目录下那个 <key>.txt 必须能访问到且内容完全等于 key。
+      # 失败不影响发布：搜索引擎不是部署的依赖项。
+      - name: Ping search engines (IndexNow)
+        run: |
+          KEY=8f3c1d7a5b9e4c2f6a0d83b7e5c9142f
+          BASE=https://vbl.easycolorful.cn
+          # Pages 的 CDN 要几十秒才把新产物铺开，太早 ping 会让蜘蛛抓到旧页面
+          sleep 20
+          code=$(curl -s -o /dev/null -w "%{http_code}" --retry 3 --retry-delay 5 \
+            "$BASE/$KEY.txt" || echo 000)
+          echo "key file -> $code"
+          if [ "$code" != "200" ]; then
+            echo "::warning::$BASE/$KEY.txt 不可访问（$code），跳过 IndexNow；检查 public/$KEY.txt 是否已发布"
+            exit 0
+          fi
+          resp=$(curl -s -w "\n%{http_code}" --retry 3 --retry-delay 5 -X POST \
+            "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"vbl.easycolorful.cn\",\"key\":\"$KEY\",\"keyLocation\":\"$BASE/$KEY.txt\",\"urlList\":[\"$BASE/\"]}")
+          echo "indexnow -> $(echo "$resp" | tail -1)（200/202 表示已接收）"
+          if [ "$(echo "$resp" | tail -1)" != "200" ] && [ "$(echo "$resp" | tail -1)" != "202" ]; then
+            echo "::warning::IndexNow 返回 $(echo "$resp" | tail -1)，本次未推送成功（不影响站点）"
+          fi
+
 # ---------------------------------------------------------------------------
 # 可选：让启动器仓库「推了 CHANGELOG.md 就立刻通知本站」（不等定时任务）。
 # 不做也能用，最迟 6 小时内站点会跟上。要做的话在启动器仓库里加两样东西：
